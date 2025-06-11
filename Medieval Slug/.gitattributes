@@ -1,0 +1,2 @@
+ck filter=lfs diff=lfs merge=lfs -text
+Assets/05.Arts/Fonts/Galmuri9[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
