@@ -12,6 +12,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     [SerializeField] private Slider progressBar;
 
     private string loadSceneName;                      // 로드하고자 하는 씬 이름
+    [Header("로딩바 벨류값 러프 계수")]
+    [SerializeField] private float loadingLerfRatio = 1f; // 높을 수록 실제 씬 로딩 process 값에 빠르게 수렴
     [Header("로딩 화면 페이드 시간")]
     [SerializeField] private float fadeTime = 0.3f;
     private void Reset()
@@ -64,7 +66,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         progressBar.value = 0f;
         // 페이드 인으로 로딩 화면 표시
         yield return Singleton<UIManager>.Instance.FadeCoroutine(loadingSceneCanvasGroup, fadeTime, FadeType.In);
-        
+
         // 비동기로 씬 로딩창 구현을 위한 변수 설정
         AsyncOperation op = SceneManager.LoadSceneAsync(loadSceneName);
         op.allowSceneActivation = false;
@@ -73,7 +75,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         float timer = 0.0f;
         while (!op.isDone)
         {
-            timer += Time.unscaledDeltaTime;
+            timer += Time.unscaledDeltaTime * loadingLerfRatio;
+            /*
             if (op.progress < 0.90f)
             {
                 progressBar.value = Mathf.Lerp(progressBar.value, op.progress, timer);
@@ -91,7 +94,16 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
                     break;
                 }
             }
-
+            */
+            if (op.progress < 1)
+            {
+                progressBar.value = Mathf.Lerp(progressBar.value, 1f, timer);
+                if (progressBar.value == 1.0f)
+                {
+                    op.allowSceneActivation = true;
+                    break;
+                }
+            }
             yield return null;
         }
     }
