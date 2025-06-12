@@ -400,6 +400,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6122673101048519114, guid: 67b141e94d66fd44b9c9fbb48e43eeb0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122673101048519114, guid: 67b141e94d66fd44b9c9fbb48e43eeb0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6347239502388275818, guid: 67b141e94d66fd44b9c9fbb48e43eeb0, type: 3}
       propertyPath: m_Camera
       value: 
