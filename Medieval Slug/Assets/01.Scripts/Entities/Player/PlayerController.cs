@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using Entities.Player;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 /// <summary>
@@ -20,22 +21,29 @@ public class PlayerController : MonoBehaviour, IDamagable
     [Header("Animator")]
     [SerializeField] private Animator animator;
 
-    [Header("근접 공격 설정")]
+    [Header("Melee Weapon Setting")]
     [SerializeField] private int meleeDamage = 10;
     [SerializeField] private float meleeRange = 1f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float windupTime = 0.2f;
 
+    [Header("Dependencies")]
+    [SerializeField] private PlayerEquip playerEquip;
+
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool jumpRequest;
     private bool isFacingRight = true;
-    
+
+    private PlayerStatHandler statHandler;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        statHandler = GetComponent<PlayerStatHandler>();
     }
+
+    #region InputSystem 바인딩
 
     public void OnMovement(InputAction.CallbackContext ctx)
     {
@@ -52,26 +60,24 @@ public class PlayerController : MonoBehaviour, IDamagable
         if (ctx.started)
             StartCoroutine(PerformMelee());
     }
+    public void OnFire(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            Vector2 aim = moveInput;
+            // Default to facing direction if no input
+            if (aim.sqrMagnitude < 0.01f)
+                aim = isFacingRight ? Vector2.right : Vector2.left;
+            playerEquip.FireRange(aim);
+        }
+    }
+    #endregion
 
     void Update()
     {
         float h = moveInput.x;
         if (h > 0 && !isFacingRight) Flip();
         else if (h < 0 && isFacingRight) Flip();
-
-        //테스트 코드
-
-        //마우스 왼쪽 클릭 시 데미지
-        if (Input.GetMouseButtonDown(0))
-        {
-            TakeDamage(1);
-        }
-        //q 입력 시 죽음
-        else if(Input.GetKeyDown(KeyCode.Q))
-        {
-            Die();
-        }
-
     }
 
     void FixedUpdate()
@@ -134,6 +140,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     //이후에 리펙토링으로 분리
     public void TakeDamage(int damage)
     {
+        statHandler.ModifyStat(StatType.Health, -damage);
         animator.SetTrigger("Hurt");
     }
 
