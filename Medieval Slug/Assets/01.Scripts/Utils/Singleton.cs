@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -31,6 +31,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         else
         {
             instance = this as T;
+            DontDestroyOnLoad(gameObject);
         }
         // 싱글톤을 상속받는 클래스가 씬이 로딩 될 때 실행되는 함수를 이벤트에 추가
         SceneManager.sceneLoaded += OnSceneLoaded;
