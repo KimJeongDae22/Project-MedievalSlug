@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 /// <summary>
 /// 플레이어 컨트롤 담당 클래스
@@ -19,6 +20,12 @@ public class PlayerController : MonoBehaviour, IDamagable
     [Header("Animator")]
     [SerializeField] private Animator animator;
 
+    [Header("근접 공격 설정")]
+    [SerializeField] private int meleeDamage = 10;
+    [SerializeField] private float meleeRange = 1f;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private float windupTime = 0.2f;
+
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool jumpRequest;
@@ -33,13 +40,17 @@ public class PlayerController : MonoBehaviour, IDamagable
     public void OnMovement(InputAction.CallbackContext ctx)
     {
         moveInput = ctx.ReadValue<Vector2>();
-
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
         if (ctx.started && IsGrounded())
             jumpRequest = true;
+    }
+    public void OnMelee(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+            StartCoroutine(PerformMelee());
     }
 
     void Update()
@@ -75,6 +86,22 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         float speed = Mathf.Abs(moveInput.x);  
         animator.SetFloat("Speed", speed);
+    }
+
+    private IEnumerator PerformMelee()
+    {
+        // 1 또는 2 중 랜덤으로 선택
+        int idx = Random.Range(1, 3); // 1 또는 2
+        string triggerName = (idx == 1) ? "MeleeAttack1" : "MeleeAttack2";
+        animator.SetTrigger(triggerName);
+
+        yield return new WaitForSeconds(windupTime);
+
+        Vector2 dir = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        Vector2 origin = (Vector2)transform.position + dir * 0.5f;
+        RaycastHit2D hit = Physics2D.Raycast(origin, dir, meleeRange, enemyLayer);
+        if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
+            target.TakeDamage(meleeDamage);
     }
 
     private void Flip()
