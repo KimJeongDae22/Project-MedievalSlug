@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4563829470035034845}
   - component: {fileID: 8695307877824504466}
   - component: {fileID: 7381979048289229804}
+  - component: {fileID: 9139739152266299481}
+  - component: {fileID: 3259687527249972566}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -106,6 +108,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &9139739152266299481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003993562906655468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf0ff133858a7ce4c9f8e06aac3420e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster: {fileID: 1974118511636949888}
+  collider2D: {fileID: 3259687527249972566}
+  colliderOffset: {x: -1.2, y: 0.7}
+  reverseColliderOffset: {x: 1.2, y: 0.7}
+--- !u!61 &3259687527249972566
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003993562906655468}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.2, y: 0.7}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2.5625, y: 2.375}
+    newSize: {x: 2.5625, y: 2.375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 1.25}
+  m_EdgeRadius: 0
 --- !u!1 &8715615119123732269
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +181,7 @@ GameObject:
   - component: {fileID: 4997690671139148300}
   - component: {fileID: 1062305500590359945}
   - component: {fileID: 7539456190247836261}
-  - component: {fileID: 1995659630605605721}
+  - component: {fileID: 1974118511636949888}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -226,12 +289,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca65ae9407e4f7a89b158ed89dfe3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Monster>k__BackingField: {fileID: 1995659630605605721}
+  <Monster>k__BackingField: {fileID: 1974118511636949888}
   <target>k__BackingField: {fileID: 0}
   <targetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &1995659630605605721
+--- !u!114 &1974118511636949888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,7 +314,11 @@ MonoBehaviour:
     runParameterName: Run
     attackParameterName: Attack
   <HasAnimator>k__BackingField: 1
+  health: 1
+  <damage>k__BackingField: 1
+  <AttackCooldown>k__BackingField: 0.5
   <MoveSpeed>k__BackingField: 2
   <DetectRange>k__BackingField: 10
   <DetectOffset>k__BackingField: {x: 0, y: -0.5, z: 0}
   <AttackRange>k__BackingField: 1.5
+  <meleeCollider>k__BackingField: {fileID: 9139739152266299481}

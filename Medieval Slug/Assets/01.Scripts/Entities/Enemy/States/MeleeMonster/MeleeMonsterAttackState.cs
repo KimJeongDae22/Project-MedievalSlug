@@ -13,7 +13,14 @@ public class MeleeMonsterAttackState : MonsterBaseState
     public override void UpdateState()
     {
         if (IsAnimationFinished())
-            stateMachine.ChangeState(stateMachine.chaseState);
+        {
+            if (IsTargetDetected() && IsTargetInAttackRange()) 
+                stateMachine.ChangeState(stateMachine.attackState);
+            else if (IsTargetDetected() && !IsTargetInAttackRange()) 
+                stateMachine.ChangeState(stateMachine.chaseState);
+            else if (!IsTargetDetected())
+                stateMachine.ChangeState(stateMachine.idleState);
+        }
     }
 
     public override void ExitState()

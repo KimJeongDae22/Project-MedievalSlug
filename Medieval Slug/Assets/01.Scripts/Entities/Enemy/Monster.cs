@@ -10,7 +10,7 @@ public class Monster : MonoBehaviour, IDamagable
     [field : SerializeField] public bool HasAnimator { get; private set; } = false;
 
     /// <summary>
-    /// 아래 값들을 SO 관리할 경우 삭제 가능
+    /// 아래 값들을 SO 관리할 경우 삭제 가능.
     /// </summary>
     /// <param name="damage"></param>
     [Header("Monster States")] 
@@ -22,6 +22,12 @@ public class Monster : MonoBehaviour, IDamagable
     [field : SerializeField] public Vector3 DetectOffset { get; private set; } = Vector3.zero;
 
     [field: SerializeField] public float AttackRange { get; private set; } = 1f;
+    
+    /// <summary>
+    /// 근접몬스터에만 넣어야 하는데 방법 모르겠음.
+    /// </summary>
+    [field : Header("Melee Monster")]
+    [field : SerializeField] public MeleeMonsterCollider meleeCollider { get; private set; }
 
     private void Reset()
     {
@@ -33,6 +39,8 @@ public class Monster : MonoBehaviour, IDamagable
             HasAnimator = true;
         
         stateMachine = GetComponent<MeleeMonsterStateMachine>();
+        
+        meleeCollider = GetComponentInChildren<MeleeMonsterCollider>();
     }
 
     private void Awake()
