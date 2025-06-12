@@ -14,7 +14,7 @@ public class MeleeMonsterIdleState : MonsterBaseState
     {
         if (IsTargetDetected())
         {
-            stateMachine.ChangeState(stateMachine.chaseState);
+            stateMachine.ChangeState(stateMachine.ChaseState);
         }
     }
 

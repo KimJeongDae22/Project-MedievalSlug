@@ -8,9 +8,10 @@ public abstract class MonsterStateMachine : MonoBehaviour
     
     protected MonsterBaseState currentState;
 
-    public MonsterBaseState idleState { get; protected set; }
-    public MonsterBaseState chaseState { get; protected set; }
-    public MonsterBaseState attackState { get; protected set; }
+    public MonsterBaseState IdleState { get; protected set; }
+    public MonsterBaseState ChaseState { get; protected set; }
+    public MonsterBaseState AttackState { get; protected set; }
+    public MonsterBaseState DeadState { get; protected set; }
     
     private void Reset()
     {

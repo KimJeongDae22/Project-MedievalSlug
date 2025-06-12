@@ -17,7 +17,7 @@ public class MeleeMonsterChaseState : MonsterBaseState
     {
         if (!IsTargetDetected())
         {
-            stateMachine.ChangeState(stateMachine.idleState);
+            stateMachine.ChangeState(stateMachine.IdleState);
         }
         
         float distanceX = (stateMachine.transform.position.x - stateMachine.target.position.x);
@@ -44,7 +44,7 @@ public class MeleeMonsterChaseState : MonsterBaseState
             else
             {
                 attackCooldown = 0f;
-                stateMachine.ChangeState(stateMachine.attackState);
+                stateMachine.ChangeState(stateMachine.AttackState);
             }
         }
         else if (distance > stateMachine.Monster.AttackRange)

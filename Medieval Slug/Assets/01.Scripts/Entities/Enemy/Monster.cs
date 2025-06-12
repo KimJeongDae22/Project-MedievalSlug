@@ -51,11 +51,16 @@ public class Monster : MonoBehaviour, IDamagable
     public void TakeDamage(int damage)
     {
         health -= damage;
+        if (health <= 0)
+        {
+            health = 0;
+            Die();
+        }
     }
 
     public void Die()
     {
-        
+        stateMachine.ChangeState(stateMachine.DeadState);
     }
     
     /// <summary>

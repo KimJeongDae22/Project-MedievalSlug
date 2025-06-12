@@ -15,11 +15,11 @@ public class MeleeMonsterAttackState : MonsterBaseState
         if (IsAnimationFinished())
         {
             if (IsTargetDetected() && IsTargetInAttackRange()) 
-                stateMachine.ChangeState(stateMachine.attackState);
+                stateMachine.ChangeState(stateMachine.AttackState);
             else if (IsTargetDetected() && !IsTargetInAttackRange()) 
-                stateMachine.ChangeState(stateMachine.chaseState);
+                stateMachine.ChangeState(stateMachine.ChaseState);
             else if (!IsTargetDetected())
-                stateMachine.ChangeState(stateMachine.idleState);
+                stateMachine.ChangeState(stateMachine.IdleState);
         }
     }
 
