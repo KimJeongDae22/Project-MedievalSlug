@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -7,7 +8,9 @@ public class Item : MonoBehaviour
     // private field
     private SpriteRenderer spriteRenderer;
     private Collider2D collider;
-    private Animator animator;
+    
+    private SpriteRenderer effectRenderer;
+    private Animator effectAnimator;
     private bool isCollected;
 
     // animator Hash
@@ -17,11 +20,15 @@ public class Item : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
-        animator = GetComponent<Animator>();
+        
+        effectRenderer = transform.FindChild<SpriteRenderer>("Effect");
+        effectAnimator = GetComponentInChildren<Animator>();
 
         if (spriteRenderer == null) Debug.LogError("Item SpriteRenderer not found");
         if (collider == null) Debug.LogError("Item Collider not found");
-        if (animator == null) Debug.LogError("Item Animator not found");
+        
+        if (effectRenderer == null) Debug.LogError("Item Effect Renderer not found");
+        if (effectAnimator == null) Debug.LogError("Item Effect Animator not found");
     }
 
     /// <summary>
@@ -29,40 +36,11 @@ public class Item : MonoBehaviour
     /// </summary>
     public void Init(ItemData data)
     {
-        Debug.Log("=== Initialize 시작 ===");
-    
-        if (data == null)
-        {
-            Debug.LogError("ItemData가 null입니다!");
-            return;
-        }
-
-        Debug.Log($"받은 ItemData: {data.name}");
-        Debug.Log($"ItemData.itemName: {data.itemName}");
-        Debug.Log($"ItemData.icon: {data.icon}");
-        Debug.Log($"ItemData.icon.name: {data.icon?.name}");
-
         itemData = data;
-    
-        // SpriteRenderer 상태 확인
-        Debug.Log($"SpriteRenderer 현재 sprite: {spriteRenderer.sprite?.name}");
-        Debug.Log($"SpriteRenderer enabled: {spriteRenderer.enabled}");
-        Debug.Log($"GameObject active: {gameObject.activeInHierarchy}");
-    
-        if (data.icon != null)
-        {
-            spriteRenderer.sprite = data.icon;
-            Debug.Log($"스프라이트 할당 후: {spriteRenderer.sprite?.name}");
-        }
-        else
-        {
-            Debug.LogError($"ItemData '{data.itemName}'의 icon이 null!");
-        }
-    
+        spriteRenderer.sprite = data.icon;
+        effectRenderer.enabled = false;
         collider.enabled = true;
         isCollected = false;
-    
-        Debug.Log("=== Initialize 완료 ===");
     }
     
     /// <summary>
@@ -83,9 +61,13 @@ public class Item : MonoBehaviour
         // player = CharacterManager.Player
         isCollected = true;
         collider.enabled = false;
+        spriteRenderer.enabled = false;
 
         ApplyItemEffect();
-        animator.SetTrigger(Get);
+        
+        effectRenderer.enabled = true;
+        effectAnimator.SetTrigger(Get);
+        StartCoroutine(WaitForAnimAndDestroy());
     }
 
     /// <summary>
@@ -118,10 +100,15 @@ public class Item : MonoBehaviour
     }
 
     /// <summary>
-    /// 애니메이션 event로 호출. 애니메이션 종료 시 아이템 삭제
+    /// 애니메이션 대기
     /// </summary>
-    public void OnCollectAnimationEnd()
+    private IEnumerator WaitForAnimAndDestroy()
     {
+        yield return null; // 애니메이션 상태 갱신 대기
+
+        float length = effectAnimator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(length);
+        
         Destroy(gameObject);
     }
 }
