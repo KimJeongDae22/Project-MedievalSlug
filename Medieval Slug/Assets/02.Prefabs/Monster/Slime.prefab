@@ -319,6 +319,6 @@ MonoBehaviour:
   <AttackCooldown>k__BackingField: 0.5
   <MoveSpeed>k__BackingField: 2
   <DetectRange>k__BackingField: 10
-  <DetectOffset>k__BackingField: {x: 0, y: -0.5, z: 0}
+  <RayOffset>k__BackingField: {x: 0, y: -0.5, z: 0}
   <AttackRange>k__BackingField: 1.5
   <meleeCollider>k__BackingField: {fileID: 9139739152266299481}

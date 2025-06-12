@@ -19,7 +19,7 @@ public class Monster : MonoBehaviour, IDamagable
     [field : SerializeField] public float AttackCooldown { get; private set; } = 0.5f;
     [field: SerializeField] public float MoveSpeed { get; private set; } = 2f;
     [field : SerializeField] public float DetectRange { get; private set; } = 10f;
-    [field : SerializeField] public Vector3 DetectOffset { get; private set; } = Vector3.zero;
+    [field : SerializeField] public Vector3 RayOffset { get; private set; } = Vector3.zero;
 
     [field: SerializeField] public float AttackRange { get; private set; } = 1f;
     
@@ -70,7 +70,7 @@ public class Monster : MonoBehaviour, IDamagable
         Gizmos.DrawWireSphere(stateMachine.transform.position, stateMachine.Monster.DetectRange);
         
         Gizmos.color = Color.red;
-        Vector2 origin = stateMachine.transform.position + DetectOffset;
+        Vector2 origin = stateMachine.transform.position + RayOffset;
         float directionX = stateMachine.target.position.x - origin.x;
         Vector2 direction = directionX > 0 ? Vector2.right : Vector2.left;
         float attackRange = stateMachine.Monster.AttackRange;

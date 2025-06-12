@@ -15,7 +15,11 @@ public abstract class MonsterBaseState
     public abstract void EnterState();
     public abstract void UpdateState();
     public abstract void ExitState();
-
+    
+    /// <summary>
+    /// 목표(플레이어)가 감지범위 안에 있는지 확인하는 메서드
+    /// </summary>
+    /// <returns></returns>
     protected bool IsTargetDetected()
     {
         Vector2 origin = stateMachine.transform.position;
@@ -35,9 +39,13 @@ public abstract class MonsterBaseState
         return false;
     }
     
+    /// <summary>
+    /// 목표(플레이어)가 직선상에 있는지 확인하는 메서드
+    /// </summary>
+    /// <returns></returns>
     protected bool IsTargetInAttackRange()
     {
-        Vector2 origin = stateMachine.transform.position + stateMachine.Monster.DetectOffset;
+        Vector2 origin = stateMachine.transform.position + stateMachine.Monster.RayOffset;
         float directionX = stateMachine.target.position.x - origin.x;
         Vector2 direction = directionX > 0 ? Vector2.right : Vector2.left;
 
@@ -55,9 +63,13 @@ public abstract class MonsterBaseState
         stateMachine.Monster.Animator.SetBool(animatorHash, false);
     }
     
-    public bool IsAnimationFinished()
+    protected bool IsAnimationFinished()
     {
         AnimatorStateInfo stateInfo = stateMachine.Monster.Animator.GetCurrentAnimatorStateInfo(0);
-        return stateInfo.normalizedTime >= 1f;
+        if (stateInfo.IsTag("Attack"))
+        { 
+            return stateInfo.normalizedTime >= 1f;
+        }
+        return true;
     }
 }
