@@ -38,14 +38,15 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     }
     private IEnumerator LoadCompleteEvent()
     {
-        IsLoading = false;
-        
         // 로드하고자 하는 씬이 활성화가 완료될 때까지
         yield return new WaitUntil(() => loadSceneName == SceneManager.GetActiveScene().name);
         // 원활한 씬 활성화 여부 확인을 위해 1프레임 넘기기
         yield return null;
         // 로드 완료 시 로딩 창 페이드 아웃
         Singleton<UIManager>.Instance.FadeInAndOut(loadingSceneCanvasGroup, fadeTime, FadeType.Out);
+
+        yield return new WaitForSeconds(fadeTime);
+        IsLoading = false;
     }
     public void LoadScene(string sceneName)
     {
@@ -55,7 +56,6 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         }
 
         loadSceneName = sceneName;
-
         StartCoroutine(LoadSceneCoroutine());
     }
     public IEnumerator LoadSceneCoroutine()

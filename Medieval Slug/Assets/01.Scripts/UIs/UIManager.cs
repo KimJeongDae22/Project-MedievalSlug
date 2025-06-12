@@ -8,6 +8,8 @@ public enum FadeType
 public class UIManager : Singleton<UIManager>
 {
     public bool StopFunc { get; private set; }      // 기능 정지 변수. 호출은 어디서나, 값 설정은 해당 스크립트에서만
+
+    private Coroutine fadeCoroutine;
     private void Reset()
     {
 
@@ -27,7 +29,11 @@ public class UIManager : Singleton<UIManager>
 
     public void FadeInAndOut(CanvasGroup canvasGroup, float time, FadeType fadeType)
     {
-        StartCoroutine(FadeCoroutine(canvasGroup, time, fadeType));
+        if (fadeCoroutine != null)
+        { 
+            StopCoroutine(fadeCoroutine); 
+        }
+        fadeCoroutine = StartCoroutine(FadeCoroutine(canvasGroup, time, fadeType));
     }
     public IEnumerator FadeCoroutine(CanvasGroup canvasGroup, float time, FadeType fadeType)
     {
@@ -36,7 +42,6 @@ public class UIManager : Singleton<UIManager>
         {
             yield break;
         }
-        canvasGroup.alpha = 0f;
         canvasGroup.gameObject.SetActive(true);
         float percent = 0f;
 
@@ -63,7 +68,7 @@ public class UIManager : Singleton<UIManager>
                 break;
             case FadeType.Out:
                 canvasGroup.alpha = 0f;
-                canvasGroup.gameObject.SetActive(false);
+                //canvasGroup.gameObject.SetActive(false);
                 break;
         }
 
