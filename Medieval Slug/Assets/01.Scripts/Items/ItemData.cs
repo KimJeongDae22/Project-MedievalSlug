@@ -11,12 +11,8 @@ public enum ItemType
 public class ItemData : ScriptableObject
 {
     [Header("Basic Info")]
-    public GameObject itemPrefab;
     public ItemType itemType;
     public string itemName;
     public Sprite icon;
     public int value;
-    
-    [Header("Effects")]
-    public GameObject collectEffect;
 }
