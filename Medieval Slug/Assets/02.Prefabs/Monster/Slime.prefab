@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7381979048289229804}
   - component: {fileID: 9139739152266299481}
   - component: {fileID: 3259687527249972566}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: b7a9b30e19b516f4e8f485ca2d26cbbd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 1062305500590359945}
   - component: {fileID: 7539456190247836261}
   - component: {fileID: 1974118511636949888}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,6 +313,7 @@ MonoBehaviour:
     idleParameterName: Idle
     runParameterName: Run
     attackParameterName: Attack
+    deadParameterName: Dead
   <HasAnimator>k__BackingField: 1
   health: 1
   <damage>k__BackingField: 1

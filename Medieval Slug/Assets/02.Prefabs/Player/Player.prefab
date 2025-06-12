@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2086830960330875878}
   - component: {fileID: 8584330687151362946}
   - component: {fileID: 697949111004323780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 4427409882205283435}
   - component: {fileID: 1281957906250111268}
   - component: {fileID: 4954691181425682607}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 6315644723866341413}
   - component: {fileID: 2474521352464498847}
   - component: {fileID: 4643268736599956163}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4730213490496782902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RangeWeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,7 +439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5654642167919794889}
   - component: {fileID: 6356721666533486478}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Virtual Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
