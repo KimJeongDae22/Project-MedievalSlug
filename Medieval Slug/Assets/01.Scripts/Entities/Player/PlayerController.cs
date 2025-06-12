@@ -88,6 +88,10 @@ public class PlayerController : MonoBehaviour, IDamagable
         animator.SetFloat("Speed", speed);
     }
 
+    /// <summary>
+    /// 근접 무기 공격 코루틴
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator PerformMelee()
     {
         // 1 또는 2 중 랜덤으로 선택
@@ -103,7 +107,9 @@ public class PlayerController : MonoBehaviour, IDamagable
         if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
             target.TakeDamage(meleeDamage);
     }
-
+    /// <summary>
+    /// 캐릭터 스프라이트 플립
+    /// </summary>
     private void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -111,7 +117,10 @@ public class PlayerController : MonoBehaviour, IDamagable
         scale.x *= -1;
         transform.localScale = scale;
     }
-
+    /// <summary>
+    /// 지면에 있는지 검사하는 메소드
+    /// </summary>
+    /// <returns></returns>
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(
