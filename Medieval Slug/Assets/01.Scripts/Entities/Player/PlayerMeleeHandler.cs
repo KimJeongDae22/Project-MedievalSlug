@@ -12,13 +12,16 @@ public class PlayerMeleeHandler : MonoBehaviour
     [SerializeField] private float windupTime = 0.2f;
     [SerializeField] private Animator animator;
 
+    private bool isAttacking;      
+    
     public void OnMelee(InputAction.CallbackContext ctx)
     {
-        if (ctx.started)
-            StartCoroutine(PerformMelee());
+        if (!ctx.started || isAttacking) return;  
+        StartCoroutine(PerformMelee());
     }
     private IEnumerator PerformMelee()
     {
+        isAttacking = true;            
         // 1 또는 2 중 랜덤으로 선택
         int idx = Random.Range(1, 3); // 1 또는 2
         string triggerName = (idx == 1) ? "MeleeAttack1" : "MeleeAttack2";
@@ -32,6 +35,7 @@ public class PlayerMeleeHandler : MonoBehaviour
         if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
             target.TakeDamage(meleeDamage);
     }
+    public void UnlockMelee() => isAttacking = false;
 
     // 히트박스 시각화 (에디터용)
     void OnDrawGizmosSelected()
