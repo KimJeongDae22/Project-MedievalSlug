@@ -52,9 +52,12 @@ public class MonsterChaseState : MonsterBaseState
         }
         else if (distance > StateMachine.Monster.MonsterData.AttackRange)
         {
+            Vector2 currentPosition = StateMachine.transform.position;
+            Vector2 targetPosition = new Vector2(StateMachine.target.position.x, currentPosition.y);
+
             StateMachine.transform.position = Vector2.MoveTowards(
-                (StateMachine.transform.position),
-                StateMachine.target.position,
+                currentPosition,
+                targetPosition,
                 StateMachine.Monster.MonsterData.MoveSpeed * Time.deltaTime
             );
         }

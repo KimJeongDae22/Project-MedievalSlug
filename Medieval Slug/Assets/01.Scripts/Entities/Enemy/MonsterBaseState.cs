@@ -48,7 +48,7 @@ public abstract class MonsterBaseState
     /// <returns></returns>
     protected bool IsTargetInAttackRange()
     {
-        Vector2 origin = StateMachine.transform.position + StateMachine.Monster.MonsterData.RayOffset;
+        Vector2 origin = StateMachine.Monster.transform.position + StateMachine.Monster.MonsterData.RayOffset;
         float directionX = StateMachine.target.position.x - origin.x;
         Vector2 direction = directionX > 0 ? Vector2.right : Vector2.left;
 
