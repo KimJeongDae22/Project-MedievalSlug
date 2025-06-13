@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class ProjectileManager : Singleton<ProjectileManager>
 {
-    [SerializeField] private List<GameObject> arrowPrefabs;
+    [SerializeField] private GameObject[] arrowPrefabs;
 
-    public void Shoot(Vector2 direction, Transform spawnPosition, ProjectileType type = default)
+    /// <summary>
+    /// dir : 월드 방향, spawn : 발사 위치/회전 기준, type : 화살 종류
+    /// </summary>
+    public void Shoot(Vector2 dir, Transform spawn, ProjectileType type = ProjectileType.Nomal)
     {
-        float angle = ProjectileAngle(direction);
-        GameObject proj = ObjectPoolManager.Instance.GetObject(0, spawnPosition.position, Quaternion.Euler(0, 0, angle));
-
-        proj.GetComponent<ProjectileController>().Init(direction);
-    }
-
-    private float ProjectileAngle(Vector2 direction)
-    {
-        return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        int index = Mathf.Clamp((int)type, 0, arrowPrefabs.Length - 1);
+        GameObject proj = ObjectPoolManager.Instance.GetObject(index, spawn.position, Quaternion.Euler(0, 0, angle));
+        proj.GetComponent<ProjectileController>().Init(dir);
     }
 }
+
 

@@ -7,148 +7,89 @@ using UnityEngine;
 /// </summary>
 namespace Entities.Player
 {
+    /// <summary>
+    /// 무기는 고정(활 1개). 화살(ProjectileData)만 교체·탄약 관리.
+    /// </summary>
     [RequireComponent(typeof(PlayerStatHandler))]
     public class PlayerEquip : MonoBehaviour
     {
-        [Header("Range Weapon Pivot (Child)")]
-        [SerializeField] private Transform rangeWeaponPivot;
-        [SerializeField] private GameObject basicBowPrefab;
+        [Header("Bow Prefab (고정)")]
+        [SerializeField] private GameObject bowPrefab;
+        [SerializeField] private Transform RangeWaeponPivot;
 
-        // 현재 장착된 무기
-        private GameObject currentWeaponPrefab;
-        private ProjectileData projectileData;
-        private RangeWeaponHandler weaponHandler;
-        private int currentAmmo;
-
-        private Vector2 spawnOffset;
-        private Transform spawnTransform;
+        private RangeWeaponHandler bowHandler;
+        private ProjectileData currentArrowData;
+        [SerializeField]private int currentAmmo;
         private PlayerStatHandler statHandler;
 
         private void Awake()
         {
             statHandler = GetComponent<PlayerStatHandler>();
-            // 기본 활 인스턴스화
-            GameObject bowInstance = Instantiate(basicBowPrefab, rangeWeaponPivot);
-            bowInstance.transform.localPosition = Vector3.zero;
-            bowInstance.transform.localRotation = Quaternion.identity;
-
-            weaponHandler = bowInstance.GetComponent<RangeWeaponHandler>();
-            if(weaponHandler == null)
-            {
-                Debug.LogError("ProjectileHandler missing on basicBowPrefab.");
-            }
-
-
-
-            // 발사 위치(SpawnPosition) 설정
-            spawnTransform = bowInstance.transform.Find("SpawnPosition");
-            if (spawnTransform != null)
-            {
-                spawnOffset = spawnTransform.localPosition;
-            }
-            else
-            {
-                Debug.LogError("SpawnPosition transform missing on basicBowPrefab.");
-            }
+            SpawnBow();
         }
 
         /// <summary>
-        /// 스코어 아이템 습득 시 
-        /// OnScorePickup()은 임시로, 바로 Item쪽에서 호출해도 
+        /// RangeWeapon의 Fire 외부 API
         /// </summary>
-        /// <param name="value"></param>
-        public void OnScorePickup(int value)
+        /// <param name="aimDirection"></param>
+        public void Fire(Vector2 aimDirection)
         {
-           // GameManager.Instance.AddScore(value);
+            if (currentAmmo <= 0) return;
+            bowHandler.Fire(aimDirection);
+            currentAmmo--;
+            // TODO: UI 이벤트 OnAmmoChanged?.Invoke(currentAmmo);
         }
-        /// <summary>
-        /// 체력회복 아이템 습득 시
-        /// Item.cs의 ApplyItemEffect()에서 이 함수를 호출하시면 될 것 같습니다.
-        /// </summary>
-        /// <param name="value"></param>
-        public void OnHealthPickup(int value) => statHandler.ModifyStat(StatType.Health, value);
 
+        #region 아이템 획득 로직
         /// <summary>
-        /// 화살 아이템 습득 시 호출
+        /// 화살 아이템 획득 시 호출
         /// </summary>
-        /// <param name="data">획득한 화살 타입 데이터</param>
-        /// <param name="amount">획득 수량</param>
         public void OnArrowPickup(ProjectileData data)
         {
-            // 같은 화살 타입 && 남은 탄약이 있을 때: 최대치 없이 누적
-            if (projectileData == data && currentAmmo > 0)
-            {
+            // 동일 화살이면 탄약 누적, 아니면 교체
+            if (currentArrowData == data && currentAmmo > 0)
                 currentAmmo += data.MaxNum;
-            }
             else
-            {
-                // 새로운 타입이거나 탄약이 0일 때 교체
-                SetProjectileData(data);
-            }
+                SetArrowData(data);
+        }
 
-            // UI 갱신: OnAmmoChanged?.Invoke(currentAmmo);
+        public void OnHealthPickup(int value) => statHandler.ModifyStat(StatType.Health, value);
+
+        #endregion
+
+        /// <summary>
+        /// 시작 시 기본활 생성
+        /// </summary>
+        private void SpawnBow()
+        {
+            if (bowHandler != null) return; // 이미 있음
+            GameObject bow = Instantiate(bowPrefab, RangeWaeponPivot);
+            bow.transform.localPosition = Vector3.zero;
+            bow.transform.localRotation = Quaternion.identity;
+            bowHandler = bow.GetComponent<RangeWeaponHandler>();
+            SetArrowData(bowHandler.projectileData);
+            if (bowHandler == null)
+                Debug.LogError("Bow Prefab에 RangeWeaponHandler가 없습니다.");
         }
 
         /// <summary>
-        /// 현재 사용 화살 타입 변경 및 탄약 초기화
+        /// 화살 데이터 교체 
         /// </summary>
-        /// <param name="data">새 화살 데이터</param>
-        /// <param name="initialAmmo">초기 탄약 수량</param>
-        public void SetProjectileData(ProjectileData data)
+        /// <param name="data"></param>
+        private void SetArrowData(ProjectileData data)
         {
-            projectileData = data;
-            //projectileHandler.SetProjectileData(data);
+            currentArrowData = data;
             currentAmmo = data.MaxNum;
+            bowHandler.SetProjectileType(data.Type);
+            // TODO: UI 이벤트 OnAmmoChanged?.Invoke(currentAmmo);
         }
 
         /// <summary>
-        /// 원거리 무리 발사
+        /// 남은 화살 수 반환
+        /// 임시용
         /// </summary>
-        public void FireRange(Vector2 aimDirection)
-        {
-            //if (projectileHandler == null || currentAmmo <= 0)
-            //{
-            //    Debug.Log("화실이 소진되었습니다.");
-            //    return;
-            //} 
-
-            Vector2 dir = GetSnappedDirection(aimDirection);
-
-            Vector3 worldOffset = rangeWeaponPivot.rotation * (Vector3)spawnOffset;
-            spawnTransform.position = rangeWeaponPivot.position + worldOffset;
-            ProjectileManager.Instance.Shoot(dir, spawnTransform);
-            //currentAmmo--;
-
-            // 탄약 소진 시 기본 무기로 복귀
-            //if (currentAmmo <= 0)
-            //    EquipRangeWeapon(basicBowPrefab);
-        }
-        /// <summary>
-        /// 방향키 입력에 따라 활 회전
-        /// </summary>
-        private Vector2 GetSnappedDirection(Vector2 rawInput)
-        {
-            if (rawInput.sqrMagnitude < 0.1f)
-                rawInput = Vector2.right;
-
-            // atan2 → degrees  → 0~360
-            float angle = Mathf.Atan2(rawInput.y, rawInput.x) * Mathf.Rad2Deg;
-            if (angle < 0) angle += 360;
-
-            // 45° 단위 반올림
-            float snapped = Mathf.Round(angle / 45f) * 45f;
-
-            // 활 피벗 회전
-            rangeWeaponPivot.rotation = Quaternion.Euler(0f, 0f, snapped);
-
-            // 방향 벡터 반환
-            float rad = snapped * Mathf.Deg2Rad;
-            return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
-        }
-
-        /// <summary>
-        /// 현재 탄약 수량 반환
-        /// </summary>
+        /// <returns></returns>
         public int GetCurrentAmmo() => currentAmmo;
     }
 }
+

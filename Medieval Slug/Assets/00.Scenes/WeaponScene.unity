@@ -525,6 +525,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1014740920 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4750172393154224779, guid: 72977b7c7f016324daa2fb2a552c25d2, type: 3}
+  m_PrefabInstance: {fileID: 3753214478146616875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1124276370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -682,6 +687,14 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PlayerMeleeHandler, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 5729073728492468103, guid: 72977b7c7f016324daa2fb2a552c25d2, type: 3}
+      propertyPath: bowPrefab
+      value: 
+      objectReference: {fileID: 2584449098090473235, guid: dcbbb167c1783e74e938d42826be5b10, type: 3}
+    - target: {fileID: 5729073728492468103, guid: 72977b7c7f016324daa2fb2a552c25d2, type: 3}
+      propertyPath: RangeWaeponPivot
+      value: 
+      objectReference: {fileID: 1014740920}
     - target: {fileID: 5762113262539273672, guid: 72977b7c7f016324daa2fb2a552c25d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.15
