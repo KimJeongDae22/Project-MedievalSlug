@@ -8,15 +8,7 @@ public abstract class MeleeMonsterBaseState : MonsterBaseState
         MeleeStateMachine = stateMachine;
     }
 
-    public override void EnterState()
-    {
-    }
-
-    public override void UpdateState()
-    {
-    }
-
-    public override void ExitState()
-    {
-    }
+    public abstract override void EnterState();
+    public abstract override void UpdateState();
+    public abstract override void ExitState();
 }

@@ -10,7 +10,7 @@ public abstract class MonsterBaseState
     {
         this.StateMachine = stateMachine;
     }
-
+    
     public abstract void EnterState();
     public abstract void UpdateState();
     public abstract void ExitState();
