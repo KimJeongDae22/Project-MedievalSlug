@@ -25,12 +25,12 @@ public class MeleeMonsterChaseState : MeleeMonsterBaseState
         if (distanceX < 0)
         {
             StateMachine.Monster.Sprite.flipX = true;
-            MeleeStateMachine.MeleeMonster.MeleeCollider.FlipMeleeCollider(true);
+            MeleeStateMachine.MeleeMonster.FlipMeleeCollider(true);
         }
         else
         {
             StateMachine.Monster.Sprite.flipX = false;
-            MeleeStateMachine.MeleeMonster.MeleeCollider.FlipMeleeCollider(false);
+            MeleeStateMachine.MeleeMonster.FlipMeleeCollider(false);
         }
         
         float distance = Mathf.Abs(distanceX);

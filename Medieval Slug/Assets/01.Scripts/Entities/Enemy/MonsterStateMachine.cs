@@ -36,6 +36,7 @@ public abstract class MonsterStateMachine : MonoBehaviour
     /// </summary>
     void OnDrawGizmos()
     {
+        if (target == null) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, Monster.MonsterData.DetectRange);
         
