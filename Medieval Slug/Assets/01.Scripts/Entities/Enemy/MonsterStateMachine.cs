@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-public abstract class MonsterStateMachine : MonoBehaviour
+public class MonsterStateMachine : MonoBehaviour
 {
     [field : SerializeField] public Monster Monster { get; protected set; }
     [field : SerializeField] public Transform target { get; set; }
@@ -19,6 +19,14 @@ public abstract class MonsterStateMachine : MonoBehaviour
         Monster = GetComponentInChildren<Monster>();
         targetLayer = LayerMask.GetMask("Player");
         target = GameObject.FindWithTag("Player")?.transform;
+    }
+    
+    protected void Start()
+    {
+        IdleState = new MonsterIdleState(this);
+        ChaseState = new MonsterChaseState(this);
+        AttackState = new MonsterAttackState(this);
+        ChangeState(IdleState);
     }
 
     private void Update()

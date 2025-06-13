@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class MeleeMonsterAttackState : MeleeMonsterBaseState
+public class MonsterAttackState : MonsterBaseState
 {
-    public MeleeMonsterAttackState(MeleeMonsterStateMachine stateMachine) : base(stateMachine) {}
+    public MonsterAttackState(MonsterStateMachine stateMachine) : base(stateMachine) {}
 
     public override void EnterState()
     {

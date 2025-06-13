@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour, IDamagable
     [field : SerializeField] public bool HasAnimator { get; private set; } = false;
     
     [field : Header("Monster States")] 
-    [field : SerializeField] public MonsterSO MonsterData { get; private set; }
+    [field : SerializeField] public virtual MonsterSO MonsterData { get; private set; }
     [SerializeField] private int health;
 
     protected virtual void Reset()

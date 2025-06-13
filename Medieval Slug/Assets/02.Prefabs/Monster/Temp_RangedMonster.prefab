@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 6113791106103305096}
   - component: {fileID: 6506889081947878118}
   - component: {fileID: 3635027562237109546}
-  - component: {fileID: 3563249209265043788}
+  - component: {fileID: 5022226975820919478}
   m_Layer: 7
   m_Name: Temp_RangedMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6113791106103305096
 Transform:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3563249209265043788
+--- !u!114 &5022226975820919478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1532668442158802693}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c3979c504514dd4963792e1738a712f, type: 3}
+  m_Script: {fileID: 11500000, guid: 60c614a452d58ca498722f5dc02d17cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Monster>k__BackingField: {fileID: 4126754008536790119}
@@ -124,7 +124,37 @@ MonoBehaviour:
   <targetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <RangedMonster>k__BackingField: {fileID: 4126754008536790119}
+--- !u!1 &3115860598697341014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3898489102591094056}
+  m_Layer: 7
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3898489102591094056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3115860598697341014}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4690290662441989814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5155684518470781678
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +167,7 @@ GameObject:
   - component: {fileID: 9106230449813526663}
   - component: {fileID: 1730311566386582147}
   - component: {fileID: 4126754008536790119}
+  - component: {fileID: 31968703703434368}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -156,7 +187,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3898489102591094056}
   m_Father: {fileID: 6113791106103305096}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9106230449813526663
@@ -169,7 +201,7 @@ Animator:
   m_GameObject: {fileID: 5155684518470781678}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d164f06309c3b084e8df1ca2620974b5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3275c69f28209f1428313dea891c2d0b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -251,7 +283,23 @@ MonoBehaviour:
     runParameterName: Run
     attackParameterName: Attack
     deadParameterName: Dead
-  <HasAnimator>k__BackingField: 0
-  <MonsterData>k__BackingField: {fileID: 11400000, guid: 8459950ffcd1a6f43a0bcec4616a03c1, type: 2}
+  <HasAnimator>k__BackingField: 1
+  <MonsterData>k__BackingField: {fileID: 11400000, guid: 45cdc68fb4764c640b68deb01ef425d2, type: 2}
   health: 0
-  <ProjectilePrefab>k__BackingField: {fileID: 0}
+  stateMachine: {fileID: 0}
+  projectileHandler: {fileID: 31968703703434368}
+--- !u!114 &31968703703434368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5155684518470781678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b06d1ce77d25e24a923fe65c7e88baf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPosition: {fileID: 3898489102591094056}
+  arrowPrefabs:
+  - {fileID: 2874846061775745548, guid: 2112f9294ff1e4b4697ddd182ff16531, type: 3}

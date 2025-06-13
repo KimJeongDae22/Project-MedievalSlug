@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MonsterSO", menuName = "Entities/Monster", order = 0)]
+[CreateAssetMenu(fileName = "DefaultMonsterSO", menuName = "Entities/Monster", order = 0)]
 public class MonsterSO : ScriptableObject
 {
     [Header("Monster States")] 
