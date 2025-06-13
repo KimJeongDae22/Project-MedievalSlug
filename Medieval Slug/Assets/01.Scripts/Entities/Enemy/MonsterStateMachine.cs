@@ -21,7 +21,7 @@ public class MonsterStateMachine : MonoBehaviour
         target = GameObject.FindWithTag("Player")?.transform;
     }
     
-    protected void Start()
+    protected virtual void Start()
     {
         IdleState = new MonsterIdleState(this);
         ChaseState = new MonsterChaseState(this);
