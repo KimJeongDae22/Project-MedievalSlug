@@ -23,7 +23,7 @@ public abstract class MonsterBaseState
     protected bool IsTargetDetected()
     {
         Vector2 origin = stateMachine.transform.position;
-        float detectionRadius = stateMachine.Monster.DetectRange;
+        float detectionRadius = stateMachine.Monster.MonsterData.DetectRange;
         LayerMask targetLayer = stateMachine.targetLayer;
         
         Collider2D[] hits = Physics2D.OverlapCircleAll(origin, detectionRadius, targetLayer);
@@ -32,6 +32,10 @@ public abstract class MonsterBaseState
         {
             if (hit.CompareTag("Player"))
             {
+                if (stateMachine.target == null)
+                {
+                    stateMachine.target = hit.transform;
+                }
                 return true;
             }
         }
@@ -45,11 +49,11 @@ public abstract class MonsterBaseState
     /// <returns></returns>
     protected bool IsTargetInAttackRange()
     {
-        Vector2 origin = stateMachine.transform.position + stateMachine.Monster.RayOffset;
+        Vector2 origin = stateMachine.transform.position + stateMachine.Monster.MonsterData.RayOffset;
         float directionX = stateMachine.target.position.x - origin.x;
         Vector2 direction = directionX > 0 ? Vector2.right : Vector2.left;
 
-        RaycastHit2D hit = Physics2D.Raycast(origin, direction, stateMachine.Monster.AttackRange, stateMachine.targetLayer);
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, stateMachine.Monster.MonsterData.AttackRange, stateMachine.targetLayer);
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
 
@@ -63,10 +67,10 @@ public abstract class MonsterBaseState
         stateMachine.Monster.Animator.SetBool(animatorHash, false);
     }
     
-    protected bool IsAnimationFinished()
+    protected bool IsAnimationFinished(string tag)
     {
         AnimatorStateInfo stateInfo = stateMachine.Monster.Animator.GetCurrentAnimatorStateInfo(0);
-        if (stateInfo.IsTag("Attack"))
+        if (stateInfo.IsTag(tag))
         { 
             return stateInfo.normalizedTime >= 1f;
         }

@@ -8,7 +8,7 @@ public class MeleeMonsterChaseState : MonsterBaseState
 
     public override void EnterState()
     {
-        attackCooldown = stateMachine.Monster.AttackCooldown;
+        attackCooldown = stateMachine.Monster.MonsterData.AttackCooldown;
         if (stateMachine.Monster.HasAnimator) 
             StartAnimation(stateMachine.Monster.AnimationHash.RunParameterHash);
     }
@@ -37,7 +37,7 @@ public class MeleeMonsterChaseState : MonsterBaseState
         
         if (IsTargetInAttackRange())
         {
-            if (attackCooldown < stateMachine.Monster.AttackCooldown)
+            if (attackCooldown < stateMachine.Monster.MonsterData.AttackCooldown)
             {
                 attackCooldown += Time.deltaTime;
             }
@@ -47,12 +47,12 @@ public class MeleeMonsterChaseState : MonsterBaseState
                 stateMachine.ChangeState(stateMachine.AttackState);
             }
         }
-        else if (distance > stateMachine.Monster.AttackRange)
+        else if (distance > stateMachine.Monster.MonsterData.AttackRange)
         {
             stateMachine.transform.position = Vector2.MoveTowards(
                 (stateMachine.transform.position),
                 stateMachine.target.position,
-                stateMachine.Monster.MoveSpeed * Time.deltaTime
+                stateMachine.Monster.MonsterData.MoveSpeed * Time.deltaTime
             );
         }
      

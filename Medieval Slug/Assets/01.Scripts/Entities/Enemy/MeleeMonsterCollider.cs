@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MeleeMonsterCollider : MonoBehaviour
@@ -13,24 +14,26 @@ public class MeleeMonsterCollider : MonoBehaviour
         collider2D = GetComponentInChildren<Collider2D>();
         colliderOffset = collider2D.offset;
         reverseColliderOffset = new Vector2(-collider2D.offset.x, collider2D.offset.y);
-        collider2D.enabled = false;
+    }
+
+    private void Start()
+    {
+        DisableCollider();
     }
 
     public void FlipMeleeCollider(bool isFlipping)
     {
-        if (isFlipping)
-        {
-            collider2D.offset = reverseColliderOffset;
-        }
-        else
-        {
-            collider2D.offset = colliderOffset;
-        }
+        collider2D.offset = isFlipping ? reverseColliderOffset : colliderOffset;
     }
 
-    public void ToggleMeleeCollider()
+    public void EnableCollider()
     {
-        collider2D.enabled = !collider2D.enabled;
+        collider2D.enabled = true;
+    }
+
+    public void DisableCollider()
+    {
+        collider2D.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,7 +42,7 @@ public class MeleeMonsterCollider : MonoBehaviour
         Debug.Log(other.name);
         other.TryGetComponent(out IDamagable damagable);
         if(damagable != null) 
-            damagable.TakeDamage(monster.damage);
+            damagable.TakeDamage(monster.MonsterData.Damage);
         else
             Debug.LogError($"{monster.name}의 IDamagable을 찾을 수 없습니다.");
     }
