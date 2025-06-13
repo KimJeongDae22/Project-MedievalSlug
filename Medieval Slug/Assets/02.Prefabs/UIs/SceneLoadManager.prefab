@@ -560,7 +560,7 @@ MonoBehaviour:
   loadingSceneCanvas: {fileID: 6705866432652363738}
   loadingSceneCanvasGroup: {fileID: 667824576688696191}
   progressBar: {fileID: 2605912566319118549}
-  loadingLerfRatio: 1
+  loadingLerfRatio: 2
   fadeTime: 0.3
 --- !u!1 &7232506173403285283
 GameObject:

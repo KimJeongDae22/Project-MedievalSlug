@@ -8,5 +8,5 @@ public static class SceneName
 {
     public const string START_SCENE = "StartScene";
     public const string KJD_SCENE = "KJDScene";
-    public const string KJD_TEST_SCENE = "KJDTestScene";
+    public const string KJD_START_SCENE = "KJDStartScene";
 }
