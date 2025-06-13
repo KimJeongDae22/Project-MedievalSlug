@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
             Vector2 aim = moveInput;
             if (aim.sqrMagnitude < 0.01f)
                 aim = isFacingRight ? Vector2.right : Vector2.left;
-            weaponHandler.FireRange(aim);
+            playerEquip.FireRange(aim);
         }
     }
     #endregion

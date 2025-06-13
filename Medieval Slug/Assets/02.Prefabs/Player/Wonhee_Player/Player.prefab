@@ -292,6 +292,7 @@ GameObject:
   - component: {fileID: 3194129535923018968}
   - component: {fileID: 8879075896321890980}
   - component: {fileID: 5729073728492468103}
+  - component: {fileID: 983891701490207897}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -497,12 +498,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   animator: {fileID: 488893499346024238}
-  meleeDamage: 10
-  meleeRange: 2
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  windupTime: 0.5
+  playerEquip: {fileID: 5729073728492468103}
   weaponHandler: {fileID: 0}
 --- !u!114 &3194129535923018968
 MonoBehaviour:
@@ -529,6 +525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statData: {fileID: 11400000, guid: 92c7b9b489aa373478853ac7cc7124d4, type: 2}
+  animator: {fileID: 488893499346024238}
 --- !u!114 &5729073728492468103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,3 +540,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeWeaponPivot: {fileID: 4750172393154224779}
   basicBowPrefab: {fileID: 2584449098090473235, guid: dcbbb167c1783e74e938d42826be5b10, type: 3}
+--- !u!114 &983891701490207897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8482778322477023689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e9e950f5718084c92ffc95bb9dc791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeDamage: 10
+  meleeRange: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  windupTime: 0.2
+  animator: {fileID: 488893499346024238}
