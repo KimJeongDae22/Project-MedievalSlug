@@ -74,11 +74,11 @@ public class UIManager : Singleton<UIManager>
 
         yield break;
     }
-    private void Update()
-    {
-        if (!Singleton<SceneLoadManager>.Instance.IsLoading && Input.GetKeyDown(KeyCode.Space))
-        {
-            Singleton<SceneLoadManager>.Instance.LoadScene(SceneName.KJD_TEST_SCENE);
-        }
-    }
+    // private void Update()
+    // {
+    //     if (!Singleton<SceneLoadManager>.Instance.IsLoading && Input.GetKeyDown(KeyCode.Space))
+    //     {
+    //         Singleton<SceneLoadManager>.Instance.LoadScene(SceneName.KJD_TEST_SCENE);
+    //     }
+    // }
 }

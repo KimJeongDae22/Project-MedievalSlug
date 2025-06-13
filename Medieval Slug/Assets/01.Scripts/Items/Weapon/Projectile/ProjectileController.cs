@@ -1,14 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileController : MonoBehaviour
+public class ProjectileController : MonoBehaviour, IPoolable
 {
     [SerializeField] private ProjectileData projectileData;
 
     private Vector2 direction;
     private Rigidbody2D rigidbody;
     private float curduration;
+
+    private Action<GameObject> returnToPool;
 
     void Awake()
     {
@@ -29,15 +32,30 @@ public class ProjectileController : MonoBehaviour
         
         if (curduration >= projectileData.Range)
         {
-            // 오브젝트 풀링
+            OnDespawn();
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // 데미지 주기
+        if (collision.tag != "Player")
+        {
+        OnDespawn();
+        }
     }
 
+    public void Initialize(Action<GameObject> returnAction)
+    {
+        returnToPool = returnAction;
+    }
 
+    public void OnSpawn()
+    {
 
+    }
+
+    public void OnDespawn()
+    {
+        returnToPool?.Invoke(gameObject);
+    }
 }
