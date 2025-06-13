@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RangeWeaponHandler : MonoBehaviour
@@ -7,10 +8,11 @@ public class RangeWeaponHandler : MonoBehaviour
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private ProjectileType equippedType = ProjectileType.Nomal; // 임시
     
+    
 
         public void FireRange(Vector2 aimDirection) // 화살 발사
         {
-            //if (projectileHandler == null || currentAmmo <= 0) return;
+            // if (equippedType == ProjectileType.Null || currentAmmo <= 0) return;
 
             Vector2 dir = aimDirection.sqrMagnitude > 0.01f
                 ? aimDirection.normalized
