@@ -15,10 +15,16 @@ public class ProjectileHandler : MonoBehaviour
 
     public void Shoot(Vector2 direction)
     {
-        GameObject proj = Instantiate(arrowPrefabs[0], spawnPosition.position, Quaternion.identity);
+        float angle = ProjectileAngle(direction);
+
+        GameObject proj = Instantiate(arrowPrefabs[0], spawnPosition.position, Quaternion.Euler(0, 0, angle));
+
         proj.GetComponent<ProjectileController>().Init(direction);
     }
 
-    // 화살 방향과 회전값 구하는 메서드
+    private float ProjectileAngle(Vector2 direction)
+    {
+        return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    }
 
 }
