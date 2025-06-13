@@ -15,18 +15,29 @@ namespace Entities.Player
         [SerializeField] private GameObject basicBowPrefab;
 
         // 현재 장착된 무기
-        private GameObject currentWeaponPrefab;
+        private ProjectileData currentProjectileData;
         private ProjectileHandler projectileHandler;
         private int currentAmmo;
-        private int maxAmmo;
 
-
+        private Vector2 spawnOffset;
+        private Transform spawnTransform;
         private PlayerStatHandler statHandler;
 
         private void Awake()
         {
             statHandler = GetComponent<PlayerStatHandler>();
-            EquipRangeWeapon(basicBowPrefab);
+            // 기본 활 인스턴스화
+            GameObject bowInstance = Instantiate(basicBowPrefab, rangeWeaponPivot);
+            bowInstance.transform.localPosition = Vector3.zero;
+            bowInstance.transform.localRotation = Quaternion.identity;
+            projectileHandler = bowInstance.GetComponent<ProjectileHandler>();
+
+            projectileHandler = bowInstance.GetComponent<ProjectileHandler>();
+            spawnTransform = bowInstance.transform.Find("SpawnPosition");
+            if (projectileHandler == null)
+                Debug.LogError("ProjectileHandler missing on basicBowPrefab.");
+
+            spawnOffset = spawnTransform.localPosition;
         }
 
         /// <summary>
@@ -46,58 +57,36 @@ namespace Entities.Player
         public void OnHealthPickup(int value) => statHandler.ModifyStat(StatType.Health, value);
 
         /// <summary>
-        /// 아이템으로부터 무기를 습득할 때 호출
-        /// Item.cs의 ApplyItemEffect()에서 이 함수를 호출하시면 될 것 같습니다.
+        /// 화살 아이템 습득 시 호출
         /// </summary>
-        public void OnWeaponPickup(GameObject weaponPrefab)
+        /// <param name="data">획득한 화살 타입 데이터</param>
+        /// <param name="amount">획득 수량</param>
+        public void OnArrowPickup(ProjectileData data)
         {
-            // 같은 무기일 때 탄약 증가
-            if (currentWeaponPrefab == weaponPrefab && currentAmmo > 0)
+            // 같은 화살 타입 && 남은 탄약이 있을 때: 최대치 없이 누적
+            if (currentProjectileData == data && currentAmmo > 0)
             {
-                //int added = projectileHandler.StartingAmmo;  // prefab 데이터에서 가져올 예정
-                //currentAmmo = currentAmmo //+ added;
+                currentAmmo += data.MaxNum;
             }
             else
             {
-                EquipRangeWeapon(weaponPrefab);
+                // 새로운 타입이거나 탄약이 0일 때 교체
+                SetProjectileData(data);
             }
+
+            // UI 갱신: OnAmmoChanged?.Invoke(currentAmmo);
         }
 
         /// <summary>
-        /// 무기 아이템 습득 시 호출
+        /// 현재 사용 화살 타입 변경 및 탄약 초기화
         /// </summary>
-        /// <param name="handlerPrefab"></param>
-        public void EquipRangeWeapon(GameObject RangeWeaponPrefab)
+        /// <param name="data">새 화살 데이터</param>
+        /// <param name="initialAmmo">초기 탄약 수량</param>
+        public void SetProjectileData(ProjectileData data)
         {
-
-            if (projectileHandler != null)
-                Destroy(projectileHandler.gameObject);
-
-            GameObject weaponInstance = Instantiate(RangeWeaponPrefab, rangeWeaponPivot);
-            weaponInstance.transform.localPosition = Vector3.zero;
-            weaponInstance.transform.localRotation = Quaternion.identity;
-
-            projectileHandler = weaponInstance.GetComponent<ProjectileHandler>();
-            if (projectileHandler == null)
-            {
-                Debug.LogError("ProjectileHandler missing on weapon prefab.");
-                return;
-            }
-
-            currentWeaponPrefab = RangeWeaponPrefab;
-            //화살 수 초기화 로직
-            //maxAmmo = projectileHandler.MaxAmmo;
-            //currentAmmo = projectileHandler.StartingAmmo;
-
-        }
-        /// <summary>
-        /// 아이템이 화살만 장착하는거면
-        /// 화살만 교체하는 메소드
-        /// </summary>
-        /// <param name="projectile"></param>
-        public void EquipProjectile(ProjectileData projectile)
-        {
-           //Todo : 투사체 데이터만 변경하는 로직
+            currentProjectileData = data;
+            //projectileHandler.SetProjectileData(data);
+            currentAmmo = data.MaxNum;
         }
 
         /// <summary>
@@ -106,12 +95,16 @@ namespace Entities.Player
         /// </summary>
         public void FireRange(Vector2 aimDirection)
         {
-            //if (projectileHandler == null || currentAmmo <= 0) return;
+            //if (projectileHandler == null || currentAmmo <= 0)
+            //{
+            //    Debug.Log("화실이 소진되었습니다.");
+            //    return;
+            //} 
 
-            Vector2 dir = aimDirection.sqrMagnitude > 0.01f
-                ? aimDirection.normalized
-                : (transform.localScale.x > 0 ? Vector2.right : Vector2.left);
+            Vector2 dir = GetSnappedDirection(aimDirection);
 
+            Vector3 worldOffset = rangeWeaponPivot.rotation * (Vector3)spawnOffset;
+            spawnTransform.position = rangeWeaponPivot.position + worldOffset;
             projectileHandler.Shoot(dir);
             //currentAmmo--;
 
@@ -119,5 +112,32 @@ namespace Entities.Player
             //if (currentAmmo <= 0)
             //    EquipRangeWeapon(basicBowPrefab);
         }
+        /// <summary>
+        /// 방향키 입력에 따라 활 회전
+        /// </summary>
+        private Vector2 GetSnappedDirection(Vector2 rawInput)
+        {
+            if (rawInput.sqrMagnitude < 0.1f)
+                rawInput = Vector2.right;
+
+            // atan2 → degrees  → 0~360
+            float angle = Mathf.Atan2(rawInput.y, rawInput.x) * Mathf.Rad2Deg;
+            if (angle < 0) angle += 360;
+
+            // 45° 단위 반올림
+            float snapped = Mathf.Round(angle / 45f) * 45f;
+
+            // 활 피벗 회전
+            rangeWeaponPivot.rotation = Quaternion.Euler(0f, 0f, snapped);
+
+            // 방향 벡터 반환
+            float rad = snapped * Mathf.Deg2Rad;
+            return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+        }
+
+        /// <summary>
+        /// 현재 탄약 수량 반환
+        /// </summary>
+        public int GetCurrentAmmo() => currentAmmo;
     }
 }
