@@ -38,10 +38,10 @@ public class ProjectileController : MonoBehaviour, IPoolable
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player")
-        {
-        OnDespawn();
-        }
+        // if (collision.tag != "Player")
+        // {
+        // OnDespawn();
+        // }
     }
 
     public void Initialize(Action<GameObject> returnAction)

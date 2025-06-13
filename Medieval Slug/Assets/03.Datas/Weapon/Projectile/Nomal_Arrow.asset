@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   Damage: 0
-  Range: 5
+  Range: 2
   AttackSpeed: 0
-  ShotSpeed: 3
+  ShotSpeed: 10
   ProjecileCount: 0
   MaxNum: 100

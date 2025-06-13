@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField] private float windupTime = 0.2f;
 
     [Header("Dependencies")]
-    [SerializeField] private PlayerEquip playerEquip;
+    [SerializeField] private WeaponHandler weaponHandler;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -41,6 +41,11 @@ public class PlayerController : MonoBehaviour, IDamagable
     {
         rb = GetComponent<Rigidbody2D>();
         statHandler = GetComponent<PlayerStatHandler>();
+    }
+
+    void Start()
+    {
+        weaponHandler = GetComponentInChildren<WeaponHandler>();
     }
 
     #region InputSystem 바인딩
@@ -68,7 +73,7 @@ public class PlayerController : MonoBehaviour, IDamagable
             // Default to facing direction if no input
             if (aim.sqrMagnitude < 0.01f)
                 aim = isFacingRight ? Vector2.right : Vector2.left;
-            playerEquip.FireRange(aim);
+            weaponHandler.FireRange(aim);
         }
     }
     #endregion

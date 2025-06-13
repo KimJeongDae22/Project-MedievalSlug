@@ -16,7 +16,7 @@ namespace Entities.Player
 
         // 현재 장착된 무기
         private GameObject currentWeaponPrefab;
-        private ProjectileManager projectileManager;
+        private WeaponHandler weaponHandler;
         private int currentAmmo;
         private int maxAmmo;
 
@@ -70,15 +70,15 @@ namespace Entities.Player
         public void EquipRangeWeapon(GameObject RangeWeaponPrefab)
         {
 
-            if (projectileManager != null)
-                Destroy(projectileManager.gameObject);
+            if (weaponHandler != null)
+                Destroy(weaponHandler.gameObject);
 
             GameObject weaponInstance = Instantiate(RangeWeaponPrefab, rangeWeaponPivot);
             weaponInstance.transform.localPosition = Vector3.zero;
             weaponInstance.transform.localRotation = Quaternion.identity;
 
-            projectileManager = weaponInstance.GetComponent<ProjectileManager>();
-            if (projectileManager == null)
+            weaponHandler = weaponInstance.GetComponent<WeaponHandler>();
+            if (weaponHandler == null)
             {
                 Debug.LogError("ProjectileManager missing on weapon prefab.");
                 return;
@@ -104,20 +104,6 @@ namespace Entities.Player
         /// 원거리 무리 발사
         /// 방향은 플레이어 측에서 파라미터로 넘기겠습니다.
         /// </summary>
-        public void FireRange(Vector2 aimDirection)
-        {
-            //if (projectileHandler == null || currentAmmo <= 0) return;
-
-            Vector2 dir = aimDirection.sqrMagnitude > 0.01f
-                ? aimDirection.normalized
-                : (transform.localScale.x > 0 ? Vector2.right : Vector2.left);
-
-            projectileManager.Shoot(dir);
-            //currentAmmo--;
-
-            // 탄약 소진 시 기본 무기로 복귀
-            //if (currentAmmo <= 0)
-            //    EquipRangeWeapon(basicBowPrefab);
-        }
+        /// 
     }
 }
