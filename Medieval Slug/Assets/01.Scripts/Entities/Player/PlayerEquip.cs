@@ -16,6 +16,7 @@ namespace Entities.Player
 
         // 현재 장착된 무기
         private GameObject currentWeaponPrefab;
+        private ProjectileData projectileData;
         private RangeWeaponHandler weaponHandler;
         private int currentAmmo;
 
@@ -30,12 +31,14 @@ namespace Entities.Player
             GameObject bowInstance = Instantiate(basicBowPrefab, rangeWeaponPivot);
             bowInstance.transform.localPosition = Vector3.zero;
             bowInstance.transform.localRotation = Quaternion.identity;
-           
-            projectileHandler = bowInstance.GetComponent<ProjectileHandler>();
-            if(projectileHandler == null)
+
+            weaponHandler = bowInstance.GetComponent<RangeWeaponHandler>();
+            if(weaponHandler == null)
             {
                 Debug.LogError("ProjectileHandler missing on basicBowPrefab.");
             }
+
+
 
             // 발사 위치(SpawnPosition) 설정
             spawnTransform = bowInstance.transform.Find("SpawnPosition");
@@ -73,7 +76,7 @@ namespace Entities.Player
         public void OnArrowPickup(ProjectileData data)
         {
             // 같은 화살 타입 && 남은 탄약이 있을 때: 최대치 없이 누적
-            if (currentProjectileData == data && currentAmmo > 0)
+            if (projectileData == data && currentAmmo > 0)
             {
                 currentAmmo += data.MaxNum;
             }
@@ -93,7 +96,7 @@ namespace Entities.Player
         /// <param name="initialAmmo">초기 탄약 수량</param>
         public void SetProjectileData(ProjectileData data)
         {
-            currentProjectileData = data;
+            projectileData = data;
             //projectileHandler.SetProjectileData(data);
             currentAmmo = data.MaxNum;
         }
@@ -101,25 +104,25 @@ namespace Entities.Player
         /// <summary>
         /// 원거리 무리 발사
         /// </summary>
-        // public void FireRange(Vector2 aimDirection)
-        // {
-        //     //if (projectileHandler == null || currentAmmo <= 0)
-        //     //{
-        //     //    Debug.Log("화실이 소진되었습니다.");
-        //     //    return;
-        //     //} 
+        public void FireRange(Vector2 aimDirection)
+        {
+            //if (projectileHandler == null || currentAmmo <= 0)
+            //{
+            //    Debug.Log("화실이 소진되었습니다.");
+            //    return;
+            //} 
 
-        //     Vector2 dir = GetSnappedDirection(aimDirection);
+            Vector2 dir = GetSnappedDirection(aimDirection);
 
-        //     Vector3 worldOffset = rangeWeaponPivot.rotation * (Vector3)spawnOffset;
-        //     spawnTransform.position = rangeWeaponPivot.position + worldOffset;
-        //     projectileHandler.Shoot(dir);
-        //     //currentAmmo--;
+            Vector3 worldOffset = rangeWeaponPivot.rotation * (Vector3)spawnOffset;
+            spawnTransform.position = rangeWeaponPivot.position + worldOffset;
+            ProjectileManager.Instance.Shoot(dir, spawnTransform);
+            //currentAmmo--;
 
-        //     // 탄약 소진 시 기본 무기로 복귀
-        //     //if (currentAmmo <= 0)
-        //     //    EquipRangeWeapon(basicBowPrefab);
-        // }
+            // 탄약 소진 시 기본 무기로 복귀
+            //if (currentAmmo <= 0)
+            //    EquipRangeWeapon(basicBowPrefab);
+        }
         /// <summary>
         /// 방향키 입력에 따라 활 회전
         /// </summary>

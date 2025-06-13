@@ -7,10 +7,10 @@ public class ProjectileManager : Singleton<ProjectileManager>
 {
     [SerializeField] private List<GameObject> arrowPrefabs;
 
-    public void Shoot(Vector2 direction, Transform spawnPosition, ProjectileType type)
+    public void Shoot(Vector2 direction, Transform spawnPosition, ProjectileType type = default)
     {
         float angle = ProjectileAngle(direction);
-        GameObject proj = ObjectPoolManager.Instance.GetObject((int)type, spawnPosition.position, Quaternion.Euler(0, 0, angle));
+        GameObject proj = ObjectPoolManager.Instance.GetObject(0, spawnPosition.position, Quaternion.Euler(0, 0, angle));
 
         proj.GetComponent<ProjectileController>().Init(direction);
     }
