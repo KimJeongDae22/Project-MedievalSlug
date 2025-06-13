@@ -11,7 +11,6 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
     private Dictionary<StatType, float> currentStats = new Dictionary<StatType, float>();
 
     public event Action<StatType, float> OnStatChanged;
-    public event Action<int> OnCoinChanged;
 
     [SerializeField]private Animator animator;
 

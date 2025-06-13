@@ -11,20 +11,22 @@ namespace Entities.Player
     /// 무기는 고정(활 1개). 화살(ProjectileData)만 교체·탄약 관리.
     /// </summary>
     [RequireComponent(typeof(PlayerStatHandler))]
-    public class PlayerEquip : MonoBehaviour
+    public class PlayerRangedHandler : MonoBehaviour
     {
         [Header("Bow Prefab (고정)")]
         [SerializeField] private GameObject bowPrefab;
-        [SerializeField] private Transform RangeWaeponPivot;
+        [SerializeField] private Transform RangeWeaponPivot;
+
+        [Header("남은 화살 수")]
+        [SerializeField]private int currentAmmo;
 
         private RangeWeaponHandler bowHandler;
         private ProjectileData currentArrowData;
-        [SerializeField]private int currentAmmo;
-        private PlayerStatHandler statHandler;
+        private float nextFireTime = 0f;
+        private bool isBursting;
 
         private void Awake()
         {
-            statHandler = GetComponent<PlayerStatHandler>();
             SpawnBow();
         }
 
@@ -32,30 +34,36 @@ namespace Entities.Player
         /// RangeWeapon의 Fire 외부 API
         /// </summary>
         /// <param name="aimDirection"></param>
-        public void Fire(Vector2 aimDirection)
+        public void Fire(Vector2 aimDir)
         {
             if (currentAmmo <= 0) return;
-            bowHandler.Fire(aimDirection);
-            currentAmmo--;
-            // TODO: UI 이벤트 OnAmmoChanged?.Invoke(currentAmmo);
+            if (currentArrowData.AttackSpeed <= 0f) return;
+
+            //발사 시퀀스 쿨타임 검사 
+            float interval = (currentArrowData.AttackSpeed > 0f)
+                           ? 1f / currentArrowData.AttackSpeed
+                           : 0;
+            if (Time.time < nextFireTime) return;
+
+            nextFireTime = Time.time + interval;
+            if (!isBursting) StartCoroutine(FireBurst(aimDir.normalized));
         }
 
-        #region 아이템 획득 로직
-        /// <summary>
-        /// 화살 아이템 획득 시 호출
-        /// </summary>
-        public void OnArrowPickup(ProjectileData data)
+        IEnumerator FireBurst(Vector2 dir)
         {
-            // 동일 화살이면 탄약 누적, 아니면 교체
-            if (currentArrowData == data && currentAmmo > 0)
-                currentAmmo += data.MaxNum;
-            else
-                SetArrowData(data);
+            isBursting = true;
+            int burst = Mathf.Max(1, currentArrowData.ProjecileCount);
+            for (int i = 0; i < burst && currentAmmo > 0; i++)
+            {
+                bowHandler.Fire(dir);        // 실제 투사체 생성
+                currentAmmo--;
+
+                /* 연사 간 미세 지연 */
+                if (i < burst - 1)
+                    yield return new WaitForSeconds(0.11f);
+            }
+            isBursting = false;
         }
-
-        public void OnHealthPickup(int value) => statHandler.ModifyStat(StatType.Health, value);
-
-        #endregion
 
         /// <summary>
         /// 시작 시 기본활 생성
@@ -63,7 +71,7 @@ namespace Entities.Player
         private void SpawnBow()
         {
             if (bowHandler != null) return; // 이미 있음
-            GameObject bow = Instantiate(bowPrefab, RangeWaeponPivot);
+            GameObject bow = Instantiate(bowPrefab, RangeWeaponPivot);
             bow.transform.localPosition = Vector3.zero;
             bow.transform.localRotation = Quaternion.identity;
             bowHandler = bow.GetComponent<RangeWeaponHandler>();
@@ -82,6 +90,14 @@ namespace Entities.Player
             currentAmmo = data.MaxNum;
             bowHandler.SetProjectileType(data.Type);
             // TODO: UI 이벤트 OnAmmoChanged?.Invoke(currentAmmo);
+        }
+
+        public void HandleArrowPickup(ProjectileData data)
+        {
+            if (currentArrowData == data && currentAmmo > 0)
+                currentAmmo += data.MaxNum;
+            else
+                SetArrowData(data);
         }
 
         /// <summary>

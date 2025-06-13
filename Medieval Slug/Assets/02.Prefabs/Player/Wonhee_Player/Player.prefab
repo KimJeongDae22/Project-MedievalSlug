@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4732801059515003393}
   - component: {fileID: 5261612923815378026}
   - component: {fileID: 488893499346024238}
+  - component: {fileID: 7192483201456885343}
   m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
@@ -106,6 +107,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7192483201456885343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240471089300345626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69716a2da057ad541aebe0f984ece9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4078786608954460355
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,6 +306,7 @@ GameObject:
   - component: {fileID: 8879075896321890980}
   - component: {fileID: 5729073728492468103}
   - component: {fileID: 983891701490207897}
+  - component: {fileID: 7593995008890787776}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -439,8 +453,8 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 618710693811762284}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 983891701490207897}
+        m_TargetAssemblyTypeName: PlayerMeleeHandler, Assembly-CSharp
         m_MethodName: OnMelee
         m_Mode: 0
         m_Arguments:
@@ -499,7 +513,6 @@ MonoBehaviour:
     m_Bits: 256
   animator: {fileID: 488893499346024238}
   playerEquip: {fileID: 5729073728492468103}
-  weaponHandler: {fileID: 0}
 --- !u!114 &3194129535923018968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,8 +551,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0e8ce209cc211458859b8f73328f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeWeaponPivot: {fileID: 4750172393154224779}
-  basicBowPrefab: {fileID: 2584449098090473235, guid: dcbbb167c1783e74e938d42826be5b10, type: 3}
+  bowPrefab: {fileID: 2584449098090473235, guid: dcbbb167c1783e74e938d42826be5b10, type: 3}
+  RangeWeaponPivot: {fileID: 4750172393154224779}
+  currentAmmo: 0
 --- !u!114 &983891701490207897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,3 +573,17 @@ MonoBehaviour:
     m_Bits: 128
   windupTime: 0.2
   animator: {fileID: 488893499346024238}
+--- !u!114 &7593995008890787776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8482778322477023689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d3ee9e1c3d8cb4dbf3e8f5d6819e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ranged: {fileID: 5729073728492468103}
+  stats: {fileID: 8879075896321890980}

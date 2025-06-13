@@ -15,7 +15,7 @@ MonoBehaviour:
   Type: 0
   Damage: 3
   Range: 2
-  AttackSpeed: 1
+  AttackSpeed: 2
   ShotSpeed: 10
-  ProjecileCount: 1
-  MaxNum: 10
+  ProjecileCount: 5
+  MaxNum: 100

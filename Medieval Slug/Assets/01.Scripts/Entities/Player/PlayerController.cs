@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private Animator animator;
-    [SerializeField] private PlayerEquip playerEquip;
+    [SerializeField] private PlayerRangedHandler playerEquip;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
-    /* ---------- InputSystem ---------- */
+
     public void OnMovement(InputAction.CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
 
     public void OnJump(InputAction.CallbackContext ctx)
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         playerEquip.Fire(aim);
     }
 
-    /* ---------- Unity Loop ---------- */
+
     void Update()
     {
         float h = moveInput.x;
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
     }
 
-    /* ---------- Helper ---------- */
+
     private void Flip()
     {
         isFacingRight = !isFacingRight;
