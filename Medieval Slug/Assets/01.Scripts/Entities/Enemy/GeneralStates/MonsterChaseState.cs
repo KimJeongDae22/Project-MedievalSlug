@@ -1,4 +1,3 @@
-using System.Numerics;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
@@ -9,11 +8,9 @@ public class MonsterChaseState : MonsterBaseState
     public MonsterChaseState(MonsterStateMachine stateMachine) : base(stateMachine) {}
 
     private Vector3 rotate = new Vector3(0, 180, 0);
-    private float attackCooldown;
 
     public override void EnterState()
     {
-        attackCooldown = StateMachine.Monster.MonsterData.AttackCooldown;
         if (StateMachine.Monster.HasAnimator) 
             StartAnimation(StateMachine.Monster.AnimationHash.RunParameterHash);
     }
@@ -40,15 +37,7 @@ public class MonsterChaseState : MonsterBaseState
         
         if (IsTargetInAttackRange())
         {
-            if (attackCooldown < StateMachine.Monster.MonsterData.AttackCooldown)
-            {
-                attackCooldown += Time.deltaTime;
-            }
-            else
-            {
-                attackCooldown = 0f;
-                StateMachine.ChangeState(StateMachine.AttackState);
-            }
+            StateMachine.ChangeState(StateMachine.AttackState);
         }
         else if (distance > StateMachine.Monster.MonsterData.AttackRange)
         {

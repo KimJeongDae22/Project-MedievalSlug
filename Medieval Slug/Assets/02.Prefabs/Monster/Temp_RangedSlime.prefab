@@ -301,4 +301,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPosition: {fileID: 3898489102591094056}
   arrowPrefabs:
-  - {fileID: 2874846061775745548, guid: 2112f9294ff1e4b4697ddd182ff16531, type: 3}
+  - {fileID: 3071809021973701136, guid: ac071a62ed76c8e4ea769d5a21dc3f06, type: 3}

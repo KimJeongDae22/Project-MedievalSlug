@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 1
   Damage: 1
-  AttackCooldown: 0.5
+  AttackCooldown: 2
   MoveSpeed: 2
   DetectRange: 10
   RayOffset: {x: 0, y: 0.3, z: 0}
