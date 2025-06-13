@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class MeleeMonster : Monster
 {
     [field : Header("Melee Monster")]
@@ -11,7 +9,14 @@ public class MeleeMonster : Monster
     protected override void Reset()
     {
         base.Reset();
-        collider2D = GetComponentInChildren<Collider2D>();
+        if (collider2D == null)
+        {
+            collider2D = GetComponent<Collider2D>();
+            if (collider2D == null)
+            {
+                collider2D = gameObject.AddComponent<BoxCollider2D>();
+            }
+        }
     }
 
     protected override void Awake()

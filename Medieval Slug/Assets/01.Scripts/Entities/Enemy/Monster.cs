@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
 public class Monster : MonoBehaviour, IDamagable
 {
     [field : SerializeField] public SpriteRenderer Sprite { get; private set; }
@@ -14,9 +16,9 @@ public class Monster : MonoBehaviour, IDamagable
 
     protected virtual void Reset()
     {
-        Sprite = GetComponentInChildren<SpriteRenderer>();
+        Sprite = GetComponent<SpriteRenderer>();
         
-        Animator = GetComponentInChildren<Animator>();
+        Animator = GetComponent<Animator>();
         
         if (Animator != null) 
             HasAnimator = true;

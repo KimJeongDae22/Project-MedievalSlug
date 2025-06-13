@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public abstract class MonsterStateMachine : MonoBehaviour
 {
     [field : SerializeField] public Monster Monster { get; protected set; }
@@ -36,7 +38,7 @@ public abstract class MonsterStateMachine : MonoBehaviour
     /// </summary>
     void OnDrawGizmos()
     {
-        if (target == null) return;
+        if (target == null || Monster.MonsterData == null) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, Monster.MonsterData.DetectRange);
         
