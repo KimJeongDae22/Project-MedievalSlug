@@ -18,13 +18,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float groundCheckRadius = 1f;
     [SerializeField] LayerMask groundLayer;
 
-    [Header("Animator")]
-
-    [Header("Melee Weapon Setting")]
-    [SerializeField] private int meleeDamage = 10;
-    [SerializeField] private float meleeRange = 1f;
-    [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private float windupTime = 0.2f;
 
     [Header("Dependencies")]
     [SerializeField] private Animator animator;
@@ -60,11 +53,7 @@ public class PlayerController : MonoBehaviour
         if (ctx.started && IsGrounded())
             jumpRequest = true;
     }
-    public void OnMelee(InputAction.CallbackContext ctx)
-    {
-        if (ctx.started)
-            StartCoroutine(PerformMelee());
-    }
+ 
     public void OnFire(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
@@ -72,7 +61,7 @@ public class PlayerController : MonoBehaviour
             Vector2 aim = moveInput;
             if (aim.sqrMagnitude < 0.01f)
                 aim = isFacingRight ? Vector2.right : Vector2.left;
-            playerEquip.FireRange(aim);
+            weaponHandler.FireRange(aim);
         }
     }
     #endregion
@@ -101,25 +90,25 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
     }
 
-    /// <summary>
-    /// 근접 무기 공격 코루틴
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator PerformMelee()
-    {
-        // 1 또는 2 중 랜덤으로 선택
-        int idx = Random.Range(1, 3); // 1 또는 2
-        string triggerName = (idx == 1) ? "MeleeAttack1" : "MeleeAttack2";
-        animator.SetTrigger(triggerName);
+    ///// <summary>
+    ///// 근접 무기 공격 코루틴
+    ///// </summary>
+    ///// <returns></returns>
+    //private IEnumerator PerformMelee()
+    //{
+    //    // 1 또는 2 중 랜덤으로 선택
+    //    int idx = Random.Range(1, 3); // 1 또는 2
+    //    string triggerName = (idx == 1) ? "MeleeAttack1" : "MeleeAttack2";
+    //    animator.SetTrigger(triggerName);
 
-        yield return new WaitForSeconds(windupTime);
+    //    yield return new WaitForSeconds(windupTime);
 
-        Vector2 dir = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
-        Vector2 origin = (Vector2)transform.position + dir * 0.5f;
-        RaycastHit2D hit = Physics2D.Raycast(origin, dir, meleeRange, enemyLayer);
-        if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
-            target.TakeDamage(meleeDamage);
-    }
+    //    Vector2 dir = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+    //    Vector2 origin = (Vector2)transform.position + dir * 0.5f;
+    //    RaycastHit2D hit = Physics2D.Raycast(origin, dir, meleeRange, enemyLayer);
+    //    if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
+    //        target.TakeDamage(meleeDamage);
+    //}
     /// <summary>
     /// 캐릭터 플립
     /// </summary>
