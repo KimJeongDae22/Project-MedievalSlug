@@ -38,6 +38,8 @@ public class FlyingMonsterAttackState : MonsterBaseState
         {
             FlyingStateMachine.MeleeMonster.DisableCollider();
             isReturning = true;
+            if (StateMachine.Monster.HasAnimator) 
+                StopAnimation(StateMachine.Monster.AnimationHash.AttackParameterHash);
         }
         
         if (isReturning)
@@ -54,8 +56,7 @@ public class FlyingMonsterAttackState : MonsterBaseState
 
     public override void ExitState()
     {
-        if (StateMachine.Monster.HasAnimator) 
-            StopAnimation(StateMachine.Monster.AnimationHash.AttackParameterHash);
+        
     }
 
     private bool IsReachedPlayer()
