@@ -15,8 +15,8 @@ namespace Entities.Player
         [SerializeField] private GameObject basicBowPrefab;
 
         // 현재 장착된 무기
-        private ProjectileData currentProjectileData;
-        private ProjectileHandler projectileHandler;
+        private GameObject currentWeaponPrefab;
+        private RangeWeaponHandler weaponHandler;
         private int currentAmmo;
 
         private Vector2 spawnOffset;
@@ -101,25 +101,25 @@ namespace Entities.Player
         /// <summary>
         /// 원거리 무리 발사
         /// </summary>
-        public void FireRange(Vector2 aimDirection)
-        {
-            //if (projectileHandler == null || currentAmmo <= 0)
-            //{
-            //    Debug.Log("화실이 소진되었습니다.");
-            //    return;
-            //} 
+        // public void FireRange(Vector2 aimDirection)
+        // {
+        //     //if (projectileHandler == null || currentAmmo <= 0)
+        //     //{
+        //     //    Debug.Log("화실이 소진되었습니다.");
+        //     //    return;
+        //     //} 
 
-            Vector2 dir = GetSnappedDirection(aimDirection);
+        //     Vector2 dir = GetSnappedDirection(aimDirection);
 
-            Vector3 worldOffset = rangeWeaponPivot.rotation * (Vector3)spawnOffset;
-            spawnTransform.position = rangeWeaponPivot.position + worldOffset;
-            projectileHandler.Shoot(dir);
-            //currentAmmo--;
+        //     Vector3 worldOffset = rangeWeaponPivot.rotation * (Vector3)spawnOffset;
+        //     spawnTransform.position = rangeWeaponPivot.position + worldOffset;
+        //     projectileHandler.Shoot(dir);
+        //     //currentAmmo--;
 
-            // 탄약 소진 시 기본 무기로 복귀
-            //if (currentAmmo <= 0)
-            //    EquipRangeWeapon(basicBowPrefab);
-        }
+        //     // 탄약 소진 시 기본 무기로 복귀
+        //     //if (currentAmmo <= 0)
+        //     //    EquipRangeWeapon(basicBowPrefab);
+        // }
         /// <summary>
         /// 방향키 입력에 따라 활 회전
         /// </summary>

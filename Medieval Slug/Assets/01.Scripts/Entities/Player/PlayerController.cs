@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerEquip playerEquip;
+    [SerializeField] private RangeWeaponHandler weaponHandler;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -40,6 +41,11 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         statHandler = GetComponent<PlayerStatHandler>();
+    }
+
+    void Start()
+    {
+        weaponHandler = GetComponentInChildren<RangeWeaponHandler>();
     }
 
     #region InputSystem 바인딩
@@ -66,7 +72,7 @@ public class PlayerController : MonoBehaviour
             Vector2 aim = moveInput;
             if (aim.sqrMagnitude < 0.01f)
                 aim = isFacingRight ? Vector2.right : Vector2.left;
-            playerEquip.FireRange(aim);
+            weaponHandler.FireRange(aim);
         }
     }
     #endregion
