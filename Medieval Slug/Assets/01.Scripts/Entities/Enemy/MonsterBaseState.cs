@@ -66,6 +66,11 @@ public abstract class MonsterBaseState
         StateMachine.Monster.Animator.SetBool(animatorHash, false);
     }
     
+    /// <summary>
+    /// tag가 붙은 애니메이션이 끝났는지 확인하는 불값 반환 함수
+    /// </summary>
+    /// <param name="tag"></param>
+    /// <returns></returns>
     protected bool IsAnimationFinished(string tag)
     {
         AnimatorStateInfo stateInfo = StateMachine.Monster.Animator.GetCurrentAnimatorStateInfo(0);

@@ -12,6 +12,7 @@ public class MonsterIdleState : MonsterBaseState
 
     public override void UpdateState()
     {
+        //타겟을 감지하면 추적 상태로
         if (IsTargetDetected())
         {
             StateMachine.ChangeState(StateMachine.ChaseState);
