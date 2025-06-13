@@ -1,9 +1,14 @@
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
-public class MeleeMonsterChaseState : MeleeMonsterBaseState
+public class MonsterChaseState : MonsterBaseState
 {
-    public MeleeMonsterChaseState(MeleeMonsterStateMachine stateMachine) : base(stateMachine) {}
+    public MonsterChaseState(MonsterStateMachine stateMachine) : base(stateMachine) {}
 
+    private Vector3 rotate = new Vector3(0, 180, 0);
     private float attackCooldown;
 
     public override void EnterState()
@@ -24,13 +29,11 @@ public class MeleeMonsterChaseState : MeleeMonsterBaseState
         
         if (distanceX < 0)
         {
-            StateMachine.Monster.Sprite.flipX = true;
-            MeleeStateMachine.MeleeMonster.FlipMeleeCollider(true);
+            StateMachine.Monster.gameObject.transform.rotation = Quaternion.Euler(rotate);
         }
         else
         {
-            StateMachine.Monster.Sprite.flipX = false;
-            MeleeStateMachine.MeleeMonster.FlipMeleeCollider(false);
+            StateMachine.Monster.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
         }
         
         float distance = Mathf.Abs(distanceX);

@@ -12,8 +12,8 @@ public class RangedMonsterStateMachine : MonsterStateMachine
 
     protected void Start()
     {
-        IdleState = new RangedMonsterIdleState(this);
-        ChaseState = new RangedMonsterChaseState(this);
+        IdleState = new MonsterIdleState(this);
+        ChaseState = new MonsterChaseState(this);
         AttackState = new RangedMonsterAttackState(this);
         ChangeState(IdleState);
     }

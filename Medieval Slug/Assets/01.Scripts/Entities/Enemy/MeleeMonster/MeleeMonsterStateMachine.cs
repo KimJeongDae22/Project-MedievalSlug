@@ -12,8 +12,8 @@ public class MeleeMonsterStateMachine : MonsterStateMachine
 
     protected void Start()
     {
-        IdleState = new MeleeMonsterIdleState(this);
-        ChaseState = new MeleeMonsterChaseState(this);
+        IdleState = new MonsterIdleState(this);
+        ChaseState = new MonsterChaseState(this);
         AttackState = new MeleeMonsterAttackState(this);
         ChangeState(IdleState);
     }
