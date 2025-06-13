@@ -11,5 +11,4 @@ public class MonsterSO : ScriptableObject
     public float DetectRange = 10f;
     public Vector3 RayOffset = Vector3.zero;
     public float AttackRange = 1f;
-    public float Weight = 1f;
 }
