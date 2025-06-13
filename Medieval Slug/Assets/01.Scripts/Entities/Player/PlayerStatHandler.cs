@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
-public class PlayerStatHandler : MonoBehaviour
+public class PlayerStatHandler : MonoBehaviour, IDamagable
 {
     [Header("Stat Setting")]
     public StatData statData;
@@ -13,6 +13,7 @@ public class PlayerStatHandler : MonoBehaviour
     public event Action<StatType, float> OnStatChanged;
     public event Action<int> OnCoinChanged;
 
+    [SerializeField]private Animator animator;
 
     private void Awake()
     {
@@ -43,6 +44,17 @@ public class PlayerStatHandler : MonoBehaviour
         yield return new WaitForSeconds(duration);
         currentStats[type] -= amount;
         OnStatChanged?.Invoke(type, currentStats[type]);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        ModifyStat(StatType.Health, -damage);
+        animator.SetTrigger("Hurt");
+    }
+
+    public void Die()
+    {
+        animator.SetTrigger("Die");
     }
 }
 

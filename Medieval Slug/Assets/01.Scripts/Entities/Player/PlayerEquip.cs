@@ -30,14 +30,23 @@ namespace Entities.Player
             GameObject bowInstance = Instantiate(basicBowPrefab, rangeWeaponPivot);
             bowInstance.transform.localPosition = Vector3.zero;
             bowInstance.transform.localRotation = Quaternion.identity;
+           
             projectileHandler = bowInstance.GetComponent<ProjectileHandler>();
-
-            projectileHandler = bowInstance.GetComponent<ProjectileHandler>();
-            spawnTransform = bowInstance.transform.Find("SpawnPosition");
-            if (projectileHandler == null)
+            if(projectileHandler == null)
+            {
                 Debug.LogError("ProjectileHandler missing on basicBowPrefab.");
+            }
 
-            spawnOffset = spawnTransform.localPosition;
+            // 발사 위치(SpawnPosition) 설정
+            spawnTransform = bowInstance.transform.Find("SpawnPosition");
+            if (spawnTransform != null)
+            {
+                spawnOffset = spawnTransform.localPosition;
+            }
+            else
+            {
+                Debug.LogError("SpawnPosition transform missing on basicBowPrefab.");
+            }
         }
 
         /// <summary>
@@ -91,7 +100,6 @@ namespace Entities.Player
 
         /// <summary>
         /// 원거리 무리 발사
-        /// 방향은 플레이어 측에서 파라미터로 넘기겠습니다.
         /// </summary>
         public void FireRange(Vector2 aimDirection)
         {

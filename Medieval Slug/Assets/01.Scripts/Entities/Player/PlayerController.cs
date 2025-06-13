@@ -7,9 +7,9 @@ using UnityEngine.InputSystem;
 /// 움직임, 공격을 제어합니다.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour, IDamagable
+public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
+    [Header("Movement Settings")]
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
 
@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField] LayerMask groundLayer;
 
     [Header("Animator")]
-    [SerializeField] private Animator animator;
 
     [Header("Melee Weapon Setting")]
     [SerializeField] private int meleeDamage = 10;
@@ -28,13 +27,13 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField] private float windupTime = 0.2f;
 
     [Header("Dependencies")]
+    [SerializeField] private Animator animator;
     [SerializeField] private PlayerEquip playerEquip;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool jumpRequest;
     private bool isFacingRight = true;
-
     private PlayerStatHandler statHandler;
 
     void Awake()
@@ -65,7 +64,6 @@ public class PlayerController : MonoBehaviour, IDamagable
         if (ctx.started)
         {
             Vector2 aim = moveInput;
-            // Default to facing direction if no input
             if (aim.sqrMagnitude < 0.01f)
                 aim = isFacingRight ? Vector2.right : Vector2.left;
             playerEquip.FireRange(aim);
@@ -75,23 +73,26 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     void Update()
     {
-        float h = moveInput.x;
-        if (h > 0 && !isFacingRight) Flip();
-        else if (h < 0 && isFacingRight) Flip();
+        // 캐릭터 방향 전환 처리
+        float horizontal = moveInput.x;
+        if (horizontal > 0 && !isFacingRight) Flip();
+        else if (horizontal < 0 && isFacingRight) Flip();
     }
 
     void FixedUpdate()
     {
+        //이동 물리 계산
         rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
 
+        //점프 실행
         if (jumpRequest)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpRequest = false;
         }
 
-        float speed = Mathf.Abs(moveInput.x);  
-        animator.SetFloat("Speed", speed);
+        // 이동 애니메이션 속도 설정
+        animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
     }
 
     /// <summary>
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour, IDamagable
             target.TakeDamage(meleeDamage);
     }
     /// <summary>
-    /// 캐릭터 스프라이트 플립
+    /// 캐릭터 플립
     /// </summary>
     private void Flip()
     {
@@ -134,18 +135,5 @@ public class PlayerController : MonoBehaviour, IDamagable
             groundCheckRadius,
             groundLayer
         );
-    }
-
-    //임시 작성, 데미지 처리는 플레이어 스탯 부분에서?
-    //이후에 리펙토링으로 분리
-    public void TakeDamage(int damage)
-    {
-        statHandler.ModifyStat(StatType.Health, -damage);
-        animator.SetTrigger("Hurt");
-    }
-
-    public void Die()
-    {
-        animator.SetTrigger("Die");
     }
 }
