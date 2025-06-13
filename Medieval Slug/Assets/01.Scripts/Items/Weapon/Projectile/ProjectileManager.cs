@@ -6,8 +6,6 @@ using UnityEngine;
 public class ProjectileManager : Singleton<ProjectileManager>
 {
     [SerializeField] private List<GameObject> arrowPrefabs;
-    
-    public ProjectileData projectileData;
 
     public void Shoot(Vector2 direction, Transform spawnPosition, ProjectileType type)
     {
