@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class ProjectileHandler : MonoBehaviour
+public class ProjectileManager : Singleton<ProjectileManager>
 {
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private List<GameObject> arrowPrefabs;
-
-    void Awake()
-    {
-        Shoot(transform.right);
-    }
 
     public void Shoot(Vector2 direction)
     {
