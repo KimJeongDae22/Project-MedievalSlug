@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2756179299855282961}
   - component: {fileID: 2616251807489088205}
-  - component: {fileID: 9026372523175608167}
+  - component: {fileID: 2982865723860731517}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Untagged
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9026372523175608167
+--- !u!114 &2982865723860731517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2584449098090473235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 888fe2165ce901548926ffb216ddc742, type: 3}
+  m_Script: {fileID: 11500000, guid: 62744aa66e7d3e94891094069640bc07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPosition: {fileID: 1731738046691072130}

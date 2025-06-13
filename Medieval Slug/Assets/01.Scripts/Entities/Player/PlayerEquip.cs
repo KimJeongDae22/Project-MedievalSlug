@@ -16,7 +16,7 @@ namespace Entities.Player
 
         // 현재 장착된 무기
         private GameObject currentWeaponPrefab;
-        private WeaponHandler weaponHandler;
+        private RangeWeaponHandler weaponHandler;
         private int currentAmmo;
         private int maxAmmo;
 
@@ -77,7 +77,7 @@ namespace Entities.Player
             weaponInstance.transform.localPosition = Vector3.zero;
             weaponInstance.transform.localRotation = Quaternion.identity;
 
-            weaponHandler = weaponInstance.GetComponent<WeaponHandler>();
+            weaponHandler = weaponInstance.GetComponent<RangeWeaponHandler>();
             if (weaponHandler == null)
             {
                 Debug.LogError("ProjectileManager missing on weapon prefab.");

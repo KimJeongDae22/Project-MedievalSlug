@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField] private float windupTime = 0.2f;
 
     [Header("Dependencies")]
-    [SerializeField] private WeaponHandler weaponHandler;
+    [SerializeField] private RangeWeaponHandler weaponHandler;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     void Start()
     {
-        weaponHandler = GetComponentInChildren<WeaponHandler>();
+        weaponHandler = GetComponentInChildren<RangeWeaponHandler>();
     }
 
     #region InputSystem 바인딩
