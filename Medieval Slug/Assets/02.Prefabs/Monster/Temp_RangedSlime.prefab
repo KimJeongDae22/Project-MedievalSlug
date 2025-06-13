@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3635027562237109546}
   - component: {fileID: 5022226975820919478}
   m_Layer: 7
-  m_Name: Temp_RangedMonster
+  m_Name: Temp_RangedSlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

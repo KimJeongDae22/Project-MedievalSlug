@@ -1173,15 +1173,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1522214104785138172, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8561303051689805925, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
+    - target: {fileID: 5510620291520525985, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
       propertyPath: <target>k__BackingField
       value: 
       objectReference: {fileID: 1207236186}
     - target: {fileID: 9056047054283940948, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.4
+      value: 14.61
       objectReference: {fileID: 0}
     - target: {fileID: 9056047054283940948, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1236,13 +1236,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Temp_RangedMonster
       objectReference: {fileID: 0}
-    - target: {fileID: 3563249209265043788, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
+    - target: {fileID: 1532668442158802693, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022226975820919478, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
       propertyPath: <target>k__BackingField
       value: 
       objectReference: {fileID: 1207236186}
     - target: {fileID: 6113791106103305096, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.27
+      value: -13.51
       objectReference: {fileID: 0}
     - target: {fileID: 6113791106103305096, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
       propertyPath: m_LocalPosition.y
