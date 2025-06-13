@@ -4,12 +4,11 @@ using UnityEngine;
 
 public abstract class MonsterBaseState
 {
-    protected MonsterStateMachine stateMachine;
-    private int animHash;
+    protected virtual MonsterStateMachine StateMachine { get; }
 
-    public MonsterBaseState(MonsterStateMachine stateMachine)
+    protected MonsterBaseState(MonsterStateMachine stateMachine)
     {
-        this.stateMachine = stateMachine;
+        this.StateMachine = stateMachine;
     }
 
     public abstract void EnterState();
@@ -22,9 +21,9 @@ public abstract class MonsterBaseState
     /// <returns></returns>
     protected bool IsTargetDetected()
     {
-        Vector2 origin = stateMachine.transform.position;
-        float detectionRadius = stateMachine.Monster.MonsterData.DetectRange;
-        LayerMask targetLayer = stateMachine.targetLayer;
+        Vector2 origin = StateMachine.transform.position;
+        float detectionRadius = StateMachine.Monster.MonsterData.DetectRange;
+        LayerMask targetLayer = StateMachine.targetLayer;
         
         Collider2D[] hits = Physics2D.OverlapCircleAll(origin, detectionRadius, targetLayer);
 
@@ -32,9 +31,9 @@ public abstract class MonsterBaseState
         {
             if (hit.CompareTag("Player"))
             {
-                if (stateMachine.target == null)
+                if (StateMachine.target == null)
                 {
-                    stateMachine.target = hit.transform;
+                    StateMachine.target = hit.transform;
                 }
                 return true;
             }
@@ -49,27 +48,27 @@ public abstract class MonsterBaseState
     /// <returns></returns>
     protected bool IsTargetInAttackRange()
     {
-        Vector2 origin = stateMachine.transform.position + stateMachine.Monster.MonsterData.RayOffset;
-        float directionX = stateMachine.target.position.x - origin.x;
+        Vector2 origin = StateMachine.transform.position + StateMachine.Monster.MonsterData.RayOffset;
+        float directionX = StateMachine.target.position.x - origin.x;
         Vector2 direction = directionX > 0 ? Vector2.right : Vector2.left;
 
-        RaycastHit2D hit = Physics2D.Raycast(origin, direction, stateMachine.Monster.MonsterData.AttackRange, stateMachine.targetLayer);
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, StateMachine.Monster.MonsterData.AttackRange, StateMachine.targetLayer);
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
 
     protected void StartAnimation(int animatorHash)
     {
-        stateMachine.Monster.Animator.SetBool(animatorHash, true);
+        StateMachine.Monster.Animator.SetBool(animatorHash, true);
     }
 
     protected void StopAnimation(int animatorHash)
     {
-        stateMachine.Monster.Animator.SetBool(animatorHash, false);
+        StateMachine.Monster.Animator.SetBool(animatorHash, false);
     }
     
     protected bool IsAnimationFinished(string tag)
     {
-        AnimatorStateInfo stateInfo = stateMachine.Monster.Animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo stateInfo = StateMachine.Monster.Animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsTag(tag))
         { 
             return stateInfo.normalizedTime >= 1f;

@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class MeleeMonsterCollider : MonoBehaviour
 {
-    [SerializeField] private Monster monster;
+    [SerializeField] private MeleeMonster monster;
     [SerializeField] private Collider2D collider2D;
     [SerializeField] private Vector2 colliderOffset;
     [SerializeField] private Vector2 reverseColliderOffset;
 
     private void Reset()
     {
-        monster = transform.parent.GetComponent<Monster>();
+        monster = GetComponent<MeleeMonster>();
         collider2D = GetComponentInChildren<Collider2D>();
         colliderOffset = collider2D.offset;
         reverseColliderOffset = new Vector2(-collider2D.offset.x, collider2D.offset.y);

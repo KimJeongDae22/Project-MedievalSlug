@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeMonster : MonoBehaviour
+public class MeleeMonster : Monster
 {
-    // Start is called before the first frame update
-    void Start()
+    [field : Header("Melee Monster")]
+    [field : SerializeField] public MeleeMonsterCollider MeleeCollider { get; private set; }
+
+    protected override void Reset()
     {
-        
+        base.Reset();
+        MeleeCollider = GetComponent<MeleeMonsterCollider>();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Awake()
     {
-        
+        base.Awake();
+        MeleeCollider.enabled = false;
     }
 }

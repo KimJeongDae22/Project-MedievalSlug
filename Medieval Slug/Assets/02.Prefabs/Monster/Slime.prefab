@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7381979048289229804}
   - component: {fileID: 3259687527249972566}
   - component: {fileID: 9139739152266299481}
+  - component: {fileID: 7506904562588806821}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -115,7 +116,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8003993562906655468}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -165,10 +166,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ff133858a7ce4c9f8e06aac3420e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 1974118511636949888}
+  monster: {fileID: 7506904562588806821}
   collider2D: {fileID: 3259687527249972566}
   colliderOffset: {x: -1.2, y: 0.7}
   reverseColliderOffset: {x: 1.2, y: 0.7}
+--- !u!114 &7506904562588806821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003993562906655468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef33b99e45d364942b1c1b14f390273b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Sprite>k__BackingField: {fileID: 7381979048289229804}
+  <Animator>k__BackingField: {fileID: 8695307877824504466}
+  <AnimationHash>k__BackingField:
+    idleParameterName: Idle
+    runParameterName: Run
+    attackParameterName: Attack
+    deadParameterName: Dead
+  <HasAnimator>k__BackingField: 1
+  <MonsterData>k__BackingField: {fileID: 11400000, guid: 5d983d5473ee4d349be0710859bc58e7, type: 2}
+  health: 0
+  <MeleeCollider>k__BackingField: {fileID: 9139739152266299481}
 --- !u!1 &8715615119123732269
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +205,6 @@ GameObject:
   - component: {fileID: 4997690671139148300}
   - component: {fileID: 1062305500590359945}
   - component: {fileID: 7539456190247836261}
-  - component: {fileID: 1974118511636949888}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
@@ -199,8 +222,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.42, y: -3.64, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4563829470035034845}
   m_Father: {fileID: 0}
@@ -289,32 +312,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca65ae9407e4f7a89b158ed89dfe3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Monster>k__BackingField: {fileID: 1974118511636949888}
+  <Monster>k__BackingField: {fileID: 7506904562588806821}
   <target>k__BackingField: {fileID: 0}
   <targetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &1974118511636949888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8715615119123732269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4eb143d735114c72a2245da6b0eccc41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateMachine: {fileID: 7539456190247836261}
-  <Sprite>k__BackingField: {fileID: 7381979048289229804}
-  <Animator>k__BackingField: {fileID: 8695307877824504466}
-  <AnimationHash>k__BackingField:
-    idleParameterName: Idle
-    runParameterName: Run
-    attackParameterName: Attack
-    deadParameterName: Dead
-  <HasAnimator>k__BackingField: 1
-  <MonsterData>k__BackingField: {fileID: 0}
-  health: 1
-  <meleeCollider>k__BackingField: {fileID: 9139739152266299481}
+  <MeleeMonster>k__BackingField: {fileID: 7506904562588806821}

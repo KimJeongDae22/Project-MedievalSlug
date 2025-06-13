@@ -11,14 +11,8 @@ public class Monster : MonoBehaviour, IDamagable
     [field : Header("Monster States")] 
     [field : SerializeField] public MonsterSO MonsterData { get; private set; }
     [SerializeField] private int health;
-    
-    /// <summary>
-    /// 근접몬스터에만 넣어야 하는데 방법 모르겠음.
-    /// </summary>
-    [field : Header("Melee Monster")]
-    [field : SerializeField] public MeleeMonsterCollider meleeCollider { get; private set; }
 
-    private void Reset()
+    protected virtual void Reset()
     {
         Sprite = GetComponentInChildren<SpriteRenderer>();
         
@@ -26,12 +20,11 @@ public class Monster : MonoBehaviour, IDamagable
         
         if (Animator != null) 
             HasAnimator = true;
-        
-        health = MonsterData.Health;
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
+        health = MonsterData.Health;
         AnimationHash.Initialize();
     }
 
@@ -48,7 +41,6 @@ public class Monster : MonoBehaviour, IDamagable
     public void Die()
     {
         Animator.SetTrigger("Dead");
-        meleeCollider.DisableCollider();
     }
 
     public void DisableGameObject()
