@@ -52,6 +52,7 @@ public class FlyingMonsterChaseState : MonsterBaseState
         Vector2 direction = (Vector2)StateMachine.target.position - origin;
 
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, StateMachine.Monster.MonsterData.AttackRange, StateMachine.targetLayer);
+        Debug.DrawRay(origin, direction, Color.red);
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
 }

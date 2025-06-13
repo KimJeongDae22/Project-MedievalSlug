@@ -640,7 +640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &795549600
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1361,7 +1361,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 173575024247405211, guid: ee790ea1f852a4e47ad6c7b2e4666ee7, type: 3}
+    - target: {fileID: 1565117062265877348, guid: ee790ea1f852a4e47ad6c7b2e4666ee7, type: 3}
       propertyPath: <target>k__BackingField
       value: 
       objectReference: {fileID: 1207236186}
