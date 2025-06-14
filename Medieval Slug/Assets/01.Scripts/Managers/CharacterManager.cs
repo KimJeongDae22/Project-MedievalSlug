@@ -14,6 +14,10 @@ public class CharacterManager : Singleton<CharacterManager>
     protected override void Awake()
     {
       base.Awake();
-        Controller = FindObjectOfType<PlayerController>();
+        //Controller = FindObjectOfType<PlayerController>(); <= 겟컴포넌트가 더 효율적이라 바꿀게여 << 정머가
+        Controller = GetComponent<PlayerController>();
+        StatHandler = GetComponent<PlayerStatHandler>();
+        PlayerRangedHandler = GetComponent<PlayerRangedHandler>();
+        PlayerItemCollector = GetComponent<PlayerItemCollector>();
     }
 }

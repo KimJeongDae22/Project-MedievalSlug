@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public enum FadeType
@@ -10,6 +11,9 @@ public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private UsuallyMessage usuallyMessage;
     [SerializeField] private Canvas canvas;
+    [SerializeField] private TextMeshProUGUI score;
+    [SerializeField] private TextMeshProUGUI currentAmmo;
+    [SerializeField] private EscUI escUI;
     public bool StopFunc { get; private set; }      // 기능 정지 변수. 호출은 어디서나, 값 설정은 해당 스크립트에서만
     public bool IsPaused { get; private set; }      // 일시 정지 변수, ESC 를 눌러 나오는 메뉴창 같은 상황에서 쓰임
 
@@ -18,6 +22,9 @@ public class UIManager : Singleton<UIManager>
     {
         usuallyMessage = Util.FindChild<UsuallyMessage>(transform, "UsuallyMessage");
         canvas = Util.FindChild<Canvas>(transform, "Canvas");
+        score = Util.FindChild<TextMeshProUGUI>(transform, "ScoreText");
+        currentAmmo = Util.FindChild<TextMeshProUGUI>(transform, "PTAmount");
+        escUI = Util.FindChild<EscUI>(transform, "EscUI");
     }
     protected override void Awake()
     {
@@ -25,6 +32,9 @@ public class UIManager : Singleton<UIManager>
         StopFunc = false;
         usuallyMessage = Util.FindChild<UsuallyMessage>(transform, "UsuallyMessage");
         canvas = Util.FindChild<Canvas>(transform, "Canvas");
+        score = Util.FindChild<TextMeshProUGUI>(transform, "ScoreText");
+        currentAmmo = Util.FindChild<TextMeshProUGUI>(transform, "PTAmount");
+        escUI = Util.FindChild<EscUI>(transform, "EscUI");
     }
 
     protected override void OnDestroy()
@@ -116,7 +126,7 @@ public class UIManager : Singleton<UIManager>
             usuallyMessage.ShowUsuallyMessage(msg, time, textColor);
         }
     }
-    public void ShowEscMenu()
+    public void ShowEscUI()
     {
         // 일시 정지 기능 활성화, 로딩 중이거나 특정 씬에서는 안뜨도록 설정
         if (!Singleton<SceneLoadManager>.Instance.IsLoading)
@@ -125,10 +135,12 @@ public class UIManager : Singleton<UIManager>
             {
                 if (Time.timeScale == 1f)
                 {
+                    escUI.gameObject.SetActive(true);
                     Time.timeScale = 0f;
                 }
                 else
                 {
+                    escUI.Btn_OnContinuing();
                     Time.timeScale = 1f;
                 }
                 Debug.Log(Time.timeScale);
@@ -136,10 +148,16 @@ public class UIManager : Singleton<UIManager>
         }
         // TODO Esc 누르면 나오는 메뉴 오브젝트 활성화. 오브젝트 제작 필요
     }
+    public void UIUpdate_CurrentAmmo()
+    {
+        int crAmmoInt = Singleton<CharacterManager>.Instance.PlayerRangedHandler.GetCurrentAmmo();
+
+        currentAmmo.text = crAmmoInt > 0 ? crAmmoInt.ToString() : "--";
+    }
     private void Update()
     {
         // 기능 테스트 코드입니다.
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Backspace))
         {
             Singleton<SceneLoadManager>.Instance.LoadScene(SceneName.KJD_START_SCENE);
         }
@@ -149,7 +167,7 @@ public class UIManager : Singleton<UIManager>
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ShowEscMenu();
+            ShowEscUI();
         }
     }
 }

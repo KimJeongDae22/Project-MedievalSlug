@@ -5,16 +5,15 @@ using UnityEngine;
 public class StartSceneUI : MonoBehaviour
 {
     [SerializeField] private GameObject soundSettingBtn;
-    public void Btn_OnStartBtn()
+    public void Btn_OnStart()
     {
         Singleton<SceneLoadManager>.Instance.LoadScene(SceneName.KJD_SCENE);
-        Debug.Log("111");
     }
-    public void Btn_OnSoundSettingBtn()
+    public void Btn_OnSoundSetting()
     {
         soundSettingBtn.SetActive(true);
     }
-    public void Btn_OffSoundSettingBtn()
+    public void Btn_OffSoundSetting()
     {
         soundSettingBtn.SetActive(false);
     }
