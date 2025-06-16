@@ -1,4 +1,3 @@
-
 // using UnityEngine;
 //
 // public class RangedMonster : Monster
@@ -17,4 +16,3 @@
 //         projectileHandler.Shoot(transform.forward);
 //     }
 // }
-
