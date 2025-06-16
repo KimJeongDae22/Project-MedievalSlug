@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public enum FadeType
@@ -10,6 +11,13 @@ public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private UsuallyMessage usuallyMessage;
     [SerializeField] private Canvas canvas;
+    [SerializeField] private TextMeshProUGUI score;
+    [SerializeField] private TextMeshProUGUI currentAmmo;
+    [SerializeField] private EscUI escUI;
+    [SerializeField] private Transform heartParentTrans;
+
+    [SerializeField] private GameObject overHealth;
+    [SerializeField] private TextMeshProUGUI overHealthText;
     public bool StopFunc { get; private set; }      // 기능 정지 변수. 호출은 어디서나, 값 설정은 해당 스크립트에서만
     public bool IsPaused { get; private set; }      // 일시 정지 변수, ESC 를 눌러 나오는 메뉴창 같은 상황에서 쓰임
 
@@ -18,6 +26,12 @@ public class UIManager : Singleton<UIManager>
     {
         usuallyMessage = Util.FindChild<UsuallyMessage>(transform, "UsuallyMessage");
         canvas = Util.FindChild<Canvas>(transform, "Canvas");
+        score = Util.FindChild<TextMeshProUGUI>(transform, "ScoreText");
+        currentAmmo = Util.FindChild<TextMeshProUGUI>(transform, "PTAmount");
+        escUI = Util.FindChild<EscUI>(transform, "EscUI");
+        heartParentTrans = Util.FindChild<RectTransform>(transform, "PlayerHP_Ver_Heart");
+        overHealth = Util.FindChild<RectTransform>(transform, "OverHealth").gameObject;
+        overHealthText = Util.FindChild<TextMeshProUGUI>(transform, "OverHealthText");
     }
     protected override void Awake()
     {
@@ -25,6 +39,12 @@ public class UIManager : Singleton<UIManager>
         StopFunc = false;
         usuallyMessage = Util.FindChild<UsuallyMessage>(transform, "UsuallyMessage");
         canvas = Util.FindChild<Canvas>(transform, "Canvas");
+        score = Util.FindChild<TextMeshProUGUI>(transform, "ScoreText");
+        currentAmmo = Util.FindChild<TextMeshProUGUI>(transform, "PTAmount");
+        escUI = Util.FindChild<EscUI>(transform, "EscUI");
+        heartParentTrans = Util.FindChild<RectTransform>(transform, "PlayerHP_Ver_Heart");
+        overHealth = Util.FindChild<RectTransform>(transform, "OverHealth").gameObject;
+        overHealthText = Util.FindChild<TextMeshProUGUI>(transform, "OverHealthText");
     }
 
     protected override void OnDestroy()
@@ -42,12 +62,17 @@ public class UIManager : Singleton<UIManager>
             case SceneName.KJD_START_SCENE:
                 canvas.gameObject.SetActive(false);
                 break;
+            case SceneName.CHARACTER_SELECT_SCENE:
+                //canvas.gameObject.SetActive(false);
+                break;
             default:
                 canvas.gameObject.SetActive(true);
                 break;
         }
         // 타임 스케일 값 초기화
         Time.timeScale = 1f;
+        // 플레이어 체력 UI 업데이트
+
     }
 
     public void FadeInAndOut(CanvasGroup canvasGroup, float time, FadeType fadeType)
@@ -105,53 +130,94 @@ public class UIManager : Singleton<UIManager>
 
         yield break;
     }
-
-
     public void ShowUsuallyMessage(string msg, float time, Color textColor = default)
     {
-        if (canvas.gameObject.activeSelf)
+
+        if (!usuallyMessage.gameObject.activeSelf)
         {
-            if (!usuallyMessage.gameObject.activeSelf)
-            {
-                usuallyMessage.gameObject.SetActive(true);
-            }
-            usuallyMessage.ShowUsuallyMessage(msg, time, textColor);
+            usuallyMessage.gameObject.SetActive(true);
         }
+        usuallyMessage.ShowUsuallyMessage(msg, time, textColor);
+
     }
-    public void ShowEscMenu()
+    public void ShowEscUI()
     {
         // 일시 정지 기능 활성화, 로딩 중이거나 특정 씬에서는 안뜨도록 설정
-        if (!Singleton<SceneLoadManager>.Instance.IsLoading)
+        if (!SceneLoadManager.Instance.IsLoading)
         {
             if (canvas.gameObject.activeSelf)
             {
                 if (Time.timeScale == 1f)
                 {
-                    Time.timeScale = 0f;
+                    escUI.gameObject.SetActive(true);
+                    escUI.Btn_OnEscUI();
                 }
                 else
                 {
-                    Time.timeScale = 1f;
+                    escUI.Btn_OffEscUI();
                 }
                 Debug.Log(Time.timeScale);
             }
         }
         // TODO Esc 누르면 나오는 메뉴 오브젝트 활성화. 오브젝트 제작 필요
     }
+    public void UIUpdate_CurrentAmmo()
+    {
+        int crAmmoInt = Singleton<CharacterManager>.Instance.PlayerRangedHandler.GetCurrentAmmo();
+
+        currentAmmo.text = crAmmoInt > 0 ? crAmmoInt.ToString() : "--";
+    }
+    public void UIUpdate_PlayerHP()
+    {
+        int heartAmount = (int)CharacterManager.Instance.StatHandler.GetStat(StatType.Health);
+
+        if (heartAmount <= 5) // 최대 하트 UI 표시량
+        {
+            overHealth.SetActive(false);
+
+            // 플레이어 체력에 해당하는 만큼 하트 UI 표시
+            for (int i = 0; i < heartAmount; i++)
+            {
+                heartParentTrans.GetChild(i).gameObject.SetActive(true);
+            }
+            // 플레이어 체력이 넘어가는 하트 표시 비활성화
+            for (int i = heartAmount; i < heartParentTrans.childCount; i++)
+            {
+                heartParentTrans.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < heartParentTrans.childCount; i++)
+            {
+                heartParentTrans.GetChild(i).gameObject.SetActive(true);
+            }
+            overHealth.SetActive(true);
+            overHealthText.text = $"+{heartAmount - 5}";
+        }
+    }
     private void Update()
     {
         // 기능 테스트 코드입니다.
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Backspace))
         {
             Singleton<SceneLoadManager>.Instance.LoadScene(SceneName.KJD_START_SCENE);
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Singleton<UIManager>.Instance.ShowUsuallyMessage("테스트 화면입니다." + Random.Range(1, 100).ToString(), 1f);
+            CharacterManager.Instance.StatHandler.TakeDamage(1);
+            UIUpdate_PlayerHP();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Singleton<UIManager>.Instance.ShowUsuallyMessage("<color=pink> 체력을 회복합니다.</color>", 1f);
+            CharacterManager.Instance.StatHandler.TakeDamage(-1);
+            UIUpdate_PlayerHP();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ShowEscMenu();
+            ShowEscUI();
         }
     }
 }
