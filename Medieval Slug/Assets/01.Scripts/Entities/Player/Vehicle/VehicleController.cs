@@ -11,26 +11,37 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
 {
     [Header("Movement / Seat")]
     [SerializeField] float moveSpeed = 4f;
+    [SerializeField] float jumpForce = 15f;
     [SerializeField] Transform seatPoint;   // 플레이어 앉는 위치
     [SerializeField] Animator animator;
+    [SerializeField]private bool facingRight = true;
 
     [Header("Combat")]
+    [SerializeField]PlayerController rider;
     //[SerializeField] PlayerRangedHandler crossbow;      // 탱크 석궁
 
     [Header("Stat")]
-    [SerializeField] int maxHp = 250;
+    [SerializeField] float maxHp = 250;
 
     [Header("Melee Weapon Setting")]
     [SerializeField] private int meleeDamage = 10;
     [SerializeField] private float meleeRange = 1f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float windupTime = 0.2f;
+    [SerializeField] private Vector2 meleeOffset = new Vector2(1.0f, 0.0f);
 
 
-    int currentHp;
+    private float currentHp;
     Rigidbody2D rb;
-    PlayerController rider;
     private bool isAttacking;
+    public bool jumpRequest;
+    Vector2 cachedInput;
+
+
+    public void ReceiveInput(Vector2 input) => cachedInput = input;
+
+    public void RequestJump() => jumpRequest = true;
+
 
 
     void Awake()
@@ -38,40 +49,74 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         rb = GetComponent<Rigidbody2D>();
         currentHp = maxHp;
     }
+    void FixedUpdate()
+    {
+        // 이동
+        rb.velocity = new Vector2(cachedInput.x * moveSpeed, rb.velocity.y);
 
+        // 점프
+        if (jumpRequest)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpRequest = false;
+        }
+
+        // 좌우 플립
+        if (cachedInput.x > 0 && !facingRight) Flip();
+        else if (cachedInput.x < 0 && facingRight) Flip();
+    }
+    void Flip()
+    {
+        facingRight = !facingRight;
+
+        Vector3 s = transform.localScale;
+        s.x *= -1f;
+        transform.localScale = s;
+    }
+
+    /*---------------------------------------------------------------------------- */
     #region IMountable
     public bool IsMounted => rider != null;
 
+    /// <summary>
+    /// 탑승
+    /// </summary>
+    /// <param name="p"></param>
     public void Mount(PlayerController p)
     {
         rider = p;
         // 플레이어를 전차 자식으로 두고 위치·회전 고정
         p.transform.SetParent(seatPoint);
         p.transform.localPosition = Vector3.zero;
-        p.SetMountedState(true, this);   // ↓ 3) 참고
-        animator.SetBool("Riding", true);
+
+        Vector3 rs = p.transform.localScale;
+        rs.x = Mathf.Abs(rs.x);
+        p.transform.localScale = rs;
+
+        p.SetMountedState(true, this);   
+        
     }
 
+    /// <summary>
+    /// 탑승 해제
+    /// </summary>
+    /// <param name="exploded"></param>
     public void Dismount(bool exploded = false)
     {
-        if (rider == null) return;
+
         rider.transform.SetParent(null);
         rider.transform.position = seatPoint.position + Vector3.up * 0.8f; // 전차 위로 점프
         rider.SetMountedState(false, null);
         rider = null;
-        animator.SetBool("Riding", false);
+        //animator.SetBool("Riding", false);
 
         if (exploded) Destroy(gameObject);
     }
     #endregion
 
-    #region Movement & Attack (플레이어 입력이 전달됨)
-    public void Move(Vector2 input)
-    {
-        rb.velocity = new Vector2(input.x * moveSpeed, rb.velocity.y);
-        if (input.x != 0) transform.localScale = new Vector3(Mathf.Sign(input.x), 1, 1);
-        animator.SetFloat("Speed", Mathf.Abs(input.x));
-    }
+    /*---------------------------------------------------------------------------- */
+    #region  Attack (플레이어 입력이 전달됨)
+
 
     public void Fire(Vector2 dir) { }//=> crossbow.Fire(dir);
     public void Melee(InputAction.CallbackContext ctx)
@@ -82,21 +127,39 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     private IEnumerator PerformMelee()
     {
         isAttacking = true;
-        // 1 또는 2 중 랜덤으로 선택
-        int idx = Random.Range(1, 3); // 1 또는 2
-        string triggerName =  "Tank_Attack";
-        animator.SetTrigger(triggerName);
+        animator.SetTrigger("Tank_MeleeAttack");
 
         yield return new WaitForSeconds(windupTime);
 
-        Vector2 dir = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
-        Vector2 origin = (Vector2)transform.position + dir * 0.5f;
+
+        Vector2 dir = (Vector2)transform.right;          // 지금 바라보는 세계 방향
+        Vector2 origin = (Vector2)transform.position
+                       + dir * meleeOffset.x                // 앞뒤
+                       + Vector2.up * meleeOffset.y;        // 높이
+
+
         RaycastHit2D hit = Physics2D.Raycast(origin, dir, meleeRange, enemyLayer);
         if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
             target.TakeDamage(meleeDamage);
+
+        isAttacking = false;
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+
+        Vector2 dir = Application.isPlaying ? (Vector2)transform.right
+                                               : Vector2.right * Mathf.Sign(transform.lossyScale.x);
+        Vector2 origin = (Vector2)transform.position
+                       + dir * meleeOffset.x
+                       + Vector2.up * meleeOffset.y;
+
+        Gizmos.DrawWireSphere(origin, meleeRange);
+        Gizmos.DrawLine(origin, origin + dir * meleeRange);
     }
     #endregion
 
+    /*---------------------------------------------------------------------------- */
     #region IDamagable
     public void TakeDamage(int dmg)
     {
@@ -104,7 +167,16 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         animator.SetTrigger("Hurt");
         if (currentHp <= 0) Die();
     }
-    public void Die() => Dismount(true);
+    public void Die()
+    {
+        Dismount(true);
+        animator.SetTrigger("Die");
+    }
+
+    public void ApplyEffect(EffectType effectType)
+    {
+        throw new System.NotImplementedException();
+    }
 
 
     #endregion

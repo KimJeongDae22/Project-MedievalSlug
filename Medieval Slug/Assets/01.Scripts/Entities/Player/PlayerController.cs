@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float jumpForce = 7f;
+    [SerializeField]private bool isFacingRight = true;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheckPoint;
@@ -30,14 +31,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float mountCheckRadius = 1f;
     [SerializeField] LayerMask mountLayer;
     [SerializeField] float mountJumpForce = 4f;
-
-    VehicleController currentVehicle;
+    [SerializeField] VehicleController currentVehicle;
     bool isMounted;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool jumpRequest;
-    private bool isFacingRight = true;
+
+    int cachedSignBeforeMount = 1;   // 탑승 직전 부호
+    bool blockSelfFlip = false; // 탑승 중엔 Update → Flip 금지
 
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
@@ -45,12 +47,15 @@ public class PlayerController : MonoBehaviour
     public void OnMovement(InputAction.CallbackContext ctx)
     {
         moveInput = ctx.ReadValue<Vector2>();
-        if (isMounted) currentVehicle.Move(moveInput);
+        if (isMounted) currentVehicle.ReceiveInput(moveInput);        
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (ctx.started && IsGrounded()) jumpRequest = true;
+        if (!ctx.started) return;
+
+        if (isMounted) currentVehicle.RequestJump();               
+        else if (IsGrounded()) jumpRequest = true;
     }
 
     public void OnFire(InputAction.CallbackContext ctx)
@@ -86,30 +91,41 @@ public class PlayerController : MonoBehaviour
             playerMelee.OnMelee();
         }
     }
-    public void SetMountedState(bool mounted, VehicleController tank)
+    public void SetMountedState(bool mounted, VehicleController vehicle)
     {
+        if (mounted)
+        {
+            cachedSignBeforeMount = transform.localScale.x >= 0 ? 1 : -1;
+            blockSelfFlip = true;
+        }
+        else
+        {
+            blockSelfFlip = false;
+            SetFacing(cachedSignBeforeMount > 0);            // 원본 복구
+        }
+
         isMounted = mounted;
-        currentVehicle = tank;
-        rb.simulated = !mounted;              // 탑승 중엔 Rigidbody2D 정지
+        currentVehicle = vehicle;
+        rb.simulated = !mounted;
         GetComponent<Collider2D>().enabled = !mounted;
-        //animator.SetBool("Mounted", mounted);
+
     }
 
     void TryMountNearestTank()
     {
         Collider2D hit = Physics2D.OverlapCircle(transform.position, mountCheckRadius, mountLayer);
-        if (hit && hit.TryGetComponent(out VehicleController tank))
+        if (hit && hit.TryGetComponent(out VehicleController vehicle))
         {
             // 점프 애니메이션 & 힘
             rb.velocity = new Vector2(rb.velocity.x, mountJumpForce);
-            StartCoroutine(MountAfterDelay(tank, 0.25f)); // 살짝 뜀 → 착지 시 탑승
+            StartCoroutine(MountAfterDelay(vehicle, 0.25f)); // 살짝 뜀 → 착지 시 탑승
         }
     }
 
-    IEnumerator MountAfterDelay(VehicleController tank, float delay)
+    IEnumerator MountAfterDelay(VehicleController vehicle, float delay)
     {
         yield return new WaitForSeconds(delay);
-        tank.Mount(this);
+        vehicle.Mount(this);
     }
 
     Vector2 GetAimDir()
@@ -122,9 +138,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (isMounted) return;          // 탑승 중엔 방향 제어 안 함
+
+        // 기존 이동 방향 체크 → Flip 로직은 그대로
         float h = moveInput.x;
-        if (h > 0 && !isFacingRight) Flip();
-        else if (h < 0 && isFacingRight) Flip();
+        if (h > 0 && !isFacingRight) SetFacing(true);
+        else if (h < 0 && isFacingRight) SetFacing(false);
     }
 
     void FixedUpdate()
@@ -138,12 +157,18 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
     }
 
-
-    private void Flip()
+    public void FlipImmediate()
     {
-        isFacingRight = !isFacingRight;
-        Vector3 scale = transform.localScale; scale.x *= -1; transform.localScale = scale;
+        SetFacing(!isFacingRight);
     }
+    public void SetFacing(bool right)
+    {
+        isFacingRight = right;
+        Vector3 s = transform.localScale;
+        s.x = Mathf.Abs(s.x) * (right ? 1 : -1);
+        transform.localScale = s;
+    }
+
 
     private bool IsGrounded() => Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
 }

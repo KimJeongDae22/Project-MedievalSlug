@@ -17,7 +17,7 @@ public class RangeWeaponHandler : MonoBehaviour
     //초기 화살
     [SerializeField]public ProjectileData projectileData;
     /// <summary>
-    /// PlayerEquip → Fire() 호출
+    /// PlayerRnagedHandler → Fire() 호출
     /// </summary>
     public void Fire(Vector2 aimDirection)
     {
@@ -34,7 +34,7 @@ public class RangeWeaponHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// PlayerEquip에서 현재 장착 화살 타입을 변경할 때 호출
+    /// PlayerRnagedHandler 현재 장착 화살 타입을 변경할 때 호출
     /// </summary>
     public void SetProjectileType(ProjectileType newType) => projectileType = newType;
 
