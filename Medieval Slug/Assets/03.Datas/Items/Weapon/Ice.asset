@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 858e2fb7c68f8cd4890fb2f54a397251, type: 3}
-  m_Name: Apple
+  m_Name: Ice
   m_EditorClassIdentifier: 
-  itemType: 2
-  itemName: Apple
-  icon: {fileID: 21300000, guid: 9b4257257120d454eb17b8e839a8dbce, type: 3}
-  value: 1
+  itemType: 1
+  itemName: Ice
+  icon: {fileID: 21300000, guid: 2b1c969767083cb4fb19cebffb79870a, type: 3}
+  value: 0
+  projectileData: {fileID: 11400000, guid: c4b5373ab6fa9dd49910df16e97fb4f7, type: 2}
