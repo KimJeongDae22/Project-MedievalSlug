@@ -24,10 +24,6 @@ public class RangeWeaponHandler : MonoBehaviour
     {
         user = gameObject;
     }
-    public void NotUse()
-    {
-        user = null;
-    }
 
     public void Fire(Vector2 aimDirection)
     {
@@ -42,8 +38,6 @@ public class RangeWeaponHandler : MonoBehaviour
         // 부모(또는 자신)의 실제 스케일이 음수라면 180° 보정
         if (user.transform.localScale.x < 0f) angle += 180f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
-
-
 
         ProjectileManager.Instance.Shoot(dir, spawnPosition, projectileType);
     }

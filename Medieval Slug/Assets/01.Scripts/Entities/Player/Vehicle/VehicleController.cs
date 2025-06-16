@@ -19,7 +19,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
 
     [Header("Combat")]
     [SerializeField] PlayerController rider;
-    [SerializeField] RangeWeaponHandler crossbow;      // 탱크 석궁
+    [SerializeField] RangeWeaponHandler crossbow;      // 석궁
 
     [Header("Stat")]
     [SerializeField] float maxHp = 250;
@@ -31,14 +31,14 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [SerializeField] private float windupTime = 0.2f;
     [SerializeField] private Vector2 meleeOffset = new Vector2(1.0f, 0.0f);
 
-
+    //유틸
     private float currentHp;
     Rigidbody2D rb;
     private bool isAttacking;
     public bool jumpRequest;
     Vector2 cachedInput;
 
-
+    // 원거리 무기 관련 필드
     private ProjectileData currentArrowData;
     private int currentAmmo = 1;
     private float nextFireTime = 0f;
