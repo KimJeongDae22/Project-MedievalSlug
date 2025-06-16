@@ -24,6 +24,15 @@ public class PlayerController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerRangedHandler playerEquip;
+    [SerializeField] private PlayerMeleeHandler playerMelee;
+
+    [Header("Mount Settings")]
+    [SerializeField] float mountCheckRadius = 1f;
+    [SerializeField] LayerMask mountLayer;
+    [SerializeField] float mountJumpForce = 4f;
+
+    VehicleController currentVehicle;
+    bool isMounted;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -33,7 +42,11 @@ public class PlayerController : MonoBehaviour
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
 
-    public void OnMovement(InputAction.CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
+    public void OnMovement(InputAction.CallbackContext ctx)
+    {
+        moveInput = ctx.ReadValue<Vector2>();
+        if (isMounted) currentVehicle.Move(moveInput);
+    }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
@@ -43,8 +56,67 @@ public class PlayerController : MonoBehaviour
     public void OnFire(InputAction.CallbackContext ctx)
     {
         if (!ctx.started) return;
-        Vector2 aim = moveInput.sqrMagnitude < 0.01f ? (isFacingRight ? Vector2.right : Vector2.left) : moveInput;
-        playerEquip.Fire(aim);
+        if (isMounted) currentVehicle.Fire(GetAimDir());
+        else
+        {
+            Vector2 aim = GetAimDir();
+            playerEquip.Fire(aim);
+        }
+    }
+
+    public void OnMount(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.started) return;
+
+        if (isMounted)            // F키로 하차
+            currentVehicle.Dismount();
+        else                      // F키로 탑승
+            TryMountNearestTank();
+    }
+
+    public void OnMelee(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.started) return;
+        if(isMounted)
+        {
+            currentVehicle.Melee(ctx);
+        }
+        else
+        {
+            playerMelee.OnMelee();
+        }
+    }
+    public void SetMountedState(bool mounted, VehicleController tank)
+    {
+        isMounted = mounted;
+        currentVehicle = tank;
+        rb.simulated = !mounted;              // 탑승 중엔 Rigidbody2D 정지
+        GetComponent<Collider2D>().enabled = !mounted;
+        //animator.SetBool("Mounted", mounted);
+    }
+
+    void TryMountNearestTank()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, mountCheckRadius, mountLayer);
+        if (hit && hit.TryGetComponent(out VehicleController tank))
+        {
+            // 점프 애니메이션 & 힘
+            rb.velocity = new Vector2(rb.velocity.x, mountJumpForce);
+            StartCoroutine(MountAfterDelay(tank, 0.25f)); // 살짝 뜀 → 착지 시 탑승
+        }
+    }
+
+    IEnumerator MountAfterDelay(VehicleController tank, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        tank.Mount(this);
+    }
+
+    Vector2 GetAimDir()
+    {
+        return moveInput.sqrMagnitude < 0.01f
+            ? (isFacingRight ? Vector2.right : Vector2.left)
+            : moveInput;
     }
 
 

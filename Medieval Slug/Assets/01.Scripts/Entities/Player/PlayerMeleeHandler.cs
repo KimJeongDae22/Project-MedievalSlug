@@ -12,12 +12,13 @@ public class PlayerMeleeHandler : MonoBehaviour
     [SerializeField] private float windupTime = 0.2f;
     [SerializeField] private Animator animator;
 
-    private bool isAttacking;      
-    
-    public void OnMelee(InputAction.CallbackContext ctx)
+    private bool isAttacking;
+
+    public void OnMelee()
     {
-        if (!ctx.started || isAttacking) return;  
+        if (isAttacking) return;  
         StartCoroutine(PerformMelee());
+
     }
     private IEnumerator PerformMelee()
     {
