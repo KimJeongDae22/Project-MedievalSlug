@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TurretDamageHandler : MonoBehaviour, IDamagable
 {
-    private BossTurret bossTurret;
+    [SerializeField] private BossTurret bossTurret;
 
     private void Reset()
     {

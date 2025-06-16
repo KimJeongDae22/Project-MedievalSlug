@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d4cb42c9bd89746a4bc390301b6e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossTurret: {fileID: 1218441967336158700}
 --- !u!1 &1712564252116845173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,6 +1051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d4cb42c9bd89746a4bc390301b6e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossTurret: {fileID: 6317516304020190289}
 --- !u!1 &9115691059415730174
 GameObject:
   m_ObjectHideFlags: 0
