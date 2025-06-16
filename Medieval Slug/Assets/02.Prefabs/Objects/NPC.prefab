@@ -51,7 +51,7 @@ MonoBehaviour:
   currentHealth: 0
   hitFlashDuration: 0.15
   hitFlashColor: {r: 1, g: 0, b: 0, a: 1}
-  cageObject: {fileID: 7178614349561910309}
+  destructObject: {fileID: 7178614349561910309}
   minDropCount: 1
   maxDropCount: 3
   dropRadius: 2

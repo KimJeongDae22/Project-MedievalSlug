@@ -32,7 +32,6 @@ public class DestuctibleObject : MonoBehaviour, IDamagable
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         destructCollider = GetComponent<BoxCollider2D>();
-        destructObject = transform.Find("Cage").gameObject;
     }
 
     private void Awake()
