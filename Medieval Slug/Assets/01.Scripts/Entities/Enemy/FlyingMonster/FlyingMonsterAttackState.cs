@@ -9,6 +9,7 @@ public class FlyingMonsterAttackState : MonsterBaseState
     private float lastAttackTime = -Mathf.Infinity;
     private float reachDistance = 1f;
     private Vector3 originalPosition = Vector3.zero;
+    private Vector3 attackTargetPosition;
     private bool isReturning = false;
 
     public override void EnterState()
@@ -22,6 +23,7 @@ public class FlyingMonsterAttackState : MonsterBaseState
         lastAttackTime = Time.time;
         
         originalPosition = StateMachine.Monster.transform.position;
+        attackTargetPosition = StateMachine.target.position;
         
         if (StateMachine.Monster.HasAnimator) 
             StartAnimation(StateMachine.Monster.AnimationHash.AttackParameterHash);
@@ -31,13 +33,15 @@ public class FlyingMonsterAttackState : MonsterBaseState
     {
         if (!isReturning && !IsReachedPlayer())
         {
-            Vector3 direction = (StateMachine.target.position - StateMachine.transform.position).normalized;
+            Vector3 direction = (attackTargetPosition - StateMachine.transform.position).normalized;
+
             StateMachine.transform.position += direction * (StateMachine.Monster.MonsterData.MoveSpeed * Time.deltaTime);
         }
         else if (!isReturning && IsReachedPlayer())
         {
             FlyingStateMachine.MeleeMonster.DisableCollider();
             isReturning = true;
+            
             if (StateMachine.Monster.HasAnimator) 
                 StopAnimation(StateMachine.Monster.AnimationHash.AttackParameterHash);
         }
@@ -61,7 +65,7 @@ public class FlyingMonsterAttackState : MonsterBaseState
 
     private bool IsReachedPlayer()
     {
-        float distance = Vector2.Distance(StateMachine.transform.position, StateMachine.target.position);
+        float distance = Vector2.Distance(StateMachine.transform.position, attackTargetPosition);
         
         return distance <= reachDistance;
     }
