@@ -13,6 +13,8 @@ public class MonsterStateMachine : MonoBehaviour
     public MonsterBaseState IdleState { get; protected set; }
     public MonsterBaseState ChaseState { get; protected set; }
     public MonsterBaseState AttackState { get; protected set; }
+    public MonsterBaseState HitState { get; protected set; }
+    public MonsterBaseState DeadState { get; protected set; }
     
     protected virtual void Reset()
     {
@@ -26,6 +28,8 @@ public class MonsterStateMachine : MonoBehaviour
         IdleState = new MonsterIdleState(this);
         ChaseState = new MonsterChaseState(this);
         AttackState = new MonsterAttackState(this);
+        HitState = new MonsterHitState(this);
+        DeadState = new MonsterDeadState(this);
         ChangeState(IdleState);
     }
 
