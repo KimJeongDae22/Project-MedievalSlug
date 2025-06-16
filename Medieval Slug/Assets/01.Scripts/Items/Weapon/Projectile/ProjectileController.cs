@@ -12,6 +12,7 @@ public class ProjectileController : MonoBehaviour, IPoolable
     private float curduration;
 
     private Action<GameObject> returnToPool;
+    [SerializeField] private EffectType curEffectType;
 
     void Awake()
     {
@@ -38,10 +39,15 @@ public class ProjectileController : MonoBehaviour, IPoolable
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // if (collision.tag != "Player")
-        // {
-        // OnDespawn();
-        // }
+        if (!collision.CompareTag("Player"))
+        {
+            if (collision.GetComponentInChildren<IDamagable>() is IDamagable target)
+            {
+                target.TakeDamage((int)projectileData.Damage);
+                target.ApplyEffect(curEffectType);
+                OnDespawn();
+            }
+        }
     }
 
     public void Initialize(Action<GameObject> returnAction)

@@ -49,7 +49,7 @@ public class MonsterChaseState : MonsterBaseState
             StateMachine.transform.position = Vector2.MoveTowards(
                 currentPosition,
                 targetPosition,
-                StateMachine.Monster.MonsterData.MoveSpeed * Time.deltaTime
+                StateMachine.Monster.Speed * Time.deltaTime
             );
         }
      

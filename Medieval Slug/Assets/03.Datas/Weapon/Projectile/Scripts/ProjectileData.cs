@@ -12,6 +12,14 @@ public enum ProjectileType
     Null
 }
 
+public enum EffectType
+{
+    Nomal,
+    Burn,
+    Deceleration,
+    Poisoning
+}
+
 [CreateAssetMenu(fileName = "ProjectileData", menuName = "Projectile/Type,Stats")]
 public class ProjectileData : ScriptableObject // 투사체 종류, 스텟
 {

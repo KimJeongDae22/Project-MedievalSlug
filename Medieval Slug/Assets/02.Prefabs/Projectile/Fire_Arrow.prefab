@@ -236,3 +236,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: 433aa4d5f8f26ab4885d4ba3aaed5f2c, type: 2}
+  curEffectType: 1
