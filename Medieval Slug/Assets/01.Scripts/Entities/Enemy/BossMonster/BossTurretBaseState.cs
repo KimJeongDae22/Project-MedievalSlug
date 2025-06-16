@@ -17,14 +17,6 @@ public abstract class BossTurretBaseState
     
     protected void StartAnimation(BossTurret turret, int animatorHash)
     {
-        if (turret.IsHalfHealth)
-        {
-            turret.Animator.speed = 2f;
-        }
-        else
-        {
-            turret.Animator.speed = 1f;
-        }
         turret.Animator.SetBool(animatorHash, true);
     }
 

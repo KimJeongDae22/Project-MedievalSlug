@@ -15,7 +15,6 @@ public class Pattern1 : BossTurretBaseState
         stateMachine.AllTurretUnAim();
         
         if (!stateMachine.LeftTurret.IsDead) lastTurret = stateMachine.LeftTurret;
-        //else if (!stateMachine.CenterTurret.IsDead) lastTurret = stateMachine.CenterTurret;
         else if (!stateMachine.RightTurret.IsDead) lastTurret = stateMachine.RightTurret;
         
         timer = 0f;
@@ -35,24 +34,19 @@ public class Pattern1 : BossTurretBaseState
                     SetAnimationTrigger(stateMachine.LeftTurret, stateMachine.LeftTurret.AnimationHash.AttackParameterHash);
                     break;
                 case 1:
-                    //if (stateMachine.CenterTurret.IsDead) break;
-                    //SetAnimationTrigger(stateMachine.CenterTurret, stateMachine.CenterTurret.AnimationHash.AttackParameterHash);
-                    break;
-                case 2:
                     if (stateMachine.RightTurret.IsDead) break;
                     SetAnimationTrigger(stateMachine.RightTurret, stateMachine.RightTurret.AnimationHash.AttackParameterHash);
                     break;
                 default:
                     break;
             }
-            Debug.Log($"{step}번째 공격!");
             step++;
             timer = 0f;
         }
 
         if (step == 3 && IsAnimationFinished(lastTurret, "Attack"))
         {
-            stateMachine.ChangeState(stateMachine.IdleState);
+            stateMachine.ChangeState(stateMachine.AimingState);
         }
     }
 

@@ -9,32 +9,27 @@ public class BossTurretStateMachine : MonoBehaviour
     public Transform target;
     public BossTurret LeftTurret;
     public BossTurret RightTurret;
-    public BossTurret CenterTurret;
 
     private BossTurretBaseState currentState;
     private BossTurretBaseState prevPattern;
 
     public List<BossTurretBaseState> Patterns;
     public BossAppearState AppearState { get; private set; }
-    public BossIdleState IdleState { get; private set; }
+    public BossAimingState AimingState { get; private set; }
 
     private int deathCount = 3;
 
     private void Reset()
     {
         LeftTurret = transform.Find("LeftTurret").GetComponent<BossTurret>();
-        //CenterTurret = transform.Find("CenterTurret").GetComponent<BossTurret>();
         RightTurret = transform.Find("RightTurret").GetComponent<BossTurret>();
     }
 
     private void Awake()
     {
-        LeftTurret.BossData = BossData;
-        RightTurret.BossData = BossData;
-        //CenterTurret.BossData = BossData;
-        LeftTurret.Init();
-        RightTurret.Init();
-        //CenterTurret.Init();
+        target = GameObject.FindWithTag("Player")?.transform;
+        LeftTurret.Init(BossData,target);
+        RightTurret.Init(BossData,target);
     }
 
     private void Start()
@@ -43,14 +38,14 @@ public class BossTurretStateMachine : MonoBehaviour
         Patterns = new List<BossTurretBaseState>()
         {
             new Pattern1(this),
-            //new Pattern2(this),
-            //new Pattern3(this),
+            new Pattern2(this),
+            new Pattern3(this),
         };
 
         AppearState = new BossAppearState(this);
-        IdleState = new BossIdleState(this);
+        AimingState = new BossAimingState(this);
         //이후 연출을 위해 AppearState로 전환
-        ChangeState(IdleState);
+        ChangeState(AimingState);
     }
 
     private void Update()
@@ -67,16 +62,14 @@ public class BossTurretStateMachine : MonoBehaviour
 
     public void AllTurretAim()
     {
-        LeftTurret.AimingHandler.isAniming = true;
-        RightTurret.AimingHandler.isAniming = true;
-        //CenterTurret.AimingHandler.isAniming = true;
+        LeftTurret.AimingHandler.IsAniming = true;
+        RightTurret.AimingHandler.IsAniming = true;
     }
 
     public void AllTurretUnAim()
     {
-        LeftTurret.AimingHandler.isAniming = false;
-        RightTurret.AimingHandler.isAniming = false;
-        //CenterTurret.AimingHandler.isAniming = false;
+        LeftTurret.AimingHandler.IsAniming = false;
+        RightTurret.AimingHandler.IsAniming = false;
     }
 
     public void ChangeRandomPattern()
@@ -95,5 +88,17 @@ public class BossTurretStateMachine : MonoBehaviour
         }
         prevPattern = newPattern;
         ChangeState(newPattern);
+    }
+    
+    /// <summary>
+    /// 테스트 코드
+    /// </summary>
+    /// <param name="index"></param>
+    public void ChangeState(int index)
+    {
+        if (index >= Patterns.Count) return;
+        currentState?.Exit();
+        currentState = Patterns[index];
+        currentState?.Enter();
     }
 }
