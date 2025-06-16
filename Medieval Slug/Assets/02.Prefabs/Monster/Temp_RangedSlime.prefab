@@ -283,7 +283,9 @@ MonoBehaviour:
     runParameterName: Run
     attackParameterName: Attack
     deadParameterName: Dead
+    hitParameterName: Hit
   <HasAnimator>k__BackingField: 1
+  stateMachine: {fileID: 5022226975820919478}
   <MonsterData>k__BackingField: {fileID: 11400000, guid: 45cdc68fb4764c640b68deb01ef425d2, type: 2}
   health: 0
   projectileHandler: {fileID: 31968703703434368}

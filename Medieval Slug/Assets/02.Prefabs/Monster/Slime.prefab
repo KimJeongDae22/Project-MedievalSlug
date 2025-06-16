@@ -296,7 +296,9 @@ MonoBehaviour:
     runParameterName: Run
     attackParameterName: Attack
     deadParameterName: Dead
+    hitParameterName: Hit
   <HasAnimator>k__BackingField: 1
+  stateMachine: {fileID: 5510620291520525985}
   <MonsterData>k__BackingField: {fileID: 11400000, guid: 5d983d5473ee4d349be0710859bc58e7, type: 2}
   health: 0
   collider2D: {fileID: 2738684958390053259}

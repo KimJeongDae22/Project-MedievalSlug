@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4654cb20e541cbbe68d6d8f9e5f302, type: 3}
   m_Name: Melee_Slime
   m_EditorClassIdentifier: 
-  Health: 1
+  Health: 2
   Damage: 1
   AttackCooldown: 0.5
   MoveSpeed: 2
