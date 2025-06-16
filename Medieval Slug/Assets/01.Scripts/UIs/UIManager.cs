@@ -62,6 +62,9 @@ public class UIManager : Singleton<UIManager>
             case SceneName.KJD_START_SCENE:
                 canvas.gameObject.SetActive(false);
                 break;
+            case SceneName.CHARACTER_SELECT_SCENE:
+                //canvas.gameObject.SetActive(false);
+                break;
             default:
                 canvas.gameObject.SetActive(true);
                 break;
@@ -69,7 +72,7 @@ public class UIManager : Singleton<UIManager>
         // 타임 스케일 값 초기화
         Time.timeScale = 1f;
         // 플레이어 체력 UI 업데이트
-        UIUpdate_PlayerHP();
+
     }
 
     public void FadeInAndOut(CanvasGroup canvasGroup, float time, FadeType fadeType)
@@ -129,14 +132,13 @@ public class UIManager : Singleton<UIManager>
     }
     public void ShowUsuallyMessage(string msg, float time, Color textColor = default)
     {
-        if (canvas.gameObject.activeSelf)
+
+        if (!usuallyMessage.gameObject.activeSelf)
         {
-            if (!usuallyMessage.gameObject.activeSelf)
-            {
-                usuallyMessage.gameObject.SetActive(true);
-            }
-            usuallyMessage.ShowUsuallyMessage(msg, time, textColor);
+            usuallyMessage.gameObject.SetActive(true);
         }
+        usuallyMessage.ShowUsuallyMessage(msg, time, textColor);
+
     }
     public void ShowEscUI()
     {
@@ -148,12 +150,11 @@ public class UIManager : Singleton<UIManager>
                 if (Time.timeScale == 1f)
                 {
                     escUI.gameObject.SetActive(true);
-                    Time.timeScale = 0f;
+                    escUI.Btn_OnEscUI();
                 }
                 else
                 {
-                    escUI.Btn_OnContinuing();
-                    Time.timeScale = 1f;
+                    escUI.Btn_OffEscUI();
                 }
                 Debug.Log(Time.timeScale);
             }

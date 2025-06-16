@@ -7,7 +7,7 @@ public class StartSceneUI : MonoBehaviour
     [SerializeField] private GameObject soundSettingBtn;
     public void Btn_OnStart()
     {
-        Singleton<SceneLoadManager>.Instance.LoadScene(SceneName.KJD_SCENE);
+        Singleton<SceneLoadManager>.Instance.LoadScene(SceneName.CHARACTER_SELECT_SCENE);
     }
     public void Btn_OnSoundSetting()
     {

@@ -8,7 +8,7 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
 {
     [Header("Stat Setting")]
     public StatData statData;
-    [SerializeField] private Dictionary<StatType, float> currentStats = new Dictionary<StatType, float>();
+    [SerializeField]private Dictionary<StatType, float> currentStats = new Dictionary<StatType, float>();
 
     public event Action<StatType, float> OnStatChanged;
 

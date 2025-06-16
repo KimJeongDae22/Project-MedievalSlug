@@ -6,8 +6,12 @@ public class EscUI : MonoBehaviour
 {
     [SerializeField] private GameObject soundSettingBtn;
 
-
-    public void Btn_OnContinuing()
+    public void Btn_OnEscUI()
+    {
+        this.gameObject.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    public void Btn_OffEscUI()
     {
         this.gameObject.SetActive(false);
         soundSettingBtn.SetActive(false);
@@ -23,7 +27,7 @@ public class EscUI : MonoBehaviour
     }
     public void Btn_OnGoingStartScene()
     {
-        Btn_OnContinuing();
+        Btn_OffEscUI();
         Singleton<SceneLoadManager>.Instance.LoadScene(SceneName.KJD_START_SCENE);
     }
 }
