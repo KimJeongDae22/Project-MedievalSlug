@@ -191,6 +191,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &815505334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4352033181742626777, guid: 46ee46fb2b841e141a185446797b7cf1, type: 3}
+  m_PrefabInstance: {fileID: 1771287906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &883458710
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +528,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5678807231776426797, guid: 46ee46fb2b841e141a185446797b7cf1, type: 3}
+      propertyPath: currentAmmo
+      value: 
+      objectReference: {fileID: 815505334}
     - target: {fileID: 6122673101048519114, guid: 46ee46fb2b841e141a185446797b7cf1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

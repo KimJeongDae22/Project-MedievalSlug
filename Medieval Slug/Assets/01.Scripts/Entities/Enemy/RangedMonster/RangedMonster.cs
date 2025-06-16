@@ -3,16 +3,16 @@ using UnityEngine;
 public class RangedMonster : Monster
 {
     [field : Header("Ranged Monster")] 
-    [SerializeField] private ProjectileHandler projectileHandler;
+    //[SerializeField] private ProjectileHandler projectileHandler;
 
     protected override void Reset()
     {
         base.Reset();
-        projectileHandler = GetComponent<ProjectileHandler>();
+       // projectileHandler = GetComponent<ProjectileHandler>();
     }
 
     public void RangedAttack()
     {
-        projectileHandler.Shoot(transform.forward);
+        //projectileHandler.Shoot(transform.forward);
     }
 }
