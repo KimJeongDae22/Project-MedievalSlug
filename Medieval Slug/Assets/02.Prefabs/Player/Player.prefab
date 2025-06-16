@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 697949111004323780}
   - component: {fileID: 7474095728727476970}
   - component: {fileID: 8951737876760437755}
+  - component: {fileID: 3058669722960393406}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -162,8 +163,8 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8584330687151362946}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 3058669722960393406}
+        m_TargetAssemblyTypeName: PlayerMeleeHandler, Assembly-CSharp
         m_MethodName: OnMelee
         m_Mode: 0
         m_Arguments:
@@ -221,12 +222,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   animator: {fileID: 4643268736599956163}
-  meleeDamage: 10
-  meleeRange: 2
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  windupTime: 0.5
   playerEquip: {fileID: 8951737876760437755}
 --- !u!114 &697949111004323780
 MonoBehaviour:
@@ -253,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statData: {fileID: 11400000, guid: 92c7b9b489aa373478853ac7cc7124d4, type: 2}
+  animator: {fileID: 0}
 --- !u!114 &8951737876760437755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,8 +261,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0e8ce209cc211458859b8f73328f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeWeaponPivot: {fileID: 4730213490496782902}
-  basicBowPrefab: {fileID: 2584449098090473235, guid: bc9052766c0b37244a79000ed5031638, type: 3}
+  bowPrefab: {fileID: 2584449098090473235, guid: dcbbb167c1783e74e938d42826be5b10, type: 3}
+  RangeWeaponPivot: {fileID: 4730213490496782902}
+  currentAmmo: 100
+--- !u!114 &3058669722960393406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274353442927434438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e9e950f5718084c92ffc95bb9dc791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeDamage: 10
+  meleeRange: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  windupTime: 0.2
+  animator: {fileID: 4643268736599956163}
 --- !u!1 &2424310758629670053
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +361,7 @@ GameObject:
   - component: {fileID: 6315644723866341413}
   - component: {fileID: 2474521352464498847}
   - component: {fileID: 4643268736599956163}
+  - component: {fileID: 8004524580088987105}
   m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
@@ -440,6 +457,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8004524580088987105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4195014018803913601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69716a2da057ad541aebe0f984ece9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5670606019728448663
 GameObject:
   m_ObjectHideFlags: 0
