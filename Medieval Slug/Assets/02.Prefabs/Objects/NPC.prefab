@@ -47,15 +47,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4179cfb0bfa6a4786d8644292569ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 50
   currentHealth: 0
   hitFlashDuration: 0.15
   hitFlashColor: {r: 1, g: 0, b: 0, a: 1}
   cageObject: {fileID: 7178614349561910309}
   minDropCount: 1
   maxDropCount: 3
-  dropRadius: 1
-  useRandomDrop: 1
+  dropRadius: 2
+  useRandomDrop: 0
   dropItemData: {fileID: 11400000, guid: b90bfa69f0f3e9444937b50bf3af71ac, type: 2}
 --- !u!61 &3361856479910321840
 BoxCollider2D:
@@ -197,7 +197,6 @@ GameObject:
   - component: {fileID: 2163740799840762905}
   - component: {fileID: 7148285508360895563}
   - component: {fileID: 5294595041128658145}
-  - component: {fileID: 5073707421981523913}
   m_Layer: 7
   m_Name: NPC
   m_TagString: Untagged
@@ -260,7 +259,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 50
+  m_SortingOrder: 40
   m_Sprite: {fileID: 21300000, guid: 72de0c64f2c6a498096698322c976a67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -293,38 +292,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &5073707421981523913
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8067512924823791003}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.078106895, y: -0.36077872}
-  m_Size: {x: 1.1326606, y: 1.3409457}
-  m_Direction: 0

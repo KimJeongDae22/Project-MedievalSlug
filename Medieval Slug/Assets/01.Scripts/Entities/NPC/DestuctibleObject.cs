@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class NPC : MonoBehaviour, IDamagable
+public class DestuctibleObject : MonoBehaviour, IDamagable
 {
     [Header("Health Setting")]
     [SerializeField] private float maxHealth = 100f;
@@ -12,7 +11,7 @@ public class NPC : MonoBehaviour, IDamagable
     [Header("Visual Effects")]
     [SerializeField] private float hitFlashDuration = 0.15f;
     [SerializeField] private Color hitFlashColor = Color.red;
-    [SerializeField] private GameObject cageObject;
+    [SerializeField] private GameObject destructObject;
     
     [Header("Drop Settings")]
     [SerializeField] private int minDropCount = 1;
@@ -23,7 +22,7 @@ public class NPC : MonoBehaviour, IDamagable
     
     // Components
     private SpriteRenderer spriteRenderer;
-    private Collider2D cageCollider;
+    private Collider2D destructCollider;
     private Color originalColor;
     private bool isDestroyed;
     
@@ -32,17 +31,17 @@ public class NPC : MonoBehaviour, IDamagable
     private void Reset()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        cageCollider = GetComponent<BoxCollider2D>();
-        cageObject = transform.Find("Cage").gameObject;
+        destructCollider = GetComponent<BoxCollider2D>();
+        destructObject = transform.Find("Cage").gameObject;
     }
 
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        cageCollider = GetComponent<BoxCollider2D>();
+        destructCollider = GetComponent<BoxCollider2D>();
         
         if (spriteRenderer == null) Debug.LogError("sprite renderer is null");
-        if (cageCollider == null) Debug.LogError("cage collider is null");
+        if (destructCollider == null) Debug.LogError("cage collider is null");
     }
 
     private void Start()
@@ -55,8 +54,6 @@ public class NPC : MonoBehaviour, IDamagable
     public void TakeDamage(int damage)
     {
         if (isDestroyed) return;
-        
-        Debug.Log("Hit detected");
         
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -103,8 +100,8 @@ public class NPC : MonoBehaviour, IDamagable
         if (isDestroyed) return;
         
         isDestroyed = true;
-        cageCollider.enabled = false;
-        cageObject.SetActive(false);
+        destructCollider.enabled = false;
+        destructObject.SetActive(false);
         
         DropItems();
     }
@@ -119,13 +116,13 @@ public class NPC : MonoBehaviour, IDamagable
         // 랜덤 드롭
         if (useRandomDrop)
         {
-            ItemDropManager.Instance.DropMultipleRandomItems(transform.position, dropCount, dropRadius);
+            ItemDropManager.Instance.DropRandomItem(transform.position, dropCount, dropRadius);
         }
         
         // 특정 아이템 드롭
         else if (dropItemData)
         {
-            ItemDropManager.Instance.DropMultipleItems(transform.position, dropItemData, dropCount, dropRadius);
+            ItemDropManager.Instance.DropSpecificItem(transform.position, dropCount, dropItemData, dropRadius);
         }
         
         Debug.Log($"{name}에서 {dropCount}개 아이템 드롭됨");
