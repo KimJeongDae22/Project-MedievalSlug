@@ -15,7 +15,8 @@ MonoBehaviour:
   Health: 2
   Damage: 1
   AttackCooldown: 5
-  MoveSpeed: 4
+  MoveSpeed: 10
   DetectRange: 10
   RayOffset: {x: 0, y: 0, z: 0}
-  AttackRange: 5
+  AttackRange: 10
+  ReachDistance: 0.5

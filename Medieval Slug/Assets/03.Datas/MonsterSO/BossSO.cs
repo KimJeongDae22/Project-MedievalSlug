@@ -6,6 +6,6 @@ public class BossSO : ScriptableObject
     [Header("Monster States")] 
     public int Health = 100;
     public int Damage = 1;
-    public float AttackCooldown = 0.5f;
-    public float FireDelay = 1f;
+    public float PatternCooldown = 4f;
+    public float SequentialFireDelay = 1.2f; 
 }
