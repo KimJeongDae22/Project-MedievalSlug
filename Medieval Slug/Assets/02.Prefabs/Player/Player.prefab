@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 2086830960330875878}
   - component: {fileID: 8584330687151362946}
   - component: {fileID: 697949111004323780}
+  - component: {fileID: 7474095728727476970}
+  - component: {fileID: 8951737876760437755}
+  - component: {fileID: 3058669722960393406}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -160,8 +163,8 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8584330687151362946}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 3058669722960393406}
+        m_TargetAssemblyTypeName: PlayerMeleeHandler, Assembly-CSharp
         m_MethodName: OnMelee
         m_Mode: 0
         m_Arguments:
@@ -175,7 +178,19 @@ MonoBehaviour:
     m_ActionId: 126567d8-8ff0-4f4a-9329-1059c5bf9243
     m_ActionName: Player/Melee Attack[/Keyboard/a]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8584330687151362946}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7b0a0536-3920-4dde-94c6-77fb602a7dff
     m_ActionName: Player/Range Attack[/Keyboard/s]
   - m_PersistentCalls:
@@ -207,12 +222,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   animator: {fileID: 4643268736599956163}
-  meleeDamage: 10
-  meleeRange: 1
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  windupTime: 0.2
+  playerEquip: {fileID: 8951737876760437755}
 --- !u!114 &697949111004323780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +235,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9b6d74260a1d5409efa033a0932167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7474095728727476970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274353442927434438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004d01fa3ad608b4cb68f0f5a8e7a9cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statData: {fileID: 11400000, guid: 92c7b9b489aa373478853ac7cc7124d4, type: 2}
+  animator: {fileID: 0}
+--- !u!114 &8951737876760437755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274353442927434438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0e8ce209cc211458859b8f73328f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bowPrefab: {fileID: 2584449098090473235, guid: dcbbb167c1783e74e938d42826be5b10, type: 3}
+  RangeWeaponPivot: {fileID: 4730213490496782902}
+  currentAmmo: 100
+--- !u!114 &3058669722960393406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274353442927434438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e9e950f5718084c92ffc95bb9dc791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeDamage: 10
+  meleeRange: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  windupTime: 0.2
+  animator: {fileID: 4643268736599956163}
 --- !u!1 &2424310758629670053
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +361,7 @@ GameObject:
   - component: {fileID: 6315644723866341413}
   - component: {fileID: 2474521352464498847}
   - component: {fileID: 4643268736599956163}
+  - component: {fileID: 8004524580088987105}
   m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
@@ -398,6 +457,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8004524580088987105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4195014018803913601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69716a2da057ad541aebe0f984ece9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5670606019728448663
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +494,7 @@ Transform:
   m_GameObject: {fileID: 5670606019728448663}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.3, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
