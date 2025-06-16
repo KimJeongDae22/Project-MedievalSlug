@@ -7,7 +7,6 @@ public class FlyingMonsterAttackState : MonsterBaseState
     {
     }
     private float lastAttackTime = -Mathf.Infinity;
-    private float reachDistance = 1f;
     private Vector3 originalPosition = Vector3.zero;
     private Vector3 attackTargetPosition;
     private bool isReturning = false;
@@ -67,7 +66,7 @@ public class FlyingMonsterAttackState : MonsterBaseState
     {
         float distance = Vector2.Distance(StateMachine.transform.position, attackTargetPosition);
         
-        return distance <= reachDistance;
+        return distance <= StateMachine.Monster.MonsterData.ReachDistance;
     }
     
     private void MoveToOriginalPosition()
