@@ -1,12 +1,17 @@
+using Entities.Player;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 전역에서 Player 각 모듈 접근용 
+/// </summary>
 public class CharacterManager : Singleton<CharacterManager>
 {
-    //[Header("컴포넌트 참조")]
     public PlayerController Controller { get; private set; }
-    //public StatHandler StatHandler { get; private set; }
-    // Animator, InventoryManager 등 추가 가능
+    public PlayerStatHandler StatHandler { get; private set; }
+    public PlayerRangedHandler PlayerRangedHandler { get; private set; }
 
+    public PlayerItemCollector PlayerItemCollector { get; private set; }
     protected override void Awake()
     {
         base.Awake();

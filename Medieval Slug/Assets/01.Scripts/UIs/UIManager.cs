@@ -105,6 +105,8 @@ public class UIManager : Singleton<UIManager>
 
         yield break;
     }
+
+
     public void ShowUsuallyMessage(string msg, float time, Color textColor = default)
     {
         if (canvas.gameObject.activeSelf)
