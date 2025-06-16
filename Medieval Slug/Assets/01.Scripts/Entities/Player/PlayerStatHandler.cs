@@ -51,6 +51,10 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
         animator.SetTrigger("Hurt");
     }
 
+    public void ApplyEffect(EffectType effectType)
+    {
+    }
+
     public void Die()
     {
         animator.SetTrigger("Die");
