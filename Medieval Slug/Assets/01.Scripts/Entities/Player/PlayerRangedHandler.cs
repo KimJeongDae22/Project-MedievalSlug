@@ -46,7 +46,7 @@ namespace Entities.Player
             if (Time.time < nextFireTime) return;
 
             nextFireTime = Time.time + interval;
-            if (!isBursting) StartCoroutine(FireBurst(aimDir.normalized));
+            if (!isBursting) StartCoroutine(FireBurst(aimDir));
         }
 
         IEnumerator FireBurst(Vector2 dir)
@@ -77,6 +77,7 @@ namespace Entities.Player
             bowHandler = bow.GetComponent<RangeWeaponHandler>();
             SetArrowData(bowHandler.projectileData);
             bowHandler.Setting(gameObject);
+
             if (bowHandler == null)
                 Debug.LogError("Bow Prefab에 RangeWeaponHandler가 없습니다.");
         }

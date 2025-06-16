@@ -73,10 +73,18 @@ public class PlayerController : MonoBehaviour
     {
         if (!ctx.started) return;
 
-        if (isMounted)            // F키로 하차
+        if (isMounted)
+        {
+            // F키로 하차
             currentVehicle.Dismount();
-        else                      // F키로 탑승
+            playerRanged.SetWeaponEnabled(true);
+        }
+        else
+        {
+            // F키로 탑승
             TryMountNearestTank();
+            playerRanged.SetWeaponEnabled(false);
+        }
     }
 
     public void OnMelee(InputAction.CallbackContext ctx)
@@ -131,9 +139,18 @@ public class PlayerController : MonoBehaviour
 
     Vector2 GetAimDir()
     {
-        return moveInput.sqrMagnitude < 0.01f
-            ? (isFacingRight ? Vector2.right : Vector2.left)
-            : moveInput;
+        // 방향키를 조금이라도 움직였으면 항상 입력값을 사용
+        if (moveInput.sqrMagnitude >= 0.01f)
+            return moveInput.normalized;
+
+        // 탑승 중이면 전차 기준
+        if (isMounted && currentVehicle != null)
+            return currentVehicle.transform.localScale.x >= 0
+                   ? Vector2.right
+                   : Vector2.left;
+
+        // 평상시엔 플레이어 본인 기준
+        return isFacingRight ? Vector2.right : Vector2.left;
     }
 
 

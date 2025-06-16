@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPosition: {fileID: 1731738046691072130}
   projectileType: 0
+  user: {fileID: 0}
   projectileData: {fileID: 11400000, guid: 283bac2f47d51e74aab5113b8000bcbd, type: 2}
 --- !u!1 &7759709917985157767
 GameObject:

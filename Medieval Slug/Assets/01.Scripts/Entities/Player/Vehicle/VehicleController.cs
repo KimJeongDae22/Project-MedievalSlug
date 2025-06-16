@@ -1,6 +1,7 @@
 using Entities.Player;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 /// <summary>
@@ -38,6 +39,11 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     Vector2 cachedInput;
 
 
+    private ProjectileData currentArrowData;
+    private int currentAmmo = 1;
+    private float nextFireTime = 0f;
+    private bool isBursting;
+
     public void ReceiveInput(Vector2 input) => cachedInput = input;
 
     public void RequestJump() => jumpRequest = true;
@@ -48,6 +54,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     {
         rb = GetComponent<Rigidbody2D>();
         currentHp = maxHp;
+        currentArrowData = crossbow.projectileData;
     }
     void FixedUpdate()
     {
@@ -136,7 +143,35 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     #region  Attack (플레이어 입력이 전달됨)
 
 
-    public void Fire(Vector2 dir) => crossbow.Fire(dir);
+    public void Fire(Vector2 aimDir)
+    {
+        if (aimDir.sqrMagnitude < 0.01f)
+            aimDir = facingRight ? Vector2.right : Vector2.left;
+
+        //발사 시퀀스 쿨타임 검사 
+        float interval = (currentArrowData.AttackSpeed > 0f)
+                       ? 1f / currentArrowData.AttackSpeed
+                       : 0;
+        if (Time.time < nextFireTime) return;
+
+        nextFireTime = Time.time + interval;
+        if (!isBursting) StartCoroutine(FireBurst(aimDir));
+    }
+
+    IEnumerator FireBurst(Vector2 dir)
+    {
+        isBursting = true;
+        int burst = Mathf.Max(1, currentArrowData.ProjecileCount);
+        for (int i = 0; i < burst && currentAmmo > 0; i++)
+        {
+            crossbow.Fire(dir);        // 실제 투사체 생성
+
+            /* 연사 간 미세 지연 */
+            if (i < burst - 1)
+                yield return new WaitForSeconds(0.11f);
+        }
+        isBursting = false;
+    }
     public void Melee(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || isAttacking) return;

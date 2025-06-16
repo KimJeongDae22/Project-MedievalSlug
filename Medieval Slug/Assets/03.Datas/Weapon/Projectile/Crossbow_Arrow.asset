@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31412aada8c3adb42954abaede936ad3, type: 3}
   m_Name: Crossbow_Arrow
   m_EditorClassIdentifier: 
-  Type: 0
+  Type: 4
   Damage: 20
   Range: 20
-  AttackSpeed: 20
+  AttackSpeed: 9.44
   ShotSpeed: 7.88
   ProjecileCount: 5
   MaxNum: 100
