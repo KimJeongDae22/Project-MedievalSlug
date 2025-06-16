@@ -1,6 +1,7 @@
 using Entities.Player;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +21,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [Header("Combat")]
     [SerializeField] PlayerController rider;
     [SerializeField] RangeWeaponHandler crossbow;      // 석궁
+    [SerializeField]private VehicleItemCollector collector;
 
     [Header("Stat")]
     [SerializeField] float maxHp = 250;
@@ -53,6 +55,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        
         currentHp = maxHp;
         currentArrowData = crossbow.projectileData;
     }
@@ -106,6 +109,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     {
         rider = p;
         crossbow.Setting(gameObject);
+        collector.Setup();
         // 플레이어를 전차 자식으로 두고 위치·회전 고정
         p.transform.SetParent(seatPoint);
         p.transform.localPosition = Vector3.zero;
