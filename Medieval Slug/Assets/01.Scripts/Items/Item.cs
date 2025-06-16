@@ -86,14 +86,12 @@ public class Item : MonoBehaviour
                 break;
             
             case ItemType.Weapon:
-                // TODO
-                // 플레이어 무기 강화 로직
+                CharacterManager.Instance.PlayerItemCollector.OnArrowPickup(itemData.projectileData);
                 Debug.Log($"Weapon changed: {itemData.itemName}");
                 break;
             
             case ItemType.Health:
-                // TODO
-                // 플레이어 목숨 증가
+                CharacterManager.Instance.PlayerItemCollector.OnHealthPickup(itemData.value);
                 Debug.Log($"Health +{itemData.value}");
                 break;
         }

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31412aada8c3adb42954abaede936ad3, type: 3}
   m_Name: Ice_Arrow
   m_EditorClassIdentifier: 
-  Type: 1
-  Damage: 4
+  Type: 2
+  Damage: 0
   Range: 2
-  AttackSpeed: 0
+  AttackSpeed: 2
   ShotSpeed: 10
-  ProjecileCount: 0
+  ProjecileCount: 1
   MaxNum: 100

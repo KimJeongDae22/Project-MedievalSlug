@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/00.Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/00.Scenes/KJDScene.unity
-    guid: 4730124d1a457ec49b9fdbdb0522f9ed
-  - enabled: 1
     path: Assets/00.Scenes/KJDStartScene.unity
     guid: 3293e721c58da2b41aed50c71af35770
+  - enabled: 1
+    path: Assets/00.Scenes/CharacterSelectScene.unity
+    guid: 14b93c7f75569ed49936891476958077
+  - enabled: 1
+    path: Assets/00.Scenes/KJDScene.unity
+    guid: 4730124d1a457ec49b9fdbdb0522f9ed
   m_configObjects: {}
