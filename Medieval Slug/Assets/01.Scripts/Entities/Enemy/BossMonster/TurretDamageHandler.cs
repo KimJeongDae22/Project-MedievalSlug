@@ -14,5 +14,9 @@ public class TurretDamageHandler : MonoBehaviour, IDamagable
         bossTurret.TakeDamage(damage);
     }
 
+    public void ApplyEffect(EffectType effectType)
+    {
+    }
+
     public void Die() { }
 }
