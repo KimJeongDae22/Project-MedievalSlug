@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!ctx.started) return;
 
-        if (isMounted) currentVehicle.RequestJump();
+        if (isMounted && IsGrounded()) currentVehicle.RequestJump();
         else if (IsGrounded()) jumpRequest = true;
     }
 
@@ -188,11 +188,15 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private bool IsGrounded() => Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
-
-    public void UseBow()
+    private bool IsGrounded()
     {
-        if (playerRanged == null) return;
-        playerRanged.gameObject.SetActive(true);
+        if(isMounted)
+        {
+            return Physics2D.OverlapCircle(currentVehicle.gameObject.transform.position, groundCheckRadius, groundLayer);
+        }
+        else
+        {
+            return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
+        }
     }
 }
