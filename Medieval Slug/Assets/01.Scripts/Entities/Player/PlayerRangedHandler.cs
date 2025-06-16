@@ -57,7 +57,7 @@ namespace Entities.Player
             {
                 bowHandler.Fire(dir);        // 실제 투사체 생성
                 currentAmmo--;
-
+                Singleton<UIManager>.Instance.UIUpdate_CurrentAmmo();
                 /* 연사 간 미세 지연 */
                 if (i < burst - 1)
                     yield return new WaitForSeconds(0.11f);

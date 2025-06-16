@@ -7,6 +7,7 @@ using UnityEngine;
 public static class SceneName
 {
     public const string START_SCENE = "StartScene";
+    public const string CHARACTER_SELECT_SCENE = "CharacterSelectScene";
     public const string KJD_SCENE = "KJDScene";
     public const string KJD_START_SCENE = "KJDStartScene";
 }

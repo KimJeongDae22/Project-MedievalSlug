@@ -1,7 +1,6 @@
 using Entities.Player;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 /// <summary>
 /// 전역에서 Player 각 모듈 접근용 
 /// </summary>
@@ -27,9 +26,4 @@ public class CharacterManager : Singleton<CharacterManager>
         if (PlayerItemCollector == null) Debug.LogError("CharacterManager: No Player Item Collector");  
     }
 
-    protected override void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
-    {
-        base.OnSceneLoaded(scene, loadSceneMode);
-        //TODO 게임 첫 시작 화면이나 특정 씬에 플레이어가 없는 경우의 수를 생각하기
-    }
 }
