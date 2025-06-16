@@ -14,10 +14,10 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [SerializeField] float jumpForce = 15f;
     [SerializeField] Transform seatPoint;   // 플레이어 앉는 위치
     [SerializeField] Animator animator;
-    [SerializeField]private bool facingRight = true;
+    [SerializeField] private bool facingRight = true;
 
     [Header("Combat")]
-    [SerializeField]PlayerController rider;
+    [SerializeField] PlayerController rider;
     [SerializeField] RangeWeaponHandler crossbow;      // 탱크 석궁
 
     [Header("Stat")]
@@ -98,6 +98,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     public void Mount(PlayerController p)
     {
         rider = p;
+        crossbow.Setting(gameObject);
         // 플레이어를 전차 자식으로 두고 위치·회전 고정
         p.transform.SetParent(seatPoint);
         p.transform.localPosition = Vector3.zero;
@@ -106,8 +107,8 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         rs.x = Mathf.Abs(rs.x);
         p.transform.localScale = rs;
 
-        p.SetMountedState(true, this);   
-        
+        p.SetMountedState(true, this);
+
     }
 
     /// <summary>
@@ -116,14 +117,13 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     /// <param name="exploded"></param>
     public void Dismount(bool exploded = false)
     {
-
         rider.transform.SetParent(null);
         if (exploded)
         {
             rider.transform.position = seatPoint.position + Vector3.up * 5f; // 전차 위로 점프
             //플레이어에게 데미지를 입히기
         }
-        else 
+        else
         {
             rider.transform.position = seatPoint.position + Vector3.up * 0.8f; // 전차 위로 점프
         }
@@ -136,7 +136,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     #region  Attack (플레이어 입력이 전달됨)
 
 
-    public void Fire(Vector2 dir) { }//=> crossbow.Fire(dir);
+    public void Fire(Vector2 dir) => crossbow.Fire(dir);
     public void Melee(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || isAttacking) return;
@@ -150,11 +150,12 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         yield return new WaitForSeconds(windupTime);
 
 
-        Vector2 dir = (Vector2)transform.right;          // 지금 바라보는 세계 방향
-        Vector2 origin = (Vector2)transform.position
-                       + dir * meleeOffset.x                // 앞뒤
-                       + Vector2.up * meleeOffset.y;        // 높이
+        float sign = Mathf.Sign(transform.lossyScale.x);   // +1 : 오른쪽,  -1 : 왼쪽
+        Vector2 dir = Vector2.right * sign;
 
+        Vector2 origin = (Vector2)transform.position
+                       + Vector2.right * meleeOffset.x * sign   // 앞뒤 오프셋
+                       + Vector2.up * meleeOffset.y;         // 높이
 
         RaycastHit2D hit = Physics2D.Raycast(origin, dir, meleeRange, enemyLayer);
         if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
@@ -166,14 +167,15 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     {
         Gizmos.color = Color.red;
 
-        Vector2 dir = Application.isPlaying ? (Vector2)transform.right
-                                               : Vector2.right * Mathf.Sign(transform.lossyScale.x);
+        float sign = Mathf.Sign(transform.lossyScale.x);
+        Vector2 dir = Vector2.right * sign;
         Vector2 origin = (Vector2)transform.position
-                       + dir * meleeOffset.x
+                       + Vector2.right * meleeOffset.x * sign
                        + Vector2.up * meleeOffset.y;
 
         Gizmos.DrawWireSphere(origin, meleeRange);
         Gizmos.DrawLine(origin, origin + dir * meleeRange);
+
     }
     #endregion
 
@@ -203,7 +205,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
 
     public void ApplyEffect(EffectType effectType)
     {
-        
+
         throw new System.NotImplementedException();
     }
 

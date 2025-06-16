@@ -39,7 +39,7 @@ public class ProjectileController : MonoBehaviour, IPoolable
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Player"))
+        if (!collision.CompareTag("Player") && !collision.CompareTag("Vehicle"))
         {
             if (collision.GetComponentInChildren<IDamagable>() is IDamagable target)
             {

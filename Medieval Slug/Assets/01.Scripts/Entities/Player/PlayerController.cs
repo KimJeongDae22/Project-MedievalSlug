@@ -1,5 +1,6 @@
 using Entities.Player;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 /// <summary>
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float jumpForce = 7f;
-    [SerializeField]private bool isFacingRight = true;
+    [SerializeField] private bool isFacingRight = true;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheckPoint;
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private Animator animator;
-    [SerializeField] private PlayerRangedHandler playerEquip;
+    [SerializeField] private PlayerRangedHandler playerRanged;
     [SerializeField] private PlayerMeleeHandler playerMelee;
 
     [Header("Mount Settings")]
@@ -47,14 +48,14 @@ public class PlayerController : MonoBehaviour
     public void OnMovement(InputAction.CallbackContext ctx)
     {
         moveInput = ctx.ReadValue<Vector2>();
-        if (isMounted) currentVehicle.ReceiveInput(moveInput);        
+        if (isMounted) currentVehicle.ReceiveInput(moveInput);
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
         if (!ctx.started) return;
 
-        if (isMounted) currentVehicle.RequestJump();               
+        if (isMounted) currentVehicle.RequestJump();
         else if (IsGrounded()) jumpRequest = true;
     }
 
@@ -64,8 +65,7 @@ public class PlayerController : MonoBehaviour
         if (isMounted) currentVehicle.Fire(GetAimDir());
         else
         {
-            Vector2 aim = GetAimDir();
-            playerEquip.Fire(aim);
+            playerRanged.Fire(GetAimDir());
         }
     }
 
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     public void OnMelee(InputAction.CallbackContext ctx)
     {
         if (!ctx.started) return;
-        if(isMounted)
+        if (isMounted)
         {
             currentVehicle.Melee(ctx);
         }
@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
     }
     public void SetMountedState(bool mounted, VehicleController vehicle)
     {
+
         if (mounted)
         {
             cachedSignBeforeMount = transform.localScale.x >= 0 ? 1 : -1;
@@ -171,4 +172,10 @@ public class PlayerController : MonoBehaviour
 
 
     private bool IsGrounded() => Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
+
+    public void UseBow()
+    {
+        if (playerRanged == null) return;
+        playerRanged.gameObject.SetActive(true);
+    }
 }

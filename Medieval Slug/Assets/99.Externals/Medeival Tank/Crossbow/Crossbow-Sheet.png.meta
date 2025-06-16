@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 4
   spritePivot: {x: 0, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -134,7 +134,259 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Crossbow-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7281
+        width: 640
+        height: 229
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff9225ba1355e49478305c7e44cf38d5
+      internalID: -285022467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 6647
+        width: 633
+        height: 229
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c101a0f6f73dd542b27dd6e99df16ac
+      internalID: 1202567599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6006
+        width: 640
+        height: 228
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73e2a01a44f1a254086cb875f8af3f6d
+      internalID: -748061208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5364
+        width: 640
+        height: 229
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f92f214470114114a997e13a7afc6031
+      internalID: 1048158753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4727
+        width: 640
+        height: 229
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34a26e5fe6765aa4798b2f5f0a7f613a
+      internalID: 1457225690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4086
+        width: 640
+        height: 228
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 092906023949ec04f980e07c5565e4bc
+      internalID: 1642362317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3444
+        width: 640
+        height: 229
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c612b56be0444e4097494ed17622806
+      internalID: -1152253905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2807
+        width: 640
+        height: 229
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ebaddfee1106944bbada32da1cb75de
+      internalID: -2011644546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2166
+        width: 640
+        height: 217
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aa7c2e8208cf9247b927e1b42183bcc
+      internalID: -692392435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1524
+        width: 640
+        height: 222
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5d8ba91fa3a69a43b3b914f0a6d739d
+      internalID: 477443214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 887
+        width: 640
+        height: 229
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7a720c6dbc85ef49adc965245843bfb
+      internalID: 698542019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crossbow-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 246
+        width: 640
+        height: 228
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c45f47d1f65b9545bdba99e323d6cf0
+      internalID: -107620409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +397,19 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Crossbow-Sheet_0: -285022467
+      Crossbow-Sheet_1: 1202567599
+      Crossbow-Sheet_10: 698542019
+      Crossbow-Sheet_11: -107620409
+      Crossbow-Sheet_2: -748061208
+      Crossbow-Sheet_3: 1048158753
+      Crossbow-Sheet_4: 1457225690
+      Crossbow-Sheet_5: 1642362317
+      Crossbow-Sheet_6: -1152253905
+      Crossbow-Sheet_7: -2011644546
+      Crossbow-Sheet_8: -692392435
+      Crossbow-Sheet_9: 477443214
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

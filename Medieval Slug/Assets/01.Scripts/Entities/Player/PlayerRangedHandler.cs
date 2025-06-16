@@ -18,7 +18,7 @@ namespace Entities.Player
         [SerializeField] private Transform RangeWeaponPivot;
 
         [Header("남은 화살 수")]
-        [SerializeField]private int currentAmmo;
+        [SerializeField] private int currentAmmo;
 
         private RangeWeaponHandler bowHandler;
         private ProjectileData currentArrowData;
@@ -76,6 +76,7 @@ namespace Entities.Player
             bow.transform.localRotation = Quaternion.identity;
             bowHandler = bow.GetComponent<RangeWeaponHandler>();
             SetArrowData(bowHandler.projectileData);
+            bowHandler.Setting(gameObject);
             if (bowHandler == null)
                 Debug.LogError("Bow Prefab에 RangeWeaponHandler가 없습니다.");
         }
@@ -106,6 +107,12 @@ namespace Entities.Player
         /// </summary>
         /// <returns></returns>
         public int GetCurrentAmmo() => currentAmmo;
+
+        public void SetWeaponEnabled(bool enable)
+        {
+            if (bowHandler == null) return;
+            bowHandler.gameObject.SetActive(enable);
+        }
     }
 }
 
