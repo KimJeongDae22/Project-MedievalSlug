@@ -6,13 +6,15 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Monster : MonoBehaviour, IDamagable
 {
-    [field : SerializeField] public SpriteRenderer Sprite { get; private set; }
-    [field : SerializeField] public Animator Animator { get; private set; }
-    [field : SerializeField] public MonsterAnimationHash AnimationHash {get; private set;}
-    [field : SerializeField] public bool HasAnimator { get; private set; } = false;
-    
-    [field : Header("Monster States")] 
-    [field : SerializeField] public virtual MonsterSO MonsterData { get; private set; }
+    [field: SerializeField] public SpriteRenderer Sprite { get; private set; }
+    [field: SerializeField] public Animator Animator { get; private set; }
+    [field: SerializeField] public MonsterAnimationHash AnimationHash { get; private set; }
+    [field: SerializeField] public bool HasAnimator { get; private set; } = false;
+
+    [field: Header("Monster States")] [SerializeField]
+    protected MonsterStateMachine stateMachine;
+
+    [field: SerializeField] public virtual MonsterSO MonsterData { get; private set; }
     [SerializeField] private int health;
     [SerializeField] private float speed;
     private bool isSlowed;
@@ -21,11 +23,13 @@ public class Monster : MonoBehaviour, IDamagable
     protected virtual void Reset()
     {
         Sprite = GetComponent<SpriteRenderer>();
-        
+
         Animator = GetComponent<Animator>();
-        
-        if (Animator != null) 
+
+        if (Animator != null)
             HasAnimator = true;
+
+        stateMachine = transform.parent.GetComponent<MonsterStateMachine>();
     }
 
     protected virtual void Awake()
@@ -88,11 +92,15 @@ public class Monster : MonoBehaviour, IDamagable
             health = 0;
             Die();
         }
+        else
+        {
+            stateMachine.ChangeState(stateMachine.HitState);
+        }
     }
-    
+
     public void Die()
     {
-        Animator.SetTrigger("Dead");
+        stateMachine.ChangeState(stateMachine.DeadState);
     }
 
     public void DisableGameObject()

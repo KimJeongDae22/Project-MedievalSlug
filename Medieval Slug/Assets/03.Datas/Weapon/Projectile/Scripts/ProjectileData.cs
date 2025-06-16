@@ -8,6 +8,7 @@ public enum ProjectileType
     Fire,
     Ice,
     Poison,
+    Slime,
     Null
 }
 

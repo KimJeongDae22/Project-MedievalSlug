@@ -66,6 +66,11 @@ public abstract class MonsterBaseState
         StateMachine.Monster.Animator.SetBool(animatorHash, false);
     }
     
+    protected void SetAnimationTrigger(int triggerHash)
+    {
+        StateMachine.Monster.Animator.SetTrigger(triggerHash);
+    }
+    
     /// <summary>
     /// tag가 붙은 애니메이션이 끝났는지 확인하는 불값 반환 함수
     /// </summary>
