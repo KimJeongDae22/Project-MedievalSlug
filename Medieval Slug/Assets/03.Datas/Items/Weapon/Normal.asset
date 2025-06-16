@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 858e2fb7c68f8cd4890fb2f54a397251, type: 3}
-  m_Name: Beer
+  m_Name: Normal
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Beer
-  icon: {fileID: 21300000, guid: eece8ece2f687294a9ce990deda0913e, type: 3}
+  itemName: Normal
+  icon: {fileID: 21300000, guid: e36df49f2449a434d92f8db33a83c743, type: 3}
   value: 0
+  projectileData: {fileID: 11400000, guid: 283bac2f47d51e74aab5113b8000bcbd, type: 2}

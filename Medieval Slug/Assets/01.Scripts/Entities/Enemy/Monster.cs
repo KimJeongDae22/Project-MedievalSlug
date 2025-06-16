@@ -16,11 +16,7 @@ public class Monster : MonoBehaviour, IDamagable
     [SerializeField] private int health;
     [SerializeField] private float speed;
     private bool isSlowed;
-    public float Speed
-    {
-        get { return speed; }
-        private set { speed = value; }
-    }
+    public float Speed => speed;
 
     protected virtual void Reset()
     {

@@ -15,4 +15,7 @@ public class ItemData : ScriptableObject
     public string itemName;
     public Sprite icon;
     public int value;
+    
+    [Header("Weapon Info")]
+    public ProjectileData projectileData;
 }
