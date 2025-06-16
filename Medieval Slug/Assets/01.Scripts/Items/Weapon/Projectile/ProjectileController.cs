@@ -12,7 +12,7 @@ public class ProjectileController : MonoBehaviour, IPoolable
     private float curduration;
 
     private Action<GameObject> returnToPool;
-    private EffectType curEffectType;
+    [SerializeField] private EffectType curEffectType;
 
     void Awake()
     {

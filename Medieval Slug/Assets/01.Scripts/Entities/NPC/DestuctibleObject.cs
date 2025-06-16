@@ -65,6 +65,10 @@ public class DestuctibleObject : MonoBehaviour, IDamagable
         }
     }
 
+    public void ApplyEffect(EffectType effectType)
+    {
+    }
+
     public void Die()
     {
         DestroyCage();

@@ -28,7 +28,7 @@ public class Monster : MonoBehaviour, IDamagable
             HasAnimator = true;
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         health = MonsterData.Health;
         speed = MonsterData.MoveSpeed;
