@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/00.Scenes/KJDScene.unity
     guid: 4730124d1a457ec49b9fdbdb0522f9ed
   - enabled: 1
-    path: Assets/00.Scenes/KJDTestScene.unity
+    path: Assets/00.Scenes/KJDStartScene.unity
     guid: 3293e721c58da2b41aed50c71af35770
   m_configObjects: {}

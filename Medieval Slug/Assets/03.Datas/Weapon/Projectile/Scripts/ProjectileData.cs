@@ -7,7 +7,8 @@ public enum ProjectileType
     Nomal,
     Fire,
     Ice,
-    Poison
+    Poison,
+    Null
 }
 
 [CreateAssetMenu(fileName = "ProjectileData", menuName = "Projectile/Type,Stats")]

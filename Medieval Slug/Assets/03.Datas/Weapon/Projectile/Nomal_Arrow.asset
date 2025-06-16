@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Nomal_Arrow
   m_EditorClassIdentifier: 
   Type: 0
-  Damage: 0
-  Range: 5
-  AttackSpeed: 0
-  ShotSpeed: 3
-  ProjecileCount: 0
+  Damage: 3
+  Range: 2
+  AttackSpeed: 2
+  ShotSpeed: 10
+  ProjecileCount: 5
   MaxNum: 100
