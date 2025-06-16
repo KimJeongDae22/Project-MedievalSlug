@@ -170,7 +170,10 @@ public class UIManager : Singleton<UIManager>
     public void UIUpdate_PlayerHP()
     {
         int heartAmount = (int)CharacterManager.Instance.StatHandler.GetStat(StatType.Health);
-
+        if (heartAmount < 0)
+        {
+            return;
+        }
         if (heartAmount <= 5) // 최대 하트 UI 표시량
         {
             overHealth.SetActive(false);
