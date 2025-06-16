@@ -6,13 +6,13 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour, IPoolable
 {
     [SerializeField] private ProjectileData projectileData;
+    [SerializeField] private EffectType curEffectType;
 
     private Vector2 direction;
     private Rigidbody2D rigidbody;
     private float curduration;
 
     private Action<GameObject> returnToPool;
-    private EffectType curEffectType;
 
     void Awake()
     {
