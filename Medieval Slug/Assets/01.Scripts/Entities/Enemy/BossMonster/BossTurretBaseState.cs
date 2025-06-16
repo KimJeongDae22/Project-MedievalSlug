@@ -43,6 +43,6 @@ public abstract class BossTurretBaseState
         { 
             return stateInfo.normalizedTime >= 1f;
         }
-        return true;
+        return false;
     }
 }

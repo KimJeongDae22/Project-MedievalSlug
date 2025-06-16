@@ -14,10 +14,12 @@ public class BossTurretStateMachine : MonoBehaviour
     private BossTurretBaseState prevPattern;
 
     public List<BossTurretBaseState> Patterns;
-    public BossAppearState AppearState { get; private set; }
+    public List<BossTurretBaseState> HardPatterns;
     public BossAimingState AimingState { get; private set; }
+    public BossAppearState AppearState { get; private set; }
+    public BossDefeatState DefeatState { get; private set; }
 
-    private int deathCount = 3;
+    private int defeatCount = 0;
 
     private void Reset()
     {
@@ -38,14 +40,14 @@ public class BossTurretStateMachine : MonoBehaviour
         Patterns = new List<BossTurretBaseState>()
         {
             new Pattern1(this),
-            new Pattern2(this),
-            new Pattern3(this),
+            //new Pattern2(this),
+            //new Pattern3(this),
         };
-
-        AppearState = new BossAppearState(this);
         AimingState = new BossAimingState(this);
-        //이후 연출을 위해 AppearState로 전환
-        ChangeState(AimingState);
+        AppearState = new BossAppearState(this);
+        DefeatState = new BossDefeatState(this);
+        
+        ChangeState(AppearState);
     }
 
     private void Update()
@@ -88,6 +90,20 @@ public class BossTurretStateMachine : MonoBehaviour
         }
         prevPattern = newPattern;
         ChangeState(newPattern);
+    }
+
+    public void AddDefeatCount()
+    {
+        defeatCount++;
+        if (defeatCount == 2)
+        {
+            Defeat();
+        }
+    }
+
+    public void Defeat()
+    {
+        //보스 패배 로직
     }
     
     /// <summary>

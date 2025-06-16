@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BossTurret : MonoBehaviour, IDamagable
 {
+    private BossTurretStateMachine stateMachine;
     public BossSO BossData { get; private set; }
     public int Health {get; private set;}
     [field : SerializeField] public MonsterAnimationHash AnimationHash { get; private set; }
@@ -16,6 +17,7 @@ public class BossTurret : MonoBehaviour, IDamagable
     
     protected void Reset()
     {
+        stateMachine = transform.parent.GetComponent<BossTurretStateMachine>();
         AnimationHash = new MonsterAnimationHash();
         AimingHandler = GetComponent<TurretAimingHandler>();
         Animator = GetComponent<Animator>();
@@ -33,6 +35,7 @@ public class BossTurret : MonoBehaviour, IDamagable
 
     public void TakeDamage(int damage)
     {
+        if (IsDead) return;
         Health -= damage;
         if (Health <= 0)
         {
@@ -45,7 +48,7 @@ public class BossTurret : MonoBehaviour, IDamagable
             {
                 IsHalfHealth = true;
                 Animator.speed = 2;
-                Animator.SetBool("HalfHealth", true);
+                Animator.SetBool(AnimationHash.HalfHealthParameterHash, true);
             }
         }
     }
@@ -59,6 +62,7 @@ public class BossTurret : MonoBehaviour, IDamagable
     {
         IsDead = true;
         Animator.SetTrigger(AnimationHash.DeadParameterHash);
+        stateMachine.AddDefeatCount();
     }
 
     public void Fire()

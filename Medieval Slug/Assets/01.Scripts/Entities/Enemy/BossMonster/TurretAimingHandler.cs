@@ -27,7 +27,7 @@ public class TurretAimingHandler : MonoBehaviour
 
     void Update()
     {
-        if (IsAniming)
+        if (IsAniming || boss.IsHalfHealth)
         {
             Vector2 direction = target.position - rotatingPivot.position;
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

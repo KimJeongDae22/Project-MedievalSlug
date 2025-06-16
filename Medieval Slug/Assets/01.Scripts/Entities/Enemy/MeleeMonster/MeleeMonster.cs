@@ -4,7 +4,7 @@ using UnityEngine;
 public class MeleeMonster : Monster
 {
     [field : Header("Melee Monster")]
-    [SerializeField] private Collider2D collider2D;
+    private new Collider2D collider2D;
     
     protected override void Reset()
     {

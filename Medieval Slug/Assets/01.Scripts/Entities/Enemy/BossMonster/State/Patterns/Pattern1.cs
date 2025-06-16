@@ -6,16 +6,12 @@ public class Pattern1 : BossTurretBaseState
     {
     }
     
-    private BossTurret lastTurret;
     private float timer;
     private int step;
     
     public override void Enter()
     {
         stateMachine.AllTurretUnAim();
-        
-        if (!stateMachine.LeftTurret.IsDead) lastTurret = stateMachine.LeftTurret;
-        else if (!stateMachine.RightTurret.IsDead) lastTurret = stateMachine.RightTurret;
         
         timer = 0f;
         step = 0;
@@ -44,13 +40,11 @@ public class Pattern1 : BossTurretBaseState
             timer = 0f;
         }
 
-        if (step == 3 && IsAnimationFinished(lastTurret, "Attack"))
+        if (step == 2)
         {
             stateMachine.ChangeState(stateMachine.AimingState);
         }
     }
 
-    public override void Exit()
-    {
-    }
+    public override void Exit() { }
 }

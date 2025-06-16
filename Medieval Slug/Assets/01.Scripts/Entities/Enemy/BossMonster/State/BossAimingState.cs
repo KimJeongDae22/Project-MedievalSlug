@@ -22,7 +22,7 @@ public class BossAimingState : BossTurretBaseState
             StartAnimation(stateMachine.LeftTurret, stateMachine.LeftTurret.AnimationHash.IdleParameterHash);
         
         if (!stateMachine.RightTurret.IsDead) 
-            StartAnimation(stateMachine.LeftTurret, stateMachine.RightTurret.AnimationHash.IdleParameterHash);
+            StartAnimation(stateMachine.RightTurret, stateMachine.RightTurret.AnimationHash.IdleParameterHash);
         
         
         stateMachine.AllTurretAim();

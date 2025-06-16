@@ -726,42 +726,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 698323184}
-        m_TargetAssemblyTypeName: Monster, Assembly-CSharp
-        m_MethodName: TakeDamage
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 709398872}
-        m_TargetAssemblyTypeName: Monster, Assembly-CSharp
-        m_MethodName: TakeDamage
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2378131400251320199}
-        m_TargetAssemblyTypeName: Monster, Assembly-CSharp
-        m_MethodName: TakeDamage
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2026198365}
         m_TargetAssemblyTypeName: BossTurret, Assembly-CSharp
         m_MethodName: TakeDamage
@@ -769,7 +733,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -781,7 +745,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 51
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -989,28 +953,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627018252}
   m_CullTransparentMesh: 1
---- !u!114 &698323184 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1301285300495454382, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
-  m_PrefabInstance: {fileID: 2064067236}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef33b99e45d364942b1c1b14f390273b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &709398872 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4126754008536790119, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
-  m_PrefabInstance: {fileID: 30484452}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a448723331f4c54be57bc6a6128d333, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &748580148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,6 +1028,9 @@ MonoBehaviour:
     attackParameterName: Attack
     deadParameterName: Dead
     hitParameterName: Hit
+    halfHealthParameterName: HalfHealth
+    appearingParameterName: Appearing
+    defeatParameterName: Defeat
   <AimingHandler>k__BackingField: {fileID: 748580150}
   <Animator>k__BackingField: {fileID: 748580155}
   shootPoint: {fileID: 1372213534}
@@ -2754,6 +2699,9 @@ MonoBehaviour:
     attackParameterName: Attack
     deadParameterName: Dead
     hitParameterName: Hit
+    halfHealthParameterName: HalfHealth
+    appearingParameterName: Appearing
+    defeatParameterName: Defeat
   <AimingHandler>k__BackingField: {fileID: 2026198364}
   <Animator>k__BackingField: {fileID: 2026198369}
   shootPoint: {fileID: 353152248}
@@ -3185,17 +3133,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee790ea1f852a4e47ad6c7b2e4666ee7, type: 3}
---- !u!114 &2378131400251320199 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7739054415713413132, guid: ee790ea1f852a4e47ad6c7b2e4666ee7, type: 3}
-  m_PrefabInstance: {fileID: 2378131400251320198}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef33b99e45d364942b1c1b14f390273b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
