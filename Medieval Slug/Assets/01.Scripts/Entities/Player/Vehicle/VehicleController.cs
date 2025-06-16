@@ -18,7 +18,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
 
     [Header("Combat")]
     [SerializeField]PlayerController rider;
-    //[SerializeField] PlayerRangedHandler crossbow;      // 탱크 석궁
+    [SerializeField] RangeWeaponHandler crossbow;      // 탱크 석궁
 
     [Header("Stat")]
     [SerializeField] float maxHp = 250;
@@ -64,6 +64,19 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         // 좌우 플립
         if (cachedInput.x > 0 && !facingRight) Flip();
         else if (cachedInput.x < 0 && facingRight) Flip();
+
+    }
+    private void Update()
+    {
+        //테스트 코드
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TakeDamage(1);
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            StartCoroutine(Exploeded());
+        }
     }
     void Flip()
     {
@@ -105,12 +118,17 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     {
 
         rider.transform.SetParent(null);
-        rider.transform.position = seatPoint.position + Vector3.up * 0.8f; // 전차 위로 점프
+        if (exploded)
+        {
+            rider.transform.position = seatPoint.position + Vector3.up * 5f; // 전차 위로 점프
+            //플레이어에게 데미지를 입히기
+        }
+        else 
+        {
+            rider.transform.position = seatPoint.position + Vector3.up * 0.8f; // 전차 위로 점프
+        }
         rider.SetMountedState(false, null);
         rider = null;
-        //animator.SetBool("Riding", false);
-
-        if (exploded) Destroy(gameObject);
     }
     #endregion
 
@@ -165,16 +183,27 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     {
         currentHp -= dmg;
         animator.SetTrigger("Hurt");
-        if (currentHp <= 0) Die();
+        if (currentHp <= 0) StartCoroutine(Exploeded());
+    }
+
+    public IEnumerator Exploeded()
+    {
+        crossbow.gameObject.SetActive(false);
+        Dismount(true);
+        animator.SetTrigger("IsExploded");
+        yield return new WaitForSeconds(0.5f);
+        Die();
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
     public void Die()
     {
-        Dismount(true);
         animator.SetTrigger("Die");
     }
 
     public void ApplyEffect(EffectType effectType)
     {
+        
         throw new System.NotImplementedException();
     }
 
