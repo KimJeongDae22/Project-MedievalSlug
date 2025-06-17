@@ -766,7 +766,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.5088172, y: 0.23692173}
+  m_Offset: {x: 1.2492273, y: -0.033156395}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -777,7 +777,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.9203134, y: 1.9726261}
+  m_Size: {x: 1.929152, y: 1.2122116}
   m_EdgeRadius: 0
 --- !u!114 &3016855445302639523
 MonoBehaviour:
@@ -947,6 +947,7 @@ MonoBehaviour:
   spawnPosition: {fileID: 9092983695796742825}
   projectileType: 4
   animator: {fileID: 2056895891132095980}
+  attackSoundClip: []
   user: {fileID: 0}
   projectileData: {fileID: 11400000, guid: f13aeae2cb5302a419742d8c5d87663f, type: 2}
 --- !u!1 &8641623648880255465
