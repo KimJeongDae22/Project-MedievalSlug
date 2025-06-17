@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 633921220804297656}
   - component: {fileID: 1565117062265877348}
   m_Layer: 7
-  m_Name: Temp_FlyingMonster
+  m_Name: Eagle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
