@@ -8,7 +8,7 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
 {
     [Header("Stat Setting")]
     public StatData statData;
-    private Dictionary<StatType, float> currentStats = new Dictionary<StatType, float>();
+    [SerializeField]private Dictionary<StatType, float> currentStats = new Dictionary<StatType, float>();
 
     public event Action<StatType, float> OnStatChanged;
 
@@ -49,6 +49,10 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
     {
         ModifyStat(StatType.Health, -damage);
         animator.SetTrigger("Hurt");
+    }
+
+    public void ApplyEffect(EffectType effectType)
+    {
     }
 
     public void Die()

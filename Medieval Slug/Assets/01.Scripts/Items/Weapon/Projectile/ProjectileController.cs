@@ -6,6 +6,10 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour, IPoolable
 {
     [SerializeField] private ProjectileData projectileData;
+    [SerializeField] private Faction faction;
+    [SerializeField] private EffectType curEffectType;
+
+    [SerializeField] private List<AudioClip> attackSoundClip;
 
     private Vector2 direction;
     private Rigidbody2D rigidbody;
@@ -38,10 +42,32 @@ public class ProjectileController : MonoBehaviour, IPoolable
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // if (collision.tag != "Player")
-        // {
-        // OnDespawn();
-        // }
+        if (collision.GetComponentInChildren<IDamagable>() is IDamagable target) // IDamagable 있는지 확인
+        {
+            int playerLayer = LayerMask.NameToLayer("Player");
+            int enemyLayer = LayerMask.NameToLayer("Enemy");
+            Debug.Log(target);
+            if ((faction == Faction.Player && collision.gameObject.layer == enemyLayer) || // Layer에 따른 화살 공격 여부
+                (faction == Faction.Enemy && collision.gameObject.layer == playerLayer))
+            {
+                if (attackSoundClip != null)
+                {
+                    AudioManager.PlaySFXClip(attackSoundClip[0]);
+                }
+                target.TakeDamage((int)projectileData.Damage);
+                target.ApplyEffect(curEffectType);
+                OnDespawn();
+            }
+        }
+        //else
+        //{
+        //    if (attackSoundClip != null)
+        //    {
+        //        Debug.Log("소리 발생");
+        //        AudioManager.PlaySFXClip(attackSoundClip[0]);
+        //    }
+        //    OnDespawn();
+        //}
     }
 
     public void Initialize(Action<GameObject> returnAction)

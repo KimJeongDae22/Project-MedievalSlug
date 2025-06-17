@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4773008688502736243}
   - component: {fileID: 2816402097914348648}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5559698016433342830}
   - component: {fileID: 1073413050665134418}
   - component: {fileID: 8328222718258516490}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Poison_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.27561498, y: -0.014368564}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -189,7 +189,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.43873143}
+  m_Size: {x: 0.44877005, y: 0.2427966}
   m_EdgeRadius: 0
 --- !u!114 &8328222718258516490
 MonoBehaviour:
@@ -204,6 +204,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: 9f60f2992ede5064c861e9c2e60882f1, type: 2}
+  faction: 0
+  curEffectType: 3
+  attackSoundClip:
+  - {fileID: 8300000, guid: 131cc8285179cff418bfe338bb2eb66e, type: 3}
 --- !u!1 &6800308625988230474
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 189400184658531178}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
