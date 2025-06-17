@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2397607093520578374}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7430179451737386362}
   - component: {fileID: 2570486495385282774}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 4504733818043809736}
   - component: {fileID: 4693317481567144804}
   - component: {fileID: 312481100884940378}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fire_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.27692127, y: -0.014368534}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -221,7 +221,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.43873143}
+  m_Size: {x: 0.44615746, y: 0.28982103}
   m_EdgeRadius: 0
 --- !u!114 &312481100884940378
 MonoBehaviour:
@@ -236,4 +236,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: 433aa4d5f8f26ab4885d4ba3aaed5f2c, type: 2}
+  faction: 0
   curEffectType: 1
