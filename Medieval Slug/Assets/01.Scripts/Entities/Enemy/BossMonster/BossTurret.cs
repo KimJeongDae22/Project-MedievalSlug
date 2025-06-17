@@ -75,5 +75,6 @@ public class BossTurret : MonoBehaviour, IDamagable
     public void ApeearingFinished()
     {
         IsAppeared = true;
+
     }
 }
