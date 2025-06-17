@@ -23,7 +23,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [SerializeField] private VehicleItemCollector collector;
     [SerializeField] private MountIndicater indicator;
 
-    [Header("[AniMaitons]")]
+    [Header("[Animations]")]
     [SerializeField] Animator animator;
     [SerializeField] private Animator MeleeFx;
     [SerializeField] private Animator MeleeFx2;

@@ -809,6 +809,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 6954005645821867026, guid: 9edcbe09c9201134d99aed29f6de18b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.91
+      objectReference: {fileID: 0}
     - target: {fileID: 6992187938845631757, guid: 9edcbe09c9201134d99aed29f6de18b1, type: 3}
       propertyPath: m_SortingOrder
       value: 50
@@ -1283,13 +1287,53 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 103584715988627797, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 606368864366971661, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
       propertyPath: m_Name
       value: Tank
       objectReference: {fileID: 0}
+    - target: {fileID: 606368864366971661, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909252854149196652, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526594611913488539, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718003764579715793, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641799923504499131, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948063269376333143, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5047670547047223720, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5846949992600602624, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867287291440770442, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7045493118134374959, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
-      propertyPath: m_Name
-      value: MeleeFx2
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7315879554401081948, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1330,6 +1374,18 @@ PrefabInstance:
     - target: {fileID: 7315879554401081948, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449606582966242487, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641623648880255465, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9009986844457755633, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
