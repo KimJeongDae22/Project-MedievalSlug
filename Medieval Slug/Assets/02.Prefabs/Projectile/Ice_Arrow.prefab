@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7702529121539066760}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1549525685457674261}
   - component: {fileID: 1836213163979122261}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 2151120103315064925}
   - component: {fileID: 4732545011267450936}
   - component: {fileID: 6283369797197438993}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ice_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.28867733, y: -0.013062328}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -221,7 +221,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.43873143}
+  m_Size: {x: 0.42264533, y: 0.25585896}
   m_EdgeRadius: 0
 --- !u!114 &6283369797197438993
 MonoBehaviour:
@@ -236,4 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: c4b5373ab6fa9dd49910df16e97fb4f7, type: 2}
+  faction: 0
   curEffectType: 2
+  attackSoundClip:
+  - {fileID: 8300000, guid: 131cc8285179cff418bfe338bb2eb66e, type: 3}

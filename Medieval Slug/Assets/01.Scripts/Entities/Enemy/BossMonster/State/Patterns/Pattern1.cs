@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Pattern1 : BossTurretBaseState
+public class Pattern1 : BasePattern
 {
     public Pattern1(BossTurretStateMachine stateMachine) : base(stateMachine)
     {
@@ -12,11 +12,17 @@ public class Pattern1 : BossTurretBaseState
     
     public override void Enter()
     {
+        base.Enter();
         stateMachine.AllTurretUnAim();
-        
-        if (!stateMachine.LeftTurret.IsDead) lastTurret = stateMachine.LeftTurret;
-        //else if (!stateMachine.CenterTurret.IsDead) lastTurret = stateMachine.CenterTurret;
-        else if (!stateMachine.RightTurret.IsDead) lastTurret = stateMachine.RightTurret;
+
+        if (!stateMachine.LeftTurret.IsDead)
+        {
+            lastTurret = stateMachine.LeftTurret;
+        }
+        if (!stateMachine.RightTurret.IsDead)
+        {
+            lastTurret = stateMachine.RightTurret;
+        }
         
         timer = 0f;
         step = 0;
@@ -26,37 +32,28 @@ public class Pattern1 : BossTurretBaseState
     {
         timer += Time.deltaTime;
 
-        if (timer >= stateMachine.BossData.SequentialFireDelay && step < 3)
+        if (timer >= stateMachine.BossData.SequentialFireDelay && step < 2)
         {
             switch (step)
             {
                 case 0:
                     if (stateMachine.LeftTurret.IsDead) break;
-                    SetAnimationTrigger(stateMachine.LeftTurret, stateMachine.LeftTurret.AnimationHash.AttackParameterHash);
+                    SetAnimationTrigger(stateMachine.LeftTurret, stateMachine.LeftTurret.AnimationHash.AttackTriggerParameterHash);
                     break;
                 case 1:
-                    //if (stateMachine.CenterTurret.IsDead) break;
-                    //SetAnimationTrigger(stateMachine.CenterTurret, stateMachine.CenterTurret.AnimationHash.AttackParameterHash);
-                    break;
-                case 2:
                     if (stateMachine.RightTurret.IsDead) break;
-                    SetAnimationTrigger(stateMachine.RightTurret, stateMachine.RightTurret.AnimationHash.AttackParameterHash);
+                    SetAnimationTrigger(stateMachine.RightTurret, stateMachine.RightTurret.AnimationHash.AttackTriggerParameterHash);
                     break;
                 default:
                     break;
             }
-            Debug.Log($"{step}번째 공격!");
             step++;
             timer = 0f;
         }
 
-        if (step == 3 && IsAnimationFinished(lastTurret, "Attack"))
+        if (step == 2 && timer >= stateMachine.BossData.SequentialFireDelay)
         {
-            stateMachine.ChangeState(stateMachine.IdleState);
+            stateMachine.ChangeState(stateMachine.AimingState);
         }
-    }
-
-    public override void Exit()
-    {
     }
 }
