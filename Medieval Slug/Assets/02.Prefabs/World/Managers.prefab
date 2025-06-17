@@ -81,13 +81,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 235996170077114079, guid: 9c0c292b0fd86844f81313db043d18f2, type: 3}
-  availableItems:
-  - {fileID: 11400000, guid: ebef1d720f02c294d9dfd49b70148911, type: 2}
-  - {fileID: 11400000, guid: b32e20b4002e3aa45b06292aafcb22d0, type: 2}
-  - {fileID: 11400000, guid: 0b444eae25b9cd34c8c449907cc4f4f7, type: 2}
-  - {fileID: 11400000, guid: 6a984f3f87d2ad0478c3745126a089bf, type: 2}
-  scatterForce: 2
+  availableItems: []
+  scatterForce: 3
   upwardForce: 1
   scatterDelay: 0.1
-  physicsDisableTime: 2
+  physicsDisableTime: 1
   player: {fileID: 0}

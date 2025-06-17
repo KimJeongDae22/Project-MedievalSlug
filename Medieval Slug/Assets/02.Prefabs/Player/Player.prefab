@@ -230,13 +230,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   a: 3
   moveSpeed: 5
-  jumpForce: 10
+  jumpForce: 11
   isFacingRight: 1
   groundCheckPoint: {fileID: 5422235271331890033}
   groundCheckRadius: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  VehicleLayer:
+    serializedVersion: 2
+    m_Bits: 0
   wallRayRadius: 0.15
   wallCheckPoint: {fileID: 1773291076220465908}
   wallLayer:
@@ -312,6 +315,7 @@ MonoBehaviour:
   windupTime: 0.2
   animator: {fileID: 4643268736599956163}
   prh: {fileID: 8951737876760437755}
+  attackAudioClip: {fileID: 0}
 --- !u!114 &1726744008342140006
 MonoBehaviour:
   m_ObjectHideFlags: 0
