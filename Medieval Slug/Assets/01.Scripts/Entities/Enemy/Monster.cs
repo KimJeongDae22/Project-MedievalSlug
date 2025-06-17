@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
-public class Monster : MonoBehaviour, IDamagable
+public class Monster : MonoBehaviour, IDamagable, IPoolable
 {
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public MonsterAnimationHash AnimationHash { get; private set; }
@@ -18,6 +18,10 @@ public class Monster : MonoBehaviour, IDamagable
     [SerializeField] private float speed;
     private bool isSlowed;
     public float Speed => speed;
+    
+    // 풀링용 추가 변수
+    private Action<GameObject> returnToPool;
+    private int prefabIndex;
 
     protected virtual void Reset()
     {
@@ -38,8 +42,35 @@ public class Monster : MonoBehaviour, IDamagable
     {
         health = MonsterData.Health;
         speed = MonsterData.MoveSpeed;
+        isSlowed = false;
+        stateMachine.ChangeState(stateMachine.IdleState);
         AnimationHash.Initialize();
     }
+    
+    #region IPoolable
+    
+    public void Initialize(Action<GameObject> returnAction)
+    {
+        returnToPool = returnAction;
+    }
+
+    public void OnSpawn()
+    {
+        Initialize();
+        StopAllCoroutines();
+    }
+
+    public void OnDespawn()
+    {
+        returnToPool?.Invoke(gameObject);
+    }
+    
+    public void SetPrefabIndex(int index)
+    {
+        prefabIndex = index;
+    }
+    
+    #endregion
     
     public void ApplyEffect(EffectType effectType)
     {
@@ -105,7 +136,8 @@ public class Monster : MonoBehaviour, IDamagable
 
     public void DisableGameObject()
     {
-        transform.parent.gameObject.SetActive(false);
-        //몬스터도 오브젝트 풀링 한다면 이곳에 코드 추가
+        returnToPool.Invoke(transform.parent.gameObject);
     }
+
+    
 }
