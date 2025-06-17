@@ -184,11 +184,6 @@ public class PlayerController : MonoBehaviour
         }
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
     }
-
-    public void FlipImmediate()
-    {
-        SetFacing(!isFacingRight);
-    }
     public void SetFacing(bool right)
     {
         isFacingRight = right;
