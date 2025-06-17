@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2756179299855282961}
   - component: {fileID: 2616251807489088205}
+  - component: {fileID: 2279582885294692709}
   - component: {fileID: 830665002720127450}
   m_Layer: 0
   m_Name: Bow
@@ -86,6 +87,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2279582885294692709
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584449098090473235}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a2234a66ce2dd404186511cb44f85f07, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &830665002720127450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPosition: {fileID: 1731738046691072130}
   projectileType: 0
+  animator: {fileID: 2279582885294692709}
   user: {fileID: 0}
   projectileData: {fileID: 11400000, guid: 283bac2f47d51e74aab5113b8000bcbd, type: 2}
 --- !u!1 &7759709917985157767

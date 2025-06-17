@@ -15,7 +15,7 @@ MonoBehaviour:
   Type: 4
   Damage: 20
   Range: 20
-  AttackSpeed: 9.44
-  ShotSpeed: 7.88
+  AttackSpeed: 15
+  ShotSpeed: 15
   ProjecileCount: 5
   MaxNum: 100

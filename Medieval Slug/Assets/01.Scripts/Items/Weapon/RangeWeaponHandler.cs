@@ -12,6 +12,7 @@ public class RangeWeaponHandler : MonoBehaviour
     [Header("Spawn & Data")]
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private ProjectileType projectileType = ProjectileType.Nomal;
+    [SerializeField] public Animator animator;
 
     public GameObject user;
     //초기 화살
@@ -39,6 +40,7 @@ public class RangeWeaponHandler : MonoBehaviour
         if (user.transform.localScale.x < 0f) angle += 180f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
+        
         ProjectileManager.Instance.Shoot(dir, spawnPosition, projectileType);
     }
 

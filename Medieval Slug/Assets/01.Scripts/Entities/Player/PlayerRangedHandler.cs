@@ -52,6 +52,7 @@ namespace Entities.Player
         IEnumerator FireBurst(Vector2 dir)
         {
             isBursting = true;
+            bowHandler.animator.SetTrigger("Attack");
             int burst = Mathf.Max(1, currentArrowData.ProjecileCount);
             for (int i = 0; i < burst && currentAmmo > 0; i++)
             {
