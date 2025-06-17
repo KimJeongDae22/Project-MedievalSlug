@@ -12,8 +12,22 @@ public class ItemDropManager : Singleton<ItemDropManager>
     [SerializeField] private float upwardForce = 1f;
     [SerializeField] private float scatterDelay = 0.1f;
     [SerializeField] private float physicsDisableTime = 1f; // 물리엔진 비활성화
-    
 
+
+    protected override void Awake()
+    {
+        base.Awake();
+        LoadAvailableItems();
+    }
+
+    private void LoadAvailableItems()
+    {
+        availableItems = Resources.LoadAll<ItemData>("Items");
+        
+        if (availableItems.Length == 0) Debug.LogError("No Items Available");
+        else Debug.Log($"{availableItems.Length} Items Loaded");
+    }
+    
     /// <summary>
     /// 특정 아이템 드롭할 때 사용
     /// </summary>
