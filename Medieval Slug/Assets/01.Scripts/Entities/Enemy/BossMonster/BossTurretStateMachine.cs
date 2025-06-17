@@ -10,9 +10,13 @@ public class BossTurretStateMachine : MonoBehaviour
     public Transform LeftMovingTarget { get; private set; }
     public Transform RightMovingTarget { get; private set; }
     public Transform CenterTarget { get; private set; }
+    
     public BossTurret LeftTurret;
     public BossTurret RightTurret;
-
+    
+    public MovingTarget MovingTargetA { get; private set; }
+    public MovingTarget MovingTargetB { get; private set; }
+    
     private BossTurretBaseState currentState;
     private BossTurretBaseState prevPattern;
 
@@ -35,6 +39,9 @@ public class BossTurretStateMachine : MonoBehaviour
         LeftMovingTarget = transform.Find("LeftMovingTarget");
         RightMovingTarget = transform.Find("RightMovingTarget");
         CenterTarget = transform.Find("CenterTarget");
+
+        MovingTargetA = transform.Find("RandomDropPointA").GetComponent<MovingTarget>();
+        MovingTargetB = transform.Find("RandomDropPointB").GetComponent<MovingTarget>();
         
         LeftTurret.Init(BossData,TargetPlayer);
         RightTurret.Init(BossData,TargetPlayer);
@@ -47,7 +54,7 @@ public class BossTurretStateMachine : MonoBehaviour
         {
             new Pattern1(this),
             new Pattern2(this),
-            //new Pattern3(this),
+            new Pattern3(this),
         };
         AimingState = new BossAimingState(this);
         AppearState = new BossAppearState(this);

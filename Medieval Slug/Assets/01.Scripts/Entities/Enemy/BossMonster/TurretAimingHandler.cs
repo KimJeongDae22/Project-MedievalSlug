@@ -14,6 +14,8 @@ public class TurretAimingHandler : MonoBehaviour
     [SerializeField] private float headOffset;
     public bool IsAniming = false;
 
+    private Quaternion targetRotation;
+
     private void Reset()
     {
         stateMachine = transform.parent.parent.GetComponent<BossTurretStateMachine>();
@@ -37,7 +39,7 @@ public class TurretAimingHandler : MonoBehaviour
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             float finalAngle = targetAngle - angleOffset;
 
-            Quaternion targetRotation = Quaternion.Euler(0f, 0f, finalAngle);
+            targetRotation = Quaternion.Euler(0f, 0f, finalAngle);
             
             rotatingPivot.rotation = Quaternion.Lerp
             (
@@ -55,5 +57,11 @@ public class TurretAimingHandler : MonoBehaviour
     public void SetTarget(Transform target)
     {
         this.target = target;
+    }
+
+    public bool IsAimingComplete()
+    {
+        float angleDifference = Quaternion.Angle(rotatingPivot.rotation, targetRotation);
+        return angleDifference < 10f;
     }
 }

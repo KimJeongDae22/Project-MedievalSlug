@@ -13,6 +13,7 @@ public class MonsterAnimationHash
     [SerializeField] private string appearingParameterName = "Appearing";
     [SerializeField] private string defeatParameterName = "Defeat";
     [SerializeField] private string attackTriggerParameterName = "AttackTrigger";
+    [SerializeField] private string randomDropTriggerParameterName = "RandomDropTrigger";
     
     public int IdleParameterHash {get; private set;}
     public int RunParameterHash {get; private set;}
@@ -23,6 +24,7 @@ public class MonsterAnimationHash
     public int AppearingParameterHash {get; private set;}
     public int DefeatParameterHash {get; private set;}
     public int AttackTriggerParameterHash {get; private set;}
+    public int RandomDropTriggerParameterHash {get; private set;}
     
     public void Initialize()
     {
@@ -35,5 +37,6 @@ public class MonsterAnimationHash
         AppearingParameterHash = Animator.StringToHash(appearingParameterName);
         DefeatParameterHash = Animator.StringToHash(defeatParameterName);
         AttackTriggerParameterHash = Animator.StringToHash(attackTriggerParameterName);
+        RandomDropTriggerParameterHash = Animator.StringToHash(randomDropTriggerParameterName);
     }
 }
