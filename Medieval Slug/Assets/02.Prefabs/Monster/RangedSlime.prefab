@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 3635027562237109546}
   - component: {fileID: 5022226975820919478}
   m_Layer: 7
-  m_Name: Temp_RangedSlime
+  m_Name: RangedSlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6113791106103305096
 Transform:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2048
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -275,7 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a448723331f4c54be57bc6a6128d333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 1730311566386582147}
   <Animator>k__BackingField: {fileID: 9106230449813526663}
   <AnimationHash>k__BackingField:
     idleParameterName: Idle
@@ -283,9 +282,15 @@ MonoBehaviour:
     attackParameterName: Attack
     deadParameterName: Dead
     hitParameterName: Hit
+    halfHealthParameterName: HalfHealth
+    appearingParameterName: Appearing
+    defeatParameterName: Defeat
+    attackTriggerParameterName: AttackTrigger
+    randomDropTriggerParameterName: RandomDropTrigger
   <HasAnimator>k__BackingField: 1
   stateMachine: {fileID: 5022226975820919478}
   <MonsterData>k__BackingField: {fileID: 11400000, guid: 45cdc68fb4764c640b68deb01ef425d2, type: 2}
   health: 0
+  speed: 0
   ShootPoint: {fileID: 3898489102591094056}
   dir: {x: 0, y: 0}

@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9056047054283940948
 Transform:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -289,7 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33b99e45d364942b1c1b14f390273b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 8604316065426993281}
   <Animator>k__BackingField: {fileID: 3527447057664856588}
   <AnimationHash>k__BackingField:
     idleParameterName: Idle
@@ -297,8 +296,13 @@ MonoBehaviour:
     attackParameterName: Attack
     deadParameterName: Dead
     hitParameterName: Hit
+    halfHealthParameterName: HalfHealth
+    appearingParameterName: Appearing
+    defeatParameterName: Defeat
+    attackTriggerParameterName: AttackTrigger
+    randomDropTriggerParameterName: RandomDropTrigger
   <HasAnimator>k__BackingField: 1
   stateMachine: {fileID: 5510620291520525985}
   <MonsterData>k__BackingField: {fileID: 11400000, guid: 5d983d5473ee4d349be0710859bc58e7, type: 2}
   health: 0
-  collider2D: {fileID: 2738684958390053259}
+  speed: 0

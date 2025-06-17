@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 633921220804297656}
   - component: {fileID: 1565117062265877348}
   m_Layer: 7
-  m_Name: Temp_FlyingMonster
+  m_Name: Eagle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6745470527682787094
 Transform:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -289,7 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33b99e45d364942b1c1b14f390273b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 1054298961499179622}
   <Animator>k__BackingField: {fileID: 5852529761388961873}
   <AnimationHash>k__BackingField:
     idleParameterName: Idle
@@ -297,8 +296,13 @@ MonoBehaviour:
     attackParameterName: Attack
     deadParameterName: Dead
     hitParameterName: Hit
+    halfHealthParameterName: HalfHealth
+    appearingParameterName: Appearing
+    defeatParameterName: Defeat
+    attackTriggerParameterName: AttackTrigger
+    randomDropTriggerParameterName: RandomDropTrigger
   <HasAnimator>k__BackingField: 1
   stateMachine: {fileID: 1565117062265877348}
   <MonsterData>k__BackingField: {fileID: 11400000, guid: 32b1a67415c800b40923d5b9c46f57f2, type: 2}
   health: 0
-  collider2D: {fileID: 6662276762921072029}
+  speed: 0
