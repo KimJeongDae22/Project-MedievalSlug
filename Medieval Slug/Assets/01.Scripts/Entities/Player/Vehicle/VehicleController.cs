@@ -11,22 +11,23 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
 {
-    [Header("Movement / Seat")]
+    [Header("[Movement / Seat]")]
     [SerializeField] float moveSpeed = 4f;
     [SerializeField] float jumpForce = 15f;
     [SerializeField] Transform seatPoint;   // 플레이어 앉는 위치
     [SerializeField] Animator animator;
     [SerializeField] private bool facingRight = true;
 
-    [Header("Combat")]
-    [SerializeField] PlayerController rider;
-    [SerializeField] RangeWeaponHandler crossbow;      // 석궁
-    [SerializeField]private VehicleItemCollector collector;
+    [Header("[Reference]")]
+    [SerializeField] private PlayerController rider;
+    [SerializeField] private RangeWeaponHandler crossbow;      // 석궁
+    [SerializeField] private VehicleItemCollector collector;
+    [SerializeField] private MountIndicater indicator;
 
-    [Header("Stat")]
+    [Header("[Stat]")]
     [SerializeField] float maxHp = 250;
 
-    [Header("Melee Weapon Setting")]
+    [Header("[Melee Weapon Setting]")]
     [SerializeField] private int meleeDamage = 10;
     [SerializeField] private float meleeRange = 1f;
     [SerializeField] private LayerMask enemyLayer;
@@ -58,6 +59,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         
         currentHp = maxHp;
         currentArrowData = crossbow.projectileData;
+        indicator.Show(true);
     }
     void FixedUpdate()
     {
@@ -119,6 +121,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         p.transform.localScale = rs;
 
         p.SetMountedState(true, this);
+        indicator.Show(false);
 
     }
 
@@ -140,6 +143,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         }
         rider.SetMountedState(false, null);
         rider = null;
+        indicator.Show(true);
     }
     #endregion
 
