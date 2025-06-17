@@ -7,7 +7,8 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField][Range(0f, 1f)] private float musicVolume; // bgm 크기
     [SerializeField][Range(0f, 1f)] private float soundEffectPitchVariance; // 음 높낮이 설정
 
-    [SerializeField] private List<AudioClip> BGMClip;
+    public List<AudioClip> BGMClip;
+    public List<AudioClip> SFXClip;
     [SerializeField] private List<AudioSource> SFXPrefabs;
 
     [SerializeField] private int soundSourcePoolIndex = 0;
@@ -23,7 +24,7 @@ public class AudioManager : Singleton<AudioManager>
 
     private void Start()
     {
-        //ChangeBGM(BGMClip[0]);
+        ChangeBGM(BGMClip[2]);
     }
 
     public void ChangeBGM(AudioClip clip)

@@ -41,7 +41,6 @@ public class Monster : MonoBehaviour, IDamagable
         switch (effectType)
         {
             case EffectType.Nomal:
-                Debug.Log("피격");
                 break;
             case EffectType.Burn:
                 TakeDamage(1); // 추가 1 데미지
