@@ -22,7 +22,7 @@ public class UIManager : Singleton<UIManager>
     public bool IsPaused { get; private set; }      // 일시 정지 변수, ESC 를 눌러 나오는 메뉴창 같은 상황에서 쓰임
 
     private Coroutine fadeCoroutine;
-    private void Reset()
+    private void ResetSetting()
     {
         usuallyMessage = Util.FindChild<UsuallyMessage>(transform, "UsuallyMessage");
         canvas = Util.FindChild<Canvas>(transform, "Canvas");
@@ -33,18 +33,15 @@ public class UIManager : Singleton<UIManager>
         overHealth = Util.FindChild<RectTransform>(transform, "OverHealth").gameObject;
         overHealthText = Util.FindChild<TextMeshProUGUI>(transform, "OverHealthText");
     }
+    private void Reset()
+    {
+        ResetSetting();
+    }
     protected override void Awake()
     {
         base.Awake();
         StopFunc = false;
-        usuallyMessage = Util.FindChild<UsuallyMessage>(transform, "UsuallyMessage");
-        canvas = Util.FindChild<Canvas>(transform, "Canvas");
-        score = Util.FindChild<TextMeshProUGUI>(transform, "ScoreText");
-        currentAmmo = Util.FindChild<TextMeshProUGUI>(transform, "PTAmount");
-        escUI = Util.FindChild<EscUI>(transform, "EscUI");
-        heartParentTrans = Util.FindChild<RectTransform>(transform, "PlayerHP_Ver_Heart");
-        overHealth = Util.FindChild<RectTransform>(transform, "OverHealth").gameObject;
-        overHealthText = Util.FindChild<TextMeshProUGUI>(transform, "OverHealthText");
+        ResetSetting();
     }
 
     protected override void OnDestroy()

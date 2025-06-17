@@ -9,6 +9,7 @@ public enum ProjectileType
     Ice,
     Poison,
     Cross,
+    Slime,
     Null
 }
 

@@ -6,13 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Monster : MonoBehaviour, IDamagable
 {
-    [field : SerializeField] public SpriteRenderer Sprite { get; private set; }
-    [field : SerializeField] public Animator Animator { get; private set; }
-    [field : SerializeField] public MonsterAnimationHash AnimationHash {get; private set;}
-    [field : SerializeField] public bool HasAnimator { get; private set; } = false;
-    
-    [field : Header("Monster States")] 
-    [field : SerializeField] public virtual MonsterSO MonsterData { get; private set; }
+    [field: SerializeField] public Animator Animator { get; private set; }
+    [field: SerializeField] public MonsterAnimationHash AnimationHash { get; private set; }
+    [field: SerializeField] public bool HasAnimator { get; private set; } = false;
+
+    [field: Header("Monster States")] [SerializeField]
+    protected MonsterStateMachine stateMachine;
+
+    [field: SerializeField] public virtual MonsterSO MonsterData { get; private set; }
     [SerializeField] private int health;
     [SerializeField] private float speed;
     private bool isSlowed;
@@ -20,12 +21,12 @@ public class Monster : MonoBehaviour, IDamagable
 
     protected virtual void Reset()
     {
-        Sprite = GetComponent<SpriteRenderer>();
-        
         Animator = GetComponent<Animator>();
-        
-        if (Animator != null) 
+
+        if (Animator != null)
             HasAnimator = true;
+
+        stateMachine = transform.parent.GetComponent<MonsterStateMachine>();
     }
 
     protected virtual void Awake()
@@ -63,7 +64,6 @@ public class Monster : MonoBehaviour, IDamagable
 
         for (int i = 0; i < tick; i++)
         {
-            // Sprite.color = new Color(30f / 255f, 180f / 255f, 30f / 255f);  // 적용 안됨 아마도 애니메이션에다 넣어야할듯?
             TakeDamage(1);
             yield return new WaitForSeconds(1f);
         }
@@ -88,11 +88,15 @@ public class Monster : MonoBehaviour, IDamagable
             health = 0;
             Die();
         }
+        else
+        {
+            stateMachine.ChangeState(stateMachine.HitState);
+        }
     }
-    
+
     public void Die()
     {
-        Animator.SetTrigger("Dead");
+        stateMachine.ChangeState(stateMachine.DeadState);
     }
 
     public void DisableGameObject()
