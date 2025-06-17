@@ -16,10 +16,10 @@ public class TurretAimingHandler : MonoBehaviour
 
     private void Reset()
     {
-        stateMachine = transform.parent.GetComponent<BossTurretStateMachine>();
+        stateMachine = transform.parent.parent.GetComponent<BossTurretStateMachine>();
         boss = GetComponent<BossTurret>();
-        rotatingPivot = transform.Find("RotatingPivot").transform;
-        shootPoint = transform.Find("RotatingPivot/ShootPoint").transform;
+        rotatingPivot = transform.Find("RotateForAnim/RotatingPivot").transform;
+        shootPoint = transform.Find("RotateForAnim/RotatingPivot/ShootPoint").transform;
     }
 
     void Start()

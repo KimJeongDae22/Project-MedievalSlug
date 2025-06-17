@@ -6,7 +6,7 @@ public class TurretDamageHandler : MonoBehaviour, IDamagable
 
     private void Reset()
     {
-        bossTurret = transform.parent.GetComponent<BossTurret>();
+        bossTurret = transform.parent.parent.GetComponent<BossTurret>();
     }
 
     public void TakeDamage(int damage)

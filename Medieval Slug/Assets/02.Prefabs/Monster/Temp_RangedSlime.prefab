@@ -50,7 +50,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -275,7 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a448723331f4c54be57bc6a6128d333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 1730311566386582147}
   <Animator>k__BackingField: {fileID: 9106230449813526663}
   <AnimationHash>k__BackingField:
     idleParameterName: Idle
@@ -283,9 +282,14 @@ MonoBehaviour:
     attackParameterName: Attack
     deadParameterName: Dead
     hitParameterName: Hit
+    halfHealthParameterName: HalfHealth
+    appearingParameterName: Appearing
+    defeatParameterName: Defeat
+    attackTriggerParameterName: AttackTrigger
   <HasAnimator>k__BackingField: 1
   stateMachine: {fileID: 5022226975820919478}
   <MonsterData>k__BackingField: {fileID: 11400000, guid: 45cdc68fb4764c640b68deb01ef425d2, type: 2}
   health: 0
+  speed: 0
   ShootPoint: {fileID: 3898489102591094056}
   dir: {x: 0, y: 0}

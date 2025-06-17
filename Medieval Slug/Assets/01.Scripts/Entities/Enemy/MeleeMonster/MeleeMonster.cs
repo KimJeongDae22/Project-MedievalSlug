@@ -6,9 +6,10 @@ public class MeleeMonster : Monster
     [field : Header("Melee Monster")]
     private new Collider2D collider2D;
     
-    protected override void Reset()
+
+    protected override void Awake()
     {
-        base.Reset();
+        base.Awake();
         if (collider2D == null)
         {
             collider2D = GetComponent<Collider2D>();
@@ -17,11 +18,6 @@ public class MeleeMonster : Monster
                 collider2D = gameObject.AddComponent<BoxCollider2D>();
             }
         }
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
         DisableCollider();
     }
 

@@ -149,16 +149,16 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.5754717
-        inSlope: -0.58490574
-        outSlope: -0.58490574
+        value: 0.5
+        inSlope: -0.67924535
+        outSlope: -0.67924535
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.4716981
+        value: 0.41509432
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -169,7 +169,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: RotatingPivot
+    path: RotateForAnim/RotatingPivot
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -188,16 +188,16 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0
-        inSlope: 0
-        outSlope: 0
+        value: 0.09198114
+        inSlope: -0.7358491
+        outSlope: -0.7358491
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.4716981
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -208,7 +208,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: RotatingPivot
+    path: RotateForAnim/RotatingPivot
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -227,9 +227,48 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
+        value: 0.09198114
+        inSlope: -0.7358491
+        outSlope: -0.7358491
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
         value: 0
         inSlope: 0
         outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Color.b
+    path: RotateForAnim/RotatingPivot
+    classID: 212
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.25
+        value: 0.9056604
+        inSlope: -0.7547169
+        outSlope: -0.7547169
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -246,47 +285,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_Color.b
-    path: RotatingPivot
-    classID: 212
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.25
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5
-        value: 0.5849056
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
     attribute: m_Color.r
-    path: RotatingPivot/Floor
+    path: RotateForAnim/RotatingPivot/Floor
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -305,7 +305,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.33490568
+        value: 0.20932718
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -314,7 +314,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.5849056
+        value: 0.3671235
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -325,7 +325,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: RotatingPivot/Floor
+    path: RotateForAnim/RotatingPivot/Floor
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -344,7 +344,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.33490568
+        value: 0.20932718
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -353,7 +353,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.5849056
+        value: 0.3671235
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -364,7 +364,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: RotatingPivot/Floor
+    path: RotateForAnim/RotatingPivot/Floor
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -391,17 +391,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.5
-        value: 0.8773585
+        value: 0.7264151
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -412,7 +403,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: RotatingPivot/Shooter
+    path: RotateForAnim/RotatingPivot/Shooter
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -431,16 +422,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.6084906
-        inSlope: -1.8820754
-        outSlope: -1.8820754
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.33333334
-        value: 0.3726415
+        value: 0.16509432
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -449,7 +431,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.8773585
+        value: 0.5585173
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -460,7 +442,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: RotatingPivot/Shooter
+    path: RotateForAnim/RotatingPivot/Shooter
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -479,16 +461,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.6084906
-        inSlope: -1.8820754
-        outSlope: -1.8820754
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.33333334
-        value: 0.3726415
+        value: 0.16509432
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -497,7 +470,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.8773585
+        value: 0.5585173
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -508,7 +481,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: RotatingPivot/Shooter
+    path: RotateForAnim/RotatingPivot/Shooter
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -548,7 +521,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2070280448
+      path: 2353498461
       attribute: 2526845255
       script: {fileID: 0}
       typeID: 212
@@ -557,7 +530,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2070280448
+      path: 2353498461
       attribute: 4215373228
       script: {fileID: 0}
       typeID: 212
@@ -566,7 +539,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2070280448
+      path: 2353498461
       attribute: 2334886179
       script: {fileID: 0}
       typeID: 212
@@ -575,7 +548,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 4024871643
+      path: 479482845
       attribute: 2526845255
       script: {fileID: 0}
       typeID: 212
@@ -584,7 +557,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 4024871643
+      path: 479482845
       attribute: 4215373228
       script: {fileID: 0}
       typeID: 212
@@ -593,7 +566,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 4024871643
+      path: 479482845
       attribute: 2334886179
       script: {fileID: 0}
       typeID: 212
@@ -602,7 +575,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 426617092
+      path: 2337716040
       attribute: 2526845255
       script: {fileID: 0}
       typeID: 212
@@ -611,7 +584,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 426617092
+      path: 2337716040
       attribute: 4215373228
       script: {fileID: 0}
       typeID: 212
@@ -620,7 +593,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 426617092
+      path: 2337716040
       attribute: 2334886179
       script: {fileID: 0}
       typeID: 212
@@ -782,16 +755,16 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.5754717
-        inSlope: -0.58490574
-        outSlope: -0.58490574
+        value: 0.5
+        inSlope: -0.67924535
+        outSlope: -0.67924535
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.4716981
+        value: 0.41509432
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -802,7 +775,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: RotatingPivot
+    path: RotateForAnim/RotatingPivot
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -821,16 +794,16 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0
-        inSlope: 0
-        outSlope: 0
+        value: 0.09198114
+        inSlope: -0.7358491
+        outSlope: -0.7358491
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.4716981
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -841,7 +814,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: RotatingPivot
+    path: RotateForAnim/RotatingPivot
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -860,9 +833,48 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
+        value: 0.09198114
+        inSlope: -0.7358491
+        outSlope: -0.7358491
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
         value: 0
         inSlope: 0
         outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Color.b
+    path: RotateForAnim/RotatingPivot
+    classID: 212
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.25
+        value: 0.9056604
+        inSlope: -0.7547169
+        outSlope: -0.7547169
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -879,47 +891,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_Color.b
-    path: RotatingPivot
-    classID: 212
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.25
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5
-        value: 0.5849056
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
     attribute: m_Color.r
-    path: RotatingPivot/Floor
+    path: RotateForAnim/RotatingPivot/Floor
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -938,7 +911,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.33490568
+        value: 0.20932718
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -947,7 +920,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.5849056
+        value: 0.3671235
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -958,7 +931,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: RotatingPivot/Floor
+    path: RotateForAnim/RotatingPivot/Floor
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -977,7 +950,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.33490568
+        value: 0.20932718
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -986,7 +959,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.5849056
+        value: 0.3671235
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -997,7 +970,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: RotatingPivot/Floor
+    path: RotateForAnim/RotatingPivot/Floor
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -1024,17 +997,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.5
-        value: 0.8773585
+        value: 0.7264151
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1045,7 +1009,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: RotatingPivot/Shooter
+    path: RotateForAnim/RotatingPivot/Shooter
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -1064,16 +1028,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.6084906
-        inSlope: -1.8820754
-        outSlope: -1.8820754
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.33333334
-        value: 0.3726415
+        value: 0.16509432
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1082,7 +1037,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.8773585
+        value: 0.5585173
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1093,7 +1048,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: RotatingPivot/Shooter
+    path: RotateForAnim/RotatingPivot/Shooter
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -1112,16 +1067,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.6084906
-        inSlope: -1.8820754
-        outSlope: -1.8820754
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.33333334
-        value: 0.3726415
+        value: 0.16509432
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1130,7 +1076,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.8773585
+        value: 0.5585173
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1141,7 +1087,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: RotatingPivot/Shooter
+    path: RotateForAnim/RotatingPivot/Shooter
     classID: 212
     script: {fileID: 0}
     flags: 0

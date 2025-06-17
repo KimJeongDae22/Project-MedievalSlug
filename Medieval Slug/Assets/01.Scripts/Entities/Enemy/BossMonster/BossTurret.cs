@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BossTurret : MonoBehaviour, IDamagable
 {
-    private BossTurretStateMachine stateMachine;
+    [SerializeField] private BossTurretStateMachine stateMachine;
     public BossSO BossData { get; private set; }
     public int Health {get; private set;}
     [field : SerializeField] public MonsterAnimationHash AnimationHash { get; private set; }
@@ -12,18 +12,18 @@ public class BossTurret : MonoBehaviour, IDamagable
     [SerializeField] private Transform shootPoint;
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private Vector2 dir;
-    public bool IsHalfHealth = false;
-    public bool IsDead = false;
-    public bool IsAppeared = false;
+    public bool IsHalfHealth { get; private set; } = false;
+    public bool IsDead {get; private set;} = false;
+    public bool IsAppeared {get; private set;} = false;
     
     protected void Reset()
     {
-        stateMachine = transform.parent.GetComponent<BossTurretStateMachine>();
+        stateMachine = transform.parent.parent.GetComponent<BossTurretStateMachine>();
         AnimationHash = new MonsterAnimationHash();
         AimingHandler = GetComponent<TurretAimingHandler>();
         Animator = GetComponent<Animator>();
-        shootPoint = transform.Find("RotatingPivot/ShootPoint").transform;
-        shootingPoint = transform.Find("RotatingPivot/ShootingPoint").transform;
+        shootPoint = transform.Find("RotateForAnim/RotatingPivot/ShootPoint").transform;
+        shootingPoint = transform.Find("RotateForAnim/RotatingPivot/ShootingPoint").transform;
     }
 
     public void Init(BossSO bossData , Transform target)

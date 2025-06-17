@@ -15,7 +15,7 @@ public class BossAppearState : BossTurretBaseState
     {
         if (!isFirstAnimationStarted)
         {
-            StartAnimation(stateMachine.LeftTurret, stateMachine.LeftTurret.AnimationHash.AppearingParameterHash);
+            SetAnimationTrigger(stateMachine.LeftTurret, stateMachine.LeftTurret.AnimationHash.AppearingParameterHash);
             isFirstAnimationStarted = true;
         }
         if (isFirstAnimationStarted && stateMachine.LeftTurret.IsAppeared)
@@ -25,7 +25,7 @@ public class BossAppearState : BossTurretBaseState
         
         if (isFirstAnimationFinished && !isSecondAnimationStarted)
         {
-            StartAnimation(stateMachine.RightTurret, stateMachine.RightTurret.AnimationHash.AppearingParameterHash);
+            SetAnimationTrigger(stateMachine.RightTurret, stateMachine.RightTurret.AnimationHash.AppearingParameterHash);
             isSecondAnimationStarted = true;
         }
         if (isSecondAnimationStarted && stateMachine.RightTurret.IsAppeared)
