@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     public void OnMovement(InputAction.CallbackContext ctx)
     {
         moveInput = ctx.ReadValue<Vector2>();
-        if (isMounted) currentVehicle.ReceiveInput(moveInput);
+        if (isMounted) currentVehicle.ReceiveInput(moveInput, moveInput.x);
     }
 
     public void OnJump(InputAction.CallbackContext ctx)

@@ -15,7 +15,6 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [SerializeField] float moveSpeed = 4f;
     [SerializeField] float jumpForce = 15f;
     [SerializeField] Transform seatPoint;   // 플레이어 앉는 위치
-    [SerializeField] Animator animator;
     [SerializeField] private bool facingRight = true;
 
     [Header("[Reference]")]
@@ -24,6 +23,13 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [SerializeField] private VehicleItemCollector collector;
     [SerializeField] private MountIndicater indicator;
 
+    [Header("[AniMaitons]")]
+    [SerializeField] Animator animator;
+    [SerializeField] private Animator MeleeFx;
+    [SerializeField] private Animator MeleeFx2;
+    [SerializeField] private Animator MoveFx;
+ 
+    
     [Header("[Stat]")]
     [SerializeField] float maxHp = 250;
 
@@ -31,7 +37,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [SerializeField] private int meleeDamage = 10;
     [SerializeField] private float meleeRange = 1f;
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private float windupTime = 0.2f;
+    [SerializeField] private float windupTime = 0.5f;
     [SerializeField] private Vector2 meleeOffset = new Vector2(1.0f, 0.0f);
 
     //유틸
@@ -47,7 +53,12 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     private float nextFireTime = 0f;
     private bool isBursting;
 
-    public void ReceiveInput(Vector2 input) => cachedInput = input;
+    public void ReceiveInput(Vector2 input, float ctx)
+    {
+        cachedInput = input;
+        var c= Mathf.Abs(ctx);
+        MoveFx.SetFloat("IsMoving", c);
+    }
 
     public void RequestJump() => jumpRequest = true;
 
@@ -170,6 +181,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     {
         isBursting = true;
         crossbow.animator.SetTrigger("Attack");
+        
         int burst = Mathf.Max(1, currentArrowData.ProjecileCount);
         for (int i = 0; i < burst && currentAmmo > 0; i++)
         {
@@ -190,7 +202,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     {
         isAttacking = true;
         animator.SetTrigger("Tank_MeleeAttack");
-
+        StartMeleeFx("Attack");
         yield return new WaitForSeconds(windupTime);
 
 
@@ -220,6 +232,12 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         Gizmos.DrawWireSphere(origin, meleeRange);
         Gizmos.DrawLine(origin, origin + dir * meleeRange);
 
+    }
+
+    private void StartMeleeFx(string name)
+    {
+        MeleeFx.SetTrigger(name);
+        MeleeFx2.SetTrigger(name);
     }
     #endregion
 
