@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6113791106103305096
 Transform:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2048
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -286,6 +286,7 @@ MonoBehaviour:
     appearingParameterName: Appearing
     defeatParameterName: Defeat
     attackTriggerParameterName: AttackTrigger
+    randomDropTriggerParameterName: RandomDropTrigger
   <HasAnimator>k__BackingField: 1
   stateMachine: {fileID: 5022226975820919478}
   <MonsterData>k__BackingField: {fileID: 11400000, guid: 45cdc68fb4764c640b68deb01ef425d2, type: 2}

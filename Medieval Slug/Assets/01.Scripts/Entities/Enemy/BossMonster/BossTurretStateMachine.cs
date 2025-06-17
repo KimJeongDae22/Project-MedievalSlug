@@ -122,18 +122,7 @@ public class BossTurretStateMachine : MonoBehaviour
 
     public void Defeat()
     {
-        //보스 패배 로직
-    }
-    
-    /// <summary>
-    /// 테스트 코드
-    /// </summary>
-    /// <param name="index"></param>
-    public void ChangeState(int index)
-    {
-        if (index >= Patterns.Count) return;
-        currentState?.Exit();
-        currentState = Patterns[index];
-        currentState?.Enter();
+        LeftTurret.Animator.SetBool(LeftTurret.AnimationHash.DefeatParameterHash, true);
+        RightTurret.Animator.SetBool(RightTurret.AnimationHash.DefeatParameterHash, true);
     }
 }

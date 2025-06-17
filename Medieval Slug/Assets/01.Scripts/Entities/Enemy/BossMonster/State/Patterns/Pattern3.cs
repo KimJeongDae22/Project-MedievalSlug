@@ -18,12 +18,14 @@ public class Pattern3 : BasePattern
     
     public override void Update()
     {
-        if (!isFireing && 
-            stateMachine.LeftTurret.AimingHandler.IsAimingComplete() &&
-            stateMachine.RightTurret.AimingHandler.IsAimingComplete())
+        bool leftReady = stateMachine.LeftTurret.IsDead || stateMachine.LeftTurret.AimingHandler.IsAimingComplete();
+        bool rightReady = stateMachine.RightTurret.IsDead || stateMachine.RightTurret.AimingHandler.IsAimingComplete();
+        if (!isFireing && leftReady && rightReady)
         {
-            SetAnimationTrigger(stateMachine.LeftTurret, stateMachine.LeftTurret.AnimationHash.RandomDropTriggerParameterHash);
-            SetAnimationTrigger(stateMachine.RightTurret, stateMachine.RightTurret.AnimationHash.RandomDropTriggerParameterHash);
+            if(!stateMachine.LeftTurret.IsDead) 
+                SetAnimationTrigger(stateMachine.LeftTurret, stateMachine.LeftTurret.AnimationHash.RandomDropTriggerParameterHash);
+            if(!stateMachine.RightTurret.IsDead)
+                SetAnimationTrigger(stateMachine.RightTurret, stateMachine.RightTurret.AnimationHash.RandomDropTriggerParameterHash);
             isFireing = true;
             stateMachine.StartCoroutine(DropBulletsRoutine());
         }
@@ -35,8 +37,10 @@ public class Pattern3 : BasePattern
         int dropCount = 0;
         while (dropCount < 4)
         {
-            stateMachine.MovingTargetA.DropBullet();
-            stateMachine.MovingTargetB.DropBullet();
+            if(!stateMachine.LeftTurret.IsDead) 
+                stateMachine.MovingTargetA.DropBullet();
+            if(!stateMachine.LeftTurret.IsDead) 
+                stateMachine.MovingTargetB.DropBullet();
             dropCount++;
             yield return new WaitForSeconds(1f);
         }
