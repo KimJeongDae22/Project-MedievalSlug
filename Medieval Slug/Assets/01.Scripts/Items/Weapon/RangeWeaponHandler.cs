@@ -14,6 +14,10 @@ public class RangeWeaponHandler : MonoBehaviour
     [SerializeField] private ProjectileType projectileType = ProjectileType.Nomal;
     [SerializeField] public Animator animator;
 
+    [Header("SFX")]
+    [SerializeField] private List<AudioClip> attackSoundClip;
+
+
     public GameObject user;
     //초기 화살
     [SerializeField] public ProjectileData projectileData;
@@ -42,6 +46,24 @@ public class RangeWeaponHandler : MonoBehaviour
 
         
         ProjectileManager.Instance.Shoot(dir, spawnPosition, projectileType);
+        if (attackSoundClip != null)
+        {
+            switch(projectileType)
+            {
+                case ProjectileType.Nomal:
+                    AudioManager.PlaySFXClip(attackSoundClip[(int)ProjectileType.Nomal]); // index = 1
+                    break;
+                case ProjectileType.Fire:
+                    AudioManager.PlaySFXClip(attackSoundClip[(int)ProjectileType.Fire]); // index = 2
+                    break;
+                case ProjectileType.Ice:
+                    AudioManager.PlaySFXClip(attackSoundClip[(int)ProjectileType.Ice]); // index = 3
+                    break;
+                case ProjectileType.Poison:
+                    AudioManager.PlaySFXClip(attackSoundClip[(int)ProjectileType.Poison]); // index = 4
+                    break;
+            }
+        }
     }
 
     /// <summary>

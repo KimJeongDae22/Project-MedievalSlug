@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3615538105757295968}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4490694948562798395}
   - component: {fileID: 1437007321385187148}
   - component: {fileID: 4398875997031344428}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: SlimeBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: 80a7b7b952fc41e4aa3c8f952303dca8, type: 2}
+  faction: 0
   curEffectType: 0
+  attackSoundClip:
+  - {fileID: 8300000, guid: bff85abd0e1b2024b88788c3ddc72d32, type: 3}
 --- !u!1 &5579316228677038496
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9143141649482660410}
   - component: {fileID: 7207797828021878846}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

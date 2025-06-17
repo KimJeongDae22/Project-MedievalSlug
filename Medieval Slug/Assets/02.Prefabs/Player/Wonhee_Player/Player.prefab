@@ -573,6 +573,7 @@ MonoBehaviour:
     m_Bits: 128
   windupTime: 0.2
   animator: {fileID: 488893499346024238}
+  attackAudioClip: {fileID: 8300000, guid: 465081afe4dc4154d9ec4baac249c37d, type: 3}
 --- !u!114 &7593995008890787776
 MonoBehaviour:
   m_ObjectHideFlags: 0
