@@ -15,9 +15,7 @@ public class PlayerMeleeHandler : MonoBehaviour
     [SerializeField] private PlayerRangedHandler prh;
     private bool isAttacking;
 
-    [SerializeField] private AudioClip attackAudioClip;
-
-    private bool isAttacking;      
+    [SerializeField] private AudioClip attackAudioClip;   
     
     public void OnMelee()
     {
