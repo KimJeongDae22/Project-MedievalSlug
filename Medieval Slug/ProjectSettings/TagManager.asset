@@ -17,13 +17,10 @@ TagManager:
   - Ground
   - Vehicle
   - Wall
-  - 
+  - PlayerProjectile
   - 
   - 
   - EnemyProjectile
-  - 
-  - 
-  - 
   - 
   - 
   - 
