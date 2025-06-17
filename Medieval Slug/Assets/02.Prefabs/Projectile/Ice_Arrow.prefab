@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7702529121539066760}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1549525685457674261}
   - component: {fileID: 1836213163979122261}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 2151120103315064925}
   - component: {fileID: 4732545011267450936}
   - component: {fileID: 6283369797197438993}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Ice_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,6 +237,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: c4b5373ab6fa9dd49910df16e97fb4f7, type: 2}
   faction: 0
-  curEffectType: 2
+  curEffectType: 0
   attackSoundClip:
   - {fileID: 8300000, guid: 131cc8285179cff418bfe338bb2eb66e, type: 3}

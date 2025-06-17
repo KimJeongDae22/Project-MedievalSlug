@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1534651102232103081}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2288901069733805492}
   - component: {fileID: 4410866467898744762}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1891891016664114656}
   - component: {fileID: 1439634457739780919}
   - component: {fileID: 8929205483236014315}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cross_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,4 +236,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: f13aeae2cb5302a419742d8c5d87663f, type: 2}
+  faction: 0
   curEffectType: 0
+  attackSoundClip: []

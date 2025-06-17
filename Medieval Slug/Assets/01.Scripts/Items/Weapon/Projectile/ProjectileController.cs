@@ -59,15 +59,15 @@ public class ProjectileController : MonoBehaviour, IPoolable
                 OnDespawn();
             }
         }
-        else
-        {
-            if (attackSoundClip != null)
-            {
-                Debug.Log("소리 발생");
-                AudioManager.PlaySFXClip(attackSoundClip[0]);
-            }
-            OnDespawn();
-        }
+        //else
+        //{
+        //    if (attackSoundClip != null)
+        //    {
+        //        Debug.Log("소리 발생");
+        //        AudioManager.PlaySFXClip(attackSoundClip[0]);
+        //    }
+        //    OnDespawn();
+        //}
     }
 
     public void Initialize(Action<GameObject> returnAction)
