@@ -155,6 +155,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         rider.SetMountedState(false, null);
         rider = null;
         indicator.Show(true);
+        collector.ResetSetup();
     }
     #endregion
 

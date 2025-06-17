@@ -14,6 +14,11 @@ public class VehicleItemCollector : MonoBehaviour
         stats = CharacterManager.Instance.GetComponent<PlayerStatHandler>();
     }
 
+    public void ResetSetup()
+    {
+        ranged = null; stats = null;
+    }
+
     /// <summary>
     /// 화살 아이템 획득 시 호출
     /// </summary>
@@ -31,6 +36,4 @@ public class VehicleItemCollector : MonoBehaviour
     {
         stats.ModifyStat(StatType.Health, value);
     }
-
-
 }
