@@ -17,7 +17,7 @@ public class SoundSource : MonoBehaviour, IPoolable
             CancelInvoke();
             audioSource.clip = clip;
             audioSource.volume = soundEffectVolume;
-            audioSource.Play();
+            audioSource.PlayOneShot(clip);
             audioSource.pitch = 1f + Random.Range(-soundEffectPitchVariance, soundEffectPitchVariance);
 
             Invoke("Disable", clip.length + 0.1f);

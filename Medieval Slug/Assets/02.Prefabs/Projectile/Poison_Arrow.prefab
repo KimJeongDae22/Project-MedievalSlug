@@ -206,6 +206,8 @@ MonoBehaviour:
   projectileData: {fileID: 11400000, guid: 9f60f2992ede5064c861e9c2e60882f1, type: 2}
   faction: 0
   curEffectType: 3
+  attackSoundClip:
+  - {fileID: 8300000, guid: 131cc8285179cff418bfe338bb2eb66e, type: 3}
 --- !u!1 &6800308625988230474
 GameObject:
   m_ObjectHideFlags: 0

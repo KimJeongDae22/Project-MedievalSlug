@@ -9,6 +9,8 @@ public class ProjectileController : MonoBehaviour, IPoolable
     [SerializeField] private Faction faction;
     [SerializeField] private EffectType curEffectType;
 
+    [SerializeField] private List<AudioClip> attackSoundClip;
+
     private Vector2 direction;
     private Rigidbody2D rigidbody;
     private float curduration;
@@ -40,14 +42,18 @@ public class ProjectileController : MonoBehaviour, IPoolable
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponentInChildren<IDamagable>() is IDamagable target)
+        if (collision.GetComponentInChildren<IDamagable>() is IDamagable target) // IDamagable 있는지 확인
         {
             int playerLayer = LayerMask.NameToLayer("Player");
             int enemyLayer = LayerMask.NameToLayer("Enemy");
 
-            if ((faction == Faction.Player && collision.gameObject.layer == enemyLayer) ||
+            if ((faction == Faction.Player && collision.gameObject.layer == enemyLayer) || // Layer에 따른 화살 공격 여부
                 (faction == Faction.Enemy && collision.gameObject.layer == playerLayer))
             {
+                if (attackSoundClip != null)
+                {
+                    AudioManager.PlaySFXClip(attackSoundClip[0]);
+                }
                 target.TakeDamage((int)projectileData.Damage);
                 target.ApplyEffect(curEffectType);
                 OnDespawn();
@@ -55,6 +61,11 @@ public class ProjectileController : MonoBehaviour, IPoolable
         }
         else
         {
+            if (attackSoundClip != null)
+            {
+                Debug.Log("소리 발생");
+                AudioManager.PlaySFXClip(attackSoundClip[0]);
+            }
             OnDespawn();
         }
     }
