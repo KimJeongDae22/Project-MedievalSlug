@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMeleeHandler : MonoBehaviour
 {
-    [Header("Melee Weapon Setting")]
+    [Header("[Melee Weapon Setting]")]
     [SerializeField] private int meleeDamage = 10;
     [SerializeField] private float meleeRange = 1f;
     [SerializeField] private LayerMask enemyLayer;

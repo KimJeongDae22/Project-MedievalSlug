@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class RangeWeaponHandler : MonoBehaviour
 {
-    [Header("Spawn & Data")]
+    [Header("[Spawn & Data]")]
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private ProjectileType projectileType = ProjectileType.Nomal;
     [SerializeField] public Animator animator;

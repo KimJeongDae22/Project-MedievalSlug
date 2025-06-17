@@ -13,11 +13,11 @@ namespace Entities.Player
     [RequireComponent(typeof(PlayerStatHandler))]
     public class PlayerRangedHandler : MonoBehaviour
     {
-        [Header("Bow Prefab (고정)")]
+        [Header("[Bow Prefab (고정)]")]
         [SerializeField] private GameObject bowPrefab;
         [SerializeField] private Transform RangeWeaponPivot;
 
-        [Header("남은 화살 수")]
+        [Header("[남은 화살 수]")]
         [SerializeField] private int currentAmmo;
 
         private RangeWeaponHandler bowHandler;

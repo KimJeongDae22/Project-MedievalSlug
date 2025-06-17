@@ -13,22 +13,22 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement Settings")]
+    [Header("[Movement Settings]")]
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private bool isFacingRight = true;
 
-    [Header("Ground Check")]
+    [Header("[Ground Check]")]
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private float groundCheckRadius = 1f;
     [SerializeField] private LayerMask groundLayer;
 
-    [Header("Dependencies")]
+    [Header("[Dependencies]")]
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerRangedHandler playerRanged;
     [SerializeField] private PlayerMeleeHandler playerMelee;
 
-    [Header("Mount Settings")]
+    [Header("[Mount Settings]")]
     [SerializeField] float mountCheckRadius = 1f;
     [SerializeField] LayerMask mountLayer;
     [SerializeField] float mountJumpForce = 4f;
