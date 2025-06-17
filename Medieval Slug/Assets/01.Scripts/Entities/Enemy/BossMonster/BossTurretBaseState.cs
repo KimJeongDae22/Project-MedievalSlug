@@ -17,14 +17,6 @@ public abstract class BossTurretBaseState
     
     protected void StartAnimation(BossTurret turret, int animatorHash)
     {
-        if (turret.IsHalfHealth)
-        {
-            turret.Animator.speed = 2f;
-        }
-        else
-        {
-            turret.Animator.speed = 1f;
-        }
         turret.Animator.SetBool(animatorHash, true);
     }
 
@@ -37,20 +29,5 @@ public abstract class BossTurretBaseState
     {
         turret.Animator.speed = 1f;
         turret.Animator.SetTrigger(triggerHash);
-    }
-    
-    /// <summary>
-    /// tag가 붙은 애니메이션이 끝났는지 확인하는 불값 반환 함수
-    /// </summary>
-    /// <param name="tag"></param>
-    /// <returns></returns>
-    protected bool IsAnimationFinished(BossTurret turret, string tag)
-    {
-        AnimatorStateInfo stateInfo = turret.Animator.GetCurrentAnimatorStateInfo(0);
-        if (stateInfo.IsTag(tag))
-        { 
-            return stateInfo.normalizedTime >= 1f;
-        }
-        return true;
     }
 }

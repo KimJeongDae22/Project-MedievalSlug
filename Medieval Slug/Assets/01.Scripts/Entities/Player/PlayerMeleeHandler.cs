@@ -1,3 +1,4 @@
+using Entities.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,20 +6,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerMeleeHandler : MonoBehaviour
 {
-    [Header("Melee Weapon Setting")]
+    [Header("[Melee Weapon Setting]")]
     [SerializeField] private int meleeDamage = 10;
     [SerializeField] private float meleeRange = 1f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float windupTime = 0.2f;
     [SerializeField] private Animator animator;
+    [SerializeField] private PlayerRangedHandler prh;
+    private bool isAttacking;
 
     [SerializeField] private AudioClip attackAudioClip;
 
     private bool isAttacking;      
     
-    public void OnMelee(InputAction.CallbackContext ctx)
+    public void OnMelee()
     {
-        if (!ctx.started || isAttacking) return;  
+        if (isAttacking) return;  
         StartCoroutine(PerformMelee());
 
         if(attackAudioClip != null)
@@ -28,6 +31,7 @@ public class PlayerMeleeHandler : MonoBehaviour
     }
     private IEnumerator PerformMelee()
     {
+        prh.SetWeaponEnabled(false);
         isAttacking = true;            
         // 1 또는 2 중 랜덤으로 선택
         int idx = Random.Range(1, 3); // 1 또는 2
@@ -41,6 +45,8 @@ public class PlayerMeleeHandler : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(origin, dir, meleeRange, enemyLayer);
         if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
             target.TakeDamage(meleeDamage);
+
+        prh.SetWeaponEnabled(true);  
     }
     public void UnlockMelee() => isAttacking = false;
 

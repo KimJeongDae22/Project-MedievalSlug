@@ -22,4 +22,9 @@ public static class Util
         }
         return null;
     }
+    public static float MathfLerpEaseOut(float a, float b, float t)
+    {
+        t = 1f - (1f - t) * (1f - t);
+        return Mathf.Lerp(a, b, t);
+    }
 }

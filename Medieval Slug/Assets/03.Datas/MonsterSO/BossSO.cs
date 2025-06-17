@@ -7,5 +7,6 @@ public class BossSO : ScriptableObject
     public int Health = 100;
     public int Damage = 1;
     public float PatternCooldown = 4f;
-    public float SequentialFireDelay = 1.2f; 
+    public float SequentialFireDelay = 1.2f;
+    public float AimingSpeed = 5f;
 }

@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class TurretDamageHandler : MonoBehaviour, IDamagable
 {
-    private BossTurret bossTurret;
+    [SerializeField] private BossTurret bossTurret;
 
     private void Reset()
     {
-        bossTurret = transform.parent.GetComponent<BossTurret>();
+        bossTurret = transform.parent.parent.GetComponent<BossTurret>();
     }
 
     public void TakeDamage(int damage)
@@ -14,10 +14,14 @@ public class TurretDamageHandler : MonoBehaviour, IDamagable
         bossTurret.TakeDamage(damage);
     }
 
-    public void Die() { }
-
     public void ApplyEffect(EffectType effectType)
     {
-        
+        bossTurret.ApplyEffect(effectType);
+    }
+
+    public void Die() { }
+    public void ApplyEffect(EffectType effectType)
+    {
+
     }
 }

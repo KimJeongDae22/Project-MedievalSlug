@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2756179299855282961}
   - component: {fileID: 2616251807489088205}
+  - component: {fileID: 2279582885294692709}
   - component: {fileID: 830665002720127450}
   m_Layer: 0
   m_Name: Bow
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1731738046691072130}
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: 100
+  m_Sprite: {fileID: 21300000, guid: 744fa8818aad29546bf3ff182d30f30a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,6 +87,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2279582885294692709
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584449098090473235}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a2234a66ce2dd404186511cb44f85f07, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &830665002720127450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +127,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7c9eeef3d125f804ab94a65843a01436, type: 3}
   - {fileID: 8300000, guid: e46ca5770b278744ebfb75d2d59b2f67, type: 3}
   - {fileID: 8300000, guid: b1fff165fee318c48a7993790f6fb7ce, type: 3}
+  animator: {fileID: 2279582885294692709}
+  user: {fileID: 0}
   projectileData: {fileID: 11400000, guid: 283bac2f47d51e74aab5113b8000bcbd, type: 2}
 --- !u!1 &7759709917985157767
 GameObject:

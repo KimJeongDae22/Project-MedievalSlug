@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Monster : MonoBehaviour, IDamagable
 {
-    [field: SerializeField] public SpriteRenderer Sprite { get; private set; }
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public MonsterAnimationHash AnimationHash { get; private set; }
     [field: SerializeField] public bool HasAnimator { get; private set; } = false;
@@ -22,8 +21,6 @@ public class Monster : MonoBehaviour, IDamagable
 
     protected virtual void Reset()
     {
-        Sprite = GetComponent<SpriteRenderer>();
-
         Animator = GetComponent<Animator>();
 
         if (Animator != null)
@@ -67,7 +64,6 @@ public class Monster : MonoBehaviour, IDamagable
 
         for (int i = 0; i < tick; i++)
         {
-            // Sprite.color = new Color(30f / 255f, 180f / 255f, 30f / 255f);  // 적용 안됨 아마도 애니메이션에다 넣어야할듯?
             TakeDamage(1);
             yield return new WaitForSeconds(1f);
         }

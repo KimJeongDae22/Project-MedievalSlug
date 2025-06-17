@@ -1,21 +1,49 @@
-public class Pattern3 : BossTurretBaseState
+using System.Collections;
+using UnityEngine;
+
+public class Pattern3 : BasePattern
 {
     public Pattern3(BossTurretStateMachine stateMachine) : base(stateMachine)
     {
     }
 
+    private bool isFireing = false;
+    private int dropCount = 0;
+
     public override void Enter()
     {
-        
+        base.Enter();
+        stateMachine.AllTurretAimTarget(stateMachine.CenterTarget, stateMachine.CenterTarget);
     }
     
     public override void Update()
     {
-        
+        bool leftReady = stateMachine.LeftTurret.IsDead || stateMachine.LeftTurret.AimingHandler.IsAimingComplete();
+        bool rightReady = stateMachine.RightTurret.IsDead || stateMachine.RightTurret.AimingHandler.IsAimingComplete();
+        if (!isFireing && leftReady && rightReady)
+        {
+            if(!stateMachine.LeftTurret.IsDead) 
+                SetAnimationTrigger(stateMachine.LeftTurret, stateMachine.LeftTurret.AnimationHash.RandomDropTriggerParameterHash);
+            if(!stateMachine.RightTurret.IsDead)
+                SetAnimationTrigger(stateMachine.RightTurret, stateMachine.RightTurret.AnimationHash.RandomDropTriggerParameterHash);
+            isFireing = true;
+            stateMachine.StartCoroutine(DropBulletsRoutine());
+        }
     }
-
-    public override void Exit()
+    
+    private IEnumerator DropBulletsRoutine()
     {
-        
+        yield return new WaitForSeconds(4f);
+        int dropCount = 0;
+        while (dropCount < 4)
+        {
+            if(!stateMachine.LeftTurret.IsDead) 
+                stateMachine.MovingTargetA.DropBullet();
+            if(!stateMachine.LeftTurret.IsDead) 
+                stateMachine.MovingTargetB.DropBullet();
+            dropCount++;
+            yield return new WaitForSeconds(1f);
+        }
+        stateMachine.ChangeState(stateMachine.AimingState);
     }
 }

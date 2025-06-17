@@ -13,12 +13,12 @@ namespace Entities.Player
     [RequireComponent(typeof(PlayerStatHandler))]
     public class PlayerRangedHandler : MonoBehaviour
     {
-        [Header("Bow Prefab (고정)")]
+        [Header("[Bow Prefab (고정)]")]
         [SerializeField] private GameObject bowPrefab;
         [SerializeField] private Transform RangeWeaponPivot;
 
-        [Header("남은 화살 수")]
-        [SerializeField]private int currentAmmo;
+        [Header("[남은 화살 수]")]
+        [SerializeField] private int currentAmmo;
 
         private RangeWeaponHandler bowHandler;
         private ProjectileData currentArrowData;
@@ -46,12 +46,13 @@ namespace Entities.Player
             if (Time.time < nextFireTime) return;
 
             nextFireTime = Time.time + interval;
-            if (!isBursting) StartCoroutine(FireBurst(aimDir.normalized));
+            if (!isBursting) StartCoroutine(FireBurst(aimDir));
         }
 
         IEnumerator FireBurst(Vector2 dir)
         {
             isBursting = true;
+            bowHandler.animator.SetTrigger("Attack");
             int burst = Mathf.Max(1, currentArrowData.ProjecileCount);
             for (int i = 0; i < burst && currentAmmo > 0; i++)
             {
@@ -76,6 +77,8 @@ namespace Entities.Player
             bow.transform.localRotation = Quaternion.identity;
             bowHandler = bow.GetComponent<RangeWeaponHandler>();
             SetArrowData(bowHandler.projectileData);
+            bowHandler.Setting(gameObject);
+
             if (bowHandler == null)
                 Debug.LogError("Bow Prefab에 RangeWeaponHandler가 없습니다.");
         }
@@ -106,6 +109,12 @@ namespace Entities.Player
         /// </summary>
         /// <returns></returns>
         public int GetCurrentAmmo() => currentAmmo;
+
+        public void SetWeaponEnabled(bool enable)
+        {
+            if (bowHandler == null) return;
+            bowHandler.gameObject.SetActive(enable);
+        }
     }
 }
 

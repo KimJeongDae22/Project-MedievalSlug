@@ -9,30 +9,42 @@ using UnityEngine;
 /// </summary>
 public class RangeWeaponHandler : MonoBehaviour
 {
-    [Header("Spawn & Data")]
+    [Header("[Spawn & Data]")]
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private ProjectileType projectileType = ProjectileType.Nomal;
+    [SerializeField] public Animator animator;
 
     [Header("SFX")]
     [SerializeField] private List<AudioClip> attackSoundClip;
 
 
+    public GameObject user;
     //초기 화살
-    [SerializeField]public ProjectileData projectileData;
+    [SerializeField] public ProjectileData projectileData;
     /// <summary>
-    /// PlayerEquip → Fire() 호출
+    /// PlayerRnagedHandler → Fire() 호출
     /// </summary>
+
+    public void Setting(GameObject gameObject)
+    {
+        user = gameObject;
+    }
+
     public void Fire(Vector2 aimDirection)
     {
         if (aimDirection.sqrMagnitude < 0.01f)
-            aimDirection = transform.right; // 입력이 없으면 캐릭터 정면
+            aimDirection = user.transform.right; // 입력이 없으면 캐릭터 정면
 
         Vector2 dir = GetSnappedDirection(aimDirection);
 
         // 활 자체 회전 (Z-축)
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        // 부모(또는 자신)의 실제 스케일이 음수라면 180° 보정
+        if (user.transform.localScale.x < 0f) angle += 180f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
+        
         ProjectileManager.Instance.Shoot(dir, spawnPosition, projectileType);
         if (attackSoundClip != null)
         {
@@ -55,7 +67,7 @@ public class RangeWeaponHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// PlayerEquip에서 현재 장착 화살 타입을 변경할 때 호출
+    /// PlayerRnagedHandler 현재 장착 화살 타입을 변경할 때 호출
     /// </summary>
     public void SetProjectileType(ProjectileType newType) => projectileType = newType;
 
