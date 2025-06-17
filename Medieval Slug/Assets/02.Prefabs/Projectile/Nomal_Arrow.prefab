@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6272826361739111237}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3620621818233233029}
   - component: {fileID: 7446866867742609144}
   - component: {fileID: 5754223602114237097}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Nomal_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6713680733025464749}
   - component: {fileID: 5197666335201545796}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

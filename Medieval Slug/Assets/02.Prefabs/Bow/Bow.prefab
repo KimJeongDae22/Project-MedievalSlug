@@ -104,7 +104,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0c46dddadbd9f954589378b14b1821ea, type: 3}
   - {fileID: 8300000, guid: 7c9eeef3d125f804ab94a65843a01436, type: 3}
   - {fileID: 8300000, guid: e46ca5770b278744ebfb75d2d59b2f67, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: b1fff165fee318c48a7993790f6fb7ce, type: 3}
   projectileData: {fileID: 11400000, guid: 283bac2f47d51e74aab5113b8000bcbd, type: 2}
 --- !u!1 &7759709917985157767
 GameObject:

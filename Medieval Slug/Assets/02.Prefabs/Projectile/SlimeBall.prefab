@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3615538105757295968}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4490694948562798395}
   - component: {fileID: 1437007321385187148}
   - component: {fileID: 4398875997031344428}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: SlimeBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9143141649482660410}
   - component: {fileID: 7207797828021878846}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
