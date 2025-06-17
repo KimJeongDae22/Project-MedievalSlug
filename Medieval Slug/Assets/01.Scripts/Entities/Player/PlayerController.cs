@@ -13,15 +13,19 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    public float a;
     [Header("[Movement Settings]")]
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private bool isFacingRight = true;
 
-    [Header("[Ground Check]")]
+    [Header("[Ground Check & WallCheck]")]
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private float groundCheckRadius = 1f;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] float wallRayRadius = 0.15f;
+    [SerializeField] Transform wallCheckPoint;
+    [SerializeField] LayerMask wallLayer;
 
     [Header("[Dependencies]")]
     [SerializeField] private Animator animator;
@@ -55,7 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!ctx.started) return;
 
-        if (isMounted && IsGrounded()) currentVehicle.RequestJump();
+        if (isMounted && currentVehicle.IsGrounded()) currentVehicle.RequestJump();
         else if (IsGrounded()) jumpRequest = true;
     }
 
@@ -166,7 +170,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+        int sign = moveInput.x > 0 ? 1 : moveInput.x < 0 ? -1 : 0;
+
+        // 벽에 붙었고 공중이면 X속도 강제로 0
+        if (!IsGrounded() && sign != 0 && IsAgainstWall(sign))
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        else
+            rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         if (jumpRequest)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -187,16 +197,13 @@ public class PlayerController : MonoBehaviour
         transform.localScale = s;
     }
 
-
     private bool IsGrounded()
     {
-        if(isMounted)
-        {
-            return Physics2D.OverlapCircle(currentVehicle.gameObject.transform.position, groundCheckRadius, groundLayer);
-        }
-        else
-        {
             return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
-        }
+    }
+
+    bool IsAgainstWall(int sign)
+    {
+            return Physics2D.OverlapCircle(wallCheckPoint.position + Vector3.right * wallRayRadius *sign, wallRayRadius, wallLayer);
     }
 }

@@ -31,7 +31,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
  
     
     [Header("[Stat]")]
-    [SerializeField] float maxHp = 250;
+    [SerializeField] float maxHp = 250; //HP를 별도의 필드로 정의
 
     [Header("[Melee Weapon Setting]")]
     [SerializeField] private int meleeDamage = 10;
@@ -39,6 +39,14 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float windupTime = 0.5f;
     [SerializeField] private Vector2 meleeOffset = new Vector2(1.0f, 0.0f);
+
+    [Header("[Ground Check & WallCheck]")]
+    [SerializeField] Transform groundCheckPoint;
+    [SerializeField] Transform wallCheckPoint;
+    [SerializeField] float groundRadius = 0.18f;
+    [SerializeField] float wallRadius = 0.15f;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask wallLayer;
 
     //유틸
     private float currentHp;
@@ -61,7 +69,11 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     }
 
     public void RequestJump() => jumpRequest = true;
+    public bool IsGrounded() =>
+    Physics2D.OverlapCircle(groundCheckPoint.position,groundRadius, groundLayer);
 
+    bool IsAgainstWall(int sign) =>
+        Physics2D.OverlapCircle(wallCheckPoint.position + Vector3.right * wallRadius * sign, wallRadius, wallLayer);
 
 
     void Awake()
@@ -74,8 +86,13 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     }
     void FixedUpdate()
     {
-        // 이동
-        rb.velocity = new Vector2(cachedInput.x * moveSpeed, rb.velocity.y);
+        int sign = cachedInput.x > 0 ? 1 : cachedInput.x < 0 ? -1 : 0;
+
+        
+        if (!IsGrounded() && sign != 0 && IsAgainstWall(sign))
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        else
+            rb.velocity = new Vector2(cachedInput.x * moveSpeed, rb.velocity.y);
 
         // 점프
         if (jumpRequest)
@@ -162,7 +179,10 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     /*---------------------------------------------------------------------------- */
     #region  Attack (플레이어 입력이 전달됨)
 
-
+    /// <summary>
+    /// 전차의 석궁 발사
+    /// </summary>
+    /// <param name="aimDir"></param>
     public void Fire(Vector2 aimDir)
     {
         if (aimDir.sqrMagnitude < 0.01f)
@@ -194,6 +214,11 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         }
         isBursting = false;
     }
+
+    /// <summary>
+    /// 근접 공격
+    /// </summary>
+    /// <param name="ctx"></param>
     public void Melee(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || isAttacking) return;
@@ -268,7 +293,6 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
 
     public void ApplyEffect(EffectType effectType)
     {
-
         throw new System.NotImplementedException();
     }
 
