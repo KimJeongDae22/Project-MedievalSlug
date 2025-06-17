@@ -22,10 +22,6 @@ public class PlayerMeleeHandler : MonoBehaviour
         if (isAttacking) return;  
         StartCoroutine(PerformMelee());
 
-        if(attackAudioClip != null)
-        {
-            AudioManager.PlaySFXClip(attackAudioClip);
-        }
     }
     private IEnumerator PerformMelee()
     {
@@ -44,7 +40,14 @@ public class PlayerMeleeHandler : MonoBehaviour
         if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
             target.TakeDamage(meleeDamage);
 
-        prh.SetWeaponEnabled(true);  
+        if(attackAudioClip != null)
+        {
+            AudioManager.PlaySFXClip(attackAudioClip);
+        }
+        prh.SetWeaponEnabled(true);
+
+        yield return new WaitForSeconds(0.21f); //방어코드
+        UnlockMelee();
     }
     public void UnlockMelee() => isAttacking = false;
 
