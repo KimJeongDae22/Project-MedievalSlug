@@ -13,6 +13,9 @@ public class RangeWeaponHandler : MonoBehaviour
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private ProjectileType projectileType = ProjectileType.Nomal;
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip attackSoundClip;
+
 
     //초기 화살
     [SerializeField]public ProjectileData projectileData;
@@ -31,6 +34,10 @@ public class RangeWeaponHandler : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
         ProjectileManager.Instance.Shoot(dir, spawnPosition, projectileType);
+        if (attackSoundClip != null)
+        {
+            AudioManager.PlaySFXClip(attackSoundClip);
+        }
     }
 
     /// <summary>

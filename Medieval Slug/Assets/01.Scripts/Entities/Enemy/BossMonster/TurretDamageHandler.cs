@@ -15,4 +15,9 @@ public class TurretDamageHandler : MonoBehaviour, IDamagable
     }
 
     public void Die() { }
+
+    public void ApplyEffect(EffectType effectType)
+    {
+        
+    }
 }

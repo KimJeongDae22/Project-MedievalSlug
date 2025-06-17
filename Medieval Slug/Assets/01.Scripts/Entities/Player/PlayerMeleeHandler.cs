@@ -12,12 +12,19 @@ public class PlayerMeleeHandler : MonoBehaviour
     [SerializeField] private float windupTime = 0.2f;
     [SerializeField] private Animator animator;
 
+    [SerializeField] private AudioClip attackAudioClip;
+
     private bool isAttacking;      
     
     public void OnMelee(InputAction.CallbackContext ctx)
     {
         if (!ctx.started || isAttacking) return;  
         StartCoroutine(PerformMelee());
+
+        if(attackAudioClip != null)
+        {
+            AudioManager.PlaySFXClip(attackAudioClip);
+        }
     }
     private IEnumerator PerformMelee()
     {

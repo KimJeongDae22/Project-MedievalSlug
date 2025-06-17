@@ -54,4 +54,9 @@ public class BossTurret : MonoBehaviour, IDamagable
         dir = ((Vector2)shootPoint.position - (Vector2)transform.position).normalized;
         ProjectileManager.Instance.Shoot(dir, shootPoint, ProjectileType.Slime);
     }
+
+    public void ApplyEffect(EffectType effectType)
+    {
+        
+    }
 }

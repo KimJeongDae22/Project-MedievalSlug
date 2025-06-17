@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPosition: {fileID: 1731738046691072130}
   projectileType: 0
-  snapToEightDirections: 1
+  attackSoundClip: {fileID: 8300000, guid: 84e7bfeec0893eb459e9f60e4777db92, type: 3}
   projectileData: {fileID: 11400000, guid: 283bac2f47d51e74aab5113b8000bcbd, type: 2}
 --- !u!1 &7759709917985157767
 GameObject:
