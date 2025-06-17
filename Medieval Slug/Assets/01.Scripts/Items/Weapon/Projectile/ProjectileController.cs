@@ -9,8 +9,6 @@ public class ProjectileController : MonoBehaviour, IPoolable
     [SerializeField] private Faction faction;
     [SerializeField] private EffectType curEffectType;
 
-    [SerializeField] private List<AudioClip> attackSoundClip;
-
     private Vector2 direction;
     private Rigidbody2D rigidbody;
     private float curduration;
@@ -50,9 +48,9 @@ public class ProjectileController : MonoBehaviour, IPoolable
             if ((faction == Faction.Player && collision.gameObject.layer == enemyLayer) || // Layer에 따른 화살 공격 여부
                 (faction == Faction.Enemy && collision.gameObject.layer == playerLayer))
             {
-                if (attackSoundClip != null)
+                if (AudioManager.Instance.SFXClip != null)
                 {
-                    AudioManager.PlaySFXClip(attackSoundClip[0]);
+                    AudioManager.PlaySFXClip(AudioManager.Instance.SFXClip[6]);
                 }
                 target.TakeDamage((int)projectileData.Damage);
                 target.ApplyEffect(curEffectType);

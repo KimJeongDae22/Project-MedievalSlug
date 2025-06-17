@@ -13,18 +13,16 @@ public class PlayerMeleeHandler : MonoBehaviour
     [SerializeField] private float windupTime = 0.2f;
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerRangedHandler prh;
-    private bool isAttacking;
-
-    [SerializeField] private AudioClip attackAudioClip;   
+    private bool isAttacking; 
     
     public void OnMelee()
     {
         if (isAttacking) return;  
         StartCoroutine(PerformMelee());
 
-        if(attackAudioClip != null)
+        if(AudioManager.Instance.SFXClip != null)
         {
-            AudioManager.PlaySFXClip(attackAudioClip);
+            AudioManager.PlaySFXClip(AudioManager.Instance.SFXClip[0]);
         }
     }
     private IEnumerator PerformMelee()
