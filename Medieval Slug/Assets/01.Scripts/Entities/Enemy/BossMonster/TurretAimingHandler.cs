@@ -9,6 +9,9 @@ public class TurretAimingHandler : MonoBehaviour
     [SerializeField] private Transform shootPoint;
     [SerializeField] private Transform target;
     [SerializeField] private float angleOffset;
+    [Header("Aiming")]
+    [SerializeField] private bool isLeft;
+    [SerializeField] private float headOffset;
     public bool IsAniming = false;
 
     private void Reset()
@@ -22,7 +25,8 @@ public class TurretAimingHandler : MonoBehaviour
     void Start()
     {
         Vector2 initialDirection = shootPoint.position - rotatingPivot.position;
-        angleOffset = (Mathf.Atan2(initialDirection.y, initialDirection.x) * Mathf.Rad2Deg) - 45f;
+        angleOffset = (Mathf.Atan2(initialDirection.y, initialDirection.x) * Mathf.Rad2Deg) -
+                      (45f + (isLeft ? headOffset : -headOffset));
     }
 
     void Update()

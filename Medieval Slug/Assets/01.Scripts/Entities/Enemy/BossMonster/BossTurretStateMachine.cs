@@ -6,15 +6,17 @@ using Random = UnityEngine.Random;
 public class BossTurretStateMachine : MonoBehaviour
 {
     public BossSO BossData;
-    public Transform target;
+    public Transform TargetPlayer { get; private set; }
+    public Transform LeftMovingTarget { get; private set; }
+    public Transform RightMovingTarget { get; private set; }
+    public Transform CenterTarget { get; private set; }
     public BossTurret LeftTurret;
     public BossTurret RightTurret;
 
     private BossTurretBaseState currentState;
     private BossTurretBaseState prevPattern;
 
-    public List<BossTurretBaseState> Patterns;
-    public List<BossTurretBaseState> HardPatterns;
+    private List<BossTurretBaseState> Patterns;
     public BossAimingState AimingState { get; private set; }
     public BossAppearState AppearState { get; private set; }
     public BossDefeatState DefeatState { get; private set; }
@@ -23,24 +25,28 @@ public class BossTurretStateMachine : MonoBehaviour
 
     private void Reset()
     {
-        LeftTurret = transform.Find("LeftTurret").GetComponent<BossTurret>();
-        RightTurret = transform.Find("RightTurret").GetComponent<BossTurret>();
+        LeftTurret = transform.Find("Left/LeftTurret").GetComponent<BossTurret>();
+        RightTurret = transform.Find("Right/RightTurret").GetComponent<BossTurret>();
     }
 
     private void Awake()
     {
-        target = GameObject.FindWithTag("Player")?.transform;
-        LeftTurret.Init(BossData,target);
-        RightTurret.Init(BossData,target);
+        TargetPlayer = GameObject.FindWithTag("Player")?.transform;
+        LeftMovingTarget = transform.Find("LeftMovingTarget");
+        RightMovingTarget = transform.Find("RightMovingTarget");
+        CenterTarget = transform.Find("CenterTarget");
+        
+        LeftTurret.Init(BossData,TargetPlayer);
+        RightTurret.Init(BossData,TargetPlayer);
     }
 
     private void Start()
     {
-        target = GameObject.FindWithTag("Player")?.transform;
+        TargetPlayer = GameObject.FindWithTag("Player")?.transform;
         Patterns = new List<BossTurretBaseState>()
         {
             new Pattern1(this),
-            //new Pattern2(this),
+            new Pattern2(this),
             //new Pattern3(this),
         };
         AimingState = new BossAimingState(this);
@@ -72,6 +78,12 @@ public class BossTurretStateMachine : MonoBehaviour
     {
         LeftTurret.AimingHandler.IsAniming = false;
         RightTurret.AimingHandler.IsAniming = false;
+    }
+
+    public void AllTurretAimTarget(Transform leftTurretTarget, Transform rightTurretTarget)
+    {
+        LeftTurret.AimingHandler.SetTarget(leftTurretTarget);
+        RightTurret.AimingHandler.SetTarget(rightTurretTarget);
     }
 
     public void ChangeRandomPattern()

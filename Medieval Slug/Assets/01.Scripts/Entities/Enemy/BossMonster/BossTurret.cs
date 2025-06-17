@@ -14,6 +14,7 @@ public class BossTurret : MonoBehaviour, IDamagable
     [SerializeField] private Vector2 dir;
     public bool IsHalfHealth = false;
     public bool IsDead = false;
+    public bool IsAppeared = false;
     
     protected void Reset()
     {
@@ -69,5 +70,10 @@ public class BossTurret : MonoBehaviour, IDamagable
     {
         dir = ((Vector2)shootingPoint.position - (Vector2)shootPoint.position).normalized;
         ProjectileManager.Instance.Shoot(dir, shootPoint, ProjectileType.Slime);
+    }
+
+    public void ApeearingFinished()
+    {
+        IsAppeared = true;
     }
 }

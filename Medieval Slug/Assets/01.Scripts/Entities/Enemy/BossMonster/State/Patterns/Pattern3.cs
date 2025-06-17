@@ -1,4 +1,4 @@
-public class Pattern3 : BossTurretBaseState
+public class Pattern3 : BasePattern
 {
     public Pattern3(BossTurretStateMachine stateMachine) : base(stateMachine)
     {
@@ -6,15 +6,11 @@ public class Pattern3 : BossTurretBaseState
 
     public override void Enter()
     {
-        
+        base.Enter();
+        stateMachine.AllTurretAimTarget(stateMachine.CenterTarget, stateMachine.CenterTarget);
     }
     
     public override void Update()
-    {
-        
-    }
-
-    public override void Exit()
     {
         
     }

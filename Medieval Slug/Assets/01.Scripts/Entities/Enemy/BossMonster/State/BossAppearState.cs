@@ -5,28 +5,32 @@ public class BossAppearState : BossTurretBaseState
     }
 
     private bool isFirstAnimationFinished = false;
+    private bool isFirstAnimationStarted = false;
     private bool isSecondAnimationFinished = false;
-
+    private bool isSecondAnimationStarted = false;
+    
     public override void Enter() { }
     
     public override void Update()
     {
-        if (!isFirstAnimationFinished)
+        if (!isFirstAnimationStarted)
         {
             StartAnimation(stateMachine.LeftTurret, stateMachine.LeftTurret.AnimationHash.AppearingParameterHash);
-            if (IsAnimationFinished(stateMachine.LeftTurret, "Appearing"))
-            {
-                isFirstAnimationFinished = true;
-            }
+            isFirstAnimationStarted = true;
         }
-
-        if (isFirstAnimationFinished && !isSecondAnimationFinished)
+        if (isFirstAnimationStarted && stateMachine.LeftTurret.IsAppeared)
+        {
+            isFirstAnimationFinished = true;
+        }
+        
+        if (isFirstAnimationFinished && !isSecondAnimationStarted)
         {
             StartAnimation(stateMachine.RightTurret, stateMachine.RightTurret.AnimationHash.AppearingParameterHash);
-            if (IsAnimationFinished(stateMachine.RightTurret, "Appearing"))
-            {
-                isSecondAnimationFinished = true;
-            }
+            isSecondAnimationStarted = true;
+        }
+        if (isSecondAnimationStarted && stateMachine.RightTurret.IsAppeared)
+        {
+            isSecondAnimationFinished = true;
         }
 
         if (isFirstAnimationFinished && isSecondAnimationFinished)
