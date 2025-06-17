@@ -46,7 +46,7 @@ public class ProjectileController : MonoBehaviour, IPoolable
         {
             int playerLayer = LayerMask.NameToLayer("Player");
             int enemyLayer = LayerMask.NameToLayer("Enemy");
-
+            Debug.Log(target);
             if ((faction == Faction.Player && collision.gameObject.layer == enemyLayer) || // Layer에 따른 화살 공격 여부
                 (faction == Faction.Enemy && collision.gameObject.layer == playerLayer))
             {
