@@ -20,7 +20,6 @@ public class DestuctibleObject : MonoBehaviour, IDamagable
     [SerializeField] private float dropRadius = 1f;
     [SerializeField] private bool useRandomDrop = true; // true면 랜덤, false면 특정 아이템 드랍
     [SerializeField] private ItemData dropItemData; // 특정 아이템 드랍 시 사용
-    [SerializeField] private Tilemap targetTilemap;
     
     
     // Components
@@ -36,11 +35,6 @@ public class DestuctibleObject : MonoBehaviour, IDamagable
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         destructCollider = GetComponent<BoxCollider2D>();
-        
-        if (GetComponentInParent<Tilemap>() != null)
-        {
-            targetTilemap = GetComponentInParent<Tilemap>();
-        }
     }
 
     private void Awake()
@@ -50,12 +44,6 @@ public class DestuctibleObject : MonoBehaviour, IDamagable
         
         if (spriteRenderer == null) Debug.LogError("sprite renderer is null");
         if (destructCollider == null) Debug.LogError("cage collider is null");
-        
-        if (targetTilemap != null)
-        {
-            tilePosition = targetTilemap.WorldToCell(transform.position);
-        }
-
     }
 
     private void Start()
@@ -117,7 +105,6 @@ public class DestuctibleObject : MonoBehaviour, IDamagable
     {
         if (isDestroyed) return;
         
-        targetTilemap.SetTile(tilePosition, null);
         isDestroyed = true;
         destructCollider.enabled = false;
         Destroy(destructObject);

@@ -11,7 +11,7 @@ public class QuestManager : Singleton<QuestManager>
     protected override void Awake()
     {
         base.Awake();
-        
+        LoadQuests();
     }
     
     private void LoadQuests()
@@ -30,7 +30,7 @@ public class QuestManager : Singleton<QuestManager>
         }
         
         QuestData questData = GetQuestData(questId);
-        if (questData == null) return false;
+        if (!questData) return false;
         
         currentQuest = new Quest(questData);
         currentQuest.status = QuestStatus.InProgress;
