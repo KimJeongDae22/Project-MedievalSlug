@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 6551657610800734788}
   - component: {fileID: 633921220804297656}
   - component: {fileID: 1565117062265877348}
+  - component: {fileID: 6670951016732344379}
   m_Layer: 7
   m_Name: Eagle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6745470527682787094
 Transform:
   m_ObjectHideFlags: 0
@@ -124,6 +125,19 @@ MonoBehaviour:
   <targetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &6670951016732344379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3298963374946433179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f8b7c7fef4ae54bad1f586e871ffde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster: {fileID: 7739054415713413132}
 --- !u!1 &8120944490431652483
 GameObject:
   m_ObjectHideFlags: 0
