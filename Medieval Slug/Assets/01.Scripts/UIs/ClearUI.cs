@@ -20,6 +20,8 @@ public class ClearUI : MonoBehaviour
         clearTime = Util.FindChild<TextMeshProUGUI>(transform, "ClearTime");
         endingCreditBtn = Util.FindChild<Button>(transform, "EndingCreditBtn");
 
+        score.text = "Score : ";
+        clearTime.text = "Clear time : ";
     }
     public void ClearUIEnable()
     {
