@@ -11,6 +11,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     void Awake()
     {
         poolRoot = new GameObject("ObjectPool_Root");
+        DontDestroyOnLoad(poolRoot);
 
         for (int i = 0; i < prefabs.Length; i++)
         {
