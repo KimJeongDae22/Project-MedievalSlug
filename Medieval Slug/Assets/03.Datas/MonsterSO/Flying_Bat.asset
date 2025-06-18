@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4654cb20e541cbbe68d6d8f9e5f302, type: 3}
   m_Name: Flying_Bat
   m_EditorClassIdentifier: 
-  Health: 3
+  Health: 20
   Damage: 1
   AttackCooldown: 3
   MoveSpeed: 8

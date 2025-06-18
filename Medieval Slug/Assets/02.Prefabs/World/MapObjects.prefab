@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 070000000800000009000000
+  monsterPrefabIndices: 0700000008000000090000000b000000
   spawnRadius: 4
   spawnInterval: 3
   maxMonsters: 5
@@ -691,7 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 060000000700000008000000
+  monsterPrefabIndices: 0700000008000000090000000b000000
   spawnRadius: 3
   spawnInterval: 3
   maxMonsters: 5
@@ -739,7 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 060000000700000008000000
+  monsterPrefabIndices: 0700000008000000090000000b000000
   spawnRadius: 3
   spawnInterval: 3
   maxMonsters: 5
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 060000000700000008000000
+  monsterPrefabIndices: 0700000008000000090000000b000000
   spawnRadius: 3
   spawnInterval: 3
   maxMonsters: 5
@@ -1300,7 +1300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 060000000700000008000000
+  monsterPrefabIndices: 0700000008000000090000000b000000
   spawnRadius: 3
   spawnInterval: 3
   maxMonsters: 5
@@ -1509,7 +1509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 060000000700000008000000
+  monsterPrefabIndices: 0700000008000000090000000b000000
   spawnRadius: 3
   spawnInterval: 3
   maxMonsters: 5
@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 0600000007000000
+  monsterPrefabIndices: 07000000080000000a000000
   spawnRadius: 3
   spawnInterval: 3
   maxMonsters: 5
@@ -2855,7 +2855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 060000000700000008000000
+  monsterPrefabIndices: 0700000008000000090000000b000000
   spawnRadius: 3
   spawnInterval: 3
   maxMonsters: 5
