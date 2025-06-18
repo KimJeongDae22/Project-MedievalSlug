@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
@@ -8,17 +8,20 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     private GameObject poolRoot;
     private Dictionary<int, Queue<GameObject>> pools = new Dictionary<int, Queue<GameObject>>();
 
-    void Awake()
+    protected override void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
+        if (poolRoot != null)
+        {
+            return;
+        }
         poolRoot = new GameObject("ObjectPool_Root");
-        DontDestroyOnLoad(poolRoot);
+        //DontDestroyOnLoad(poolRoot);
 
         for (int i = 0; i < prefabs.Length; i++)
         {
             pools[i] = new Queue<GameObject>();
         }
     }
-
     public GameObject GetObject(int prefabIndex, Vector2 position, Quaternion rotation)
     {
         if (!pools.ContainsKey(prefabIndex))

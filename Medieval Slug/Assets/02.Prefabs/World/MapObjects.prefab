@@ -559,10 +559,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 0600000007000000
+  monsterPrefabIndices: 060000000700000008000000
   spawnRadius: 4
-  spawnInterval: 2
-  maxMonsters: 10
+  spawnInterval: 3
+  maxMonsters: 5
 --- !u!1 &2000984234290269179
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,10 +691,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 0600000007000000
+  monsterPrefabIndices: 060000000700000008000000
   spawnRadius: 3
-  spawnInterval: 2
-  maxMonsters: 10
+  spawnInterval: 3
+  maxMonsters: 5
 --- !u!1 &2140375699587548101
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,10 +739,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 0600000007000000
+  monsterPrefabIndices: 060000000700000008000000
   spawnRadius: 3
-  spawnInterval: 2
-  maxMonsters: 10
+  spawnInterval: 3
+  maxMonsters: 5
 --- !u!1 &2252000147519826377
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,10 +787,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 0600000007000000
+  monsterPrefabIndices: 060000000700000008000000
   spawnRadius: 3
-  spawnInterval: 2
-  maxMonsters: 10
+  spawnInterval: 3
+  maxMonsters: 5
 --- !u!1 &2295886175937612831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,10 +1300,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 0600000007000000
+  monsterPrefabIndices: 060000000700000008000000
   spawnRadius: 3
-  spawnInterval: 2
-  maxMonsters: 10
+  spawnInterval: 3
+  maxMonsters: 5
 --- !u!1 &3812456230428171694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,10 +1509,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 0600000007000000
+  monsterPrefabIndices: 060000000700000008000000
   spawnRadius: 3
-  spawnInterval: 2
-  maxMonsters: 10
+  spawnInterval: 3
+  maxMonsters: 5
 --- !u!1 &4530334339387023417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,8 +1858,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefabIndices: 0600000007000000
   spawnRadius: 3
-  spawnInterval: 2
-  maxMonsters: 10
+  spawnInterval: 3
+  maxMonsters: 5
 --- !u!1 &5532045643802732932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,10 +2855,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 0600000007000000
+  monsterPrefabIndices: 060000000700000008000000
   spawnRadius: 3
-  spawnInterval: 2
-  maxMonsters: 10
+  spawnInterval: 3
+  maxMonsters: 5
 --- !u!1 &7793037674954602500
 GameObject:
   m_ObjectHideFlags: 0
