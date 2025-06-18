@@ -241,6 +241,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
+--- !u!114 &500620880 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3016855445302639523, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+  m_PrefabInstance: {fileID: 651228705}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51d4d55a16abff41acb6234f1e4ffe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &608465193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -322,6 +333,10 @@ PrefabInstance:
       propertyPath: meleeWidth
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3473360710309007466, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: vehicleItemCollector
+      value: 
+      objectReference: {fileID: 500620880}
     - target: {fileID: 7315879554401081948, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
       propertyPath: m_LocalPosition.x
       value: 82.1
@@ -896,6 +911,10 @@ PrefabInstance:
     - target: {fileID: 5422235271331890033, guid: 8314488c53996e944b2dbe6bf74a0fc7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584330687151362946, guid: 8314488c53996e944b2dbe6bf74a0fc7, type: 3}
+      propertyPath: mountCheckRadius
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
