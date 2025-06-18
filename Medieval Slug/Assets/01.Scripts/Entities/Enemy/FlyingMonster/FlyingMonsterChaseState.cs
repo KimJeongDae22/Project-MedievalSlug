@@ -27,11 +27,11 @@ public class FlyingMonsterChaseState : MonsterBaseState
         //오른쪽에 있으면 반대편으로 돌아본다
         if (distanceX < 0)
         {
-            StateMachine.Monster.gameObject.transform.rotation = Quaternion.Euler(rotate);
+            StateMachine.gameObject.transform.rotation = Quaternion.Euler(rotate);
         }
         else
         {
-            StateMachine.Monster.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+            StateMachine.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
         }
 
         if (IsTargetInRange())
