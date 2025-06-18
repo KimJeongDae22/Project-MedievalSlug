@@ -22,6 +22,7 @@ public class Portal : MonoBehaviour
         if (playerInRange && Input.GetKeyDown(interactKey))
         {
             Debug.Log("보스 씬 전환");
+            SceneLoadManager.Instance.LoadScene(targetSceneName);
         }
     }
     

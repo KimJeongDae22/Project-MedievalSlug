@@ -38,7 +38,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask mountLayer;
     [SerializeField] float mountJumpForce = 4f;
     [SerializeField] VehicleController currentVehicle;
+    public VehicleController CurrentVehicle => currentVehicle;
+
     bool isMounted;
+    public bool IsMounted => isMounted;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
