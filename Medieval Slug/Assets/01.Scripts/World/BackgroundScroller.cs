@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class BackgroundScroller : MonoBehaviour
 {
-    [Header("Scroll Settings")]
-    [SerializeField] private bool infiniteScroll = true;
     
     private float backgroundWidth;
     private Camera cam;
@@ -37,23 +35,29 @@ public class BackgroundScroller : MonoBehaviour
     
     private void Update()
     {
-        if (infiniteScroll)
-        {
-            CheckAndRepositionBackgrounds();
-        }
+        CheckAndRepositionBackgrounds();
     }
     
     private void CheckAndRepositionBackgrounds()
     {
         float cameraLeftEdge = cam.transform.position.x - (cam.orthographicSize * cam.aspect);
+        float cameraRightEdge = cam.transform.position.x + (cam.orthographicSize * cam.aspect);
         float repositionBuffer = backgroundWidth * 0.5f;
         
         foreach (Transform piece in backgroundPieces)
         {
+            // 왼쪽으로 벗어나면 오른쪽 끝 재배치
             if (piece.position.x + backgroundWidth * 0.5f < cameraLeftEdge - repositionBuffer)
             {
                 float rightmostX = GetRightmostPosition();
                 piece.position = new Vector3(rightmostX + backgroundWidth - 0.1f, piece.position.y, piece.position.z);
+            }
+            
+            // 오른쪽으로 벗어나면 왼쪽 끝 재배치
+            else if (piece.position.x - backgroundWidth * 0.5f > cameraRightEdge + repositionBuffer)
+            {
+                float leftmostX = GetLeftmostPosition();
+                piece.position = new Vector3(leftmostX - backgroundWidth + 0.1f, piece.position.y, piece.position.z);
             }
         }
     }
@@ -67,5 +71,17 @@ public class BackgroundScroller : MonoBehaviour
                 rightmost = piece.position.x;
         }
         return rightmost;
+    }
+    
+    
+    private float GetLeftmostPosition()
+    {
+        float leftmost = float.MaxValue;
+        foreach (Transform piece in backgroundPieces)
+        {
+            if (piece.position.x < leftmost)
+                leftmost = piece.position.x;
+        }
+        return leftmost;
     }
 }
