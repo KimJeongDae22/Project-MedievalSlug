@@ -34,7 +34,6 @@ public class MeleeMonster : Monster
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-        Debug.Log(other.name);
         other.TryGetComponent(out IDamagable damagable);
         if(damagable != null) 
             damagable.TakeDamage(MonsterData.Damage);

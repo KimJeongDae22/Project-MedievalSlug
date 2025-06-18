@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 6506889081947878118}
   - component: {fileID: 3635027562237109546}
   - component: {fileID: 5022226975820919478}
+  - component: {fileID: 1137154634029975480}
   m_Layer: 7
   m_Name: RangedSlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6113791106103305096
 Transform:
   m_ObjectHideFlags: 0
@@ -124,6 +125,19 @@ MonoBehaviour:
   <targetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1137154634029975480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532668442158802693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f8b7c7fef4ae54bad1f586e871ffde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster: {fileID: 4126754008536790119}
 --- !u!1 &3115860598697341014
 GameObject:
   m_ObjectHideFlags: 0
