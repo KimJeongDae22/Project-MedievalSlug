@@ -24,6 +24,7 @@ public class ClearUI : MonoBehaviour
     public void ClearUIEnable()
     {
         Awake();
+        GameManager.Instance.IsClear = true;
         StartCoroutine(BlinkingTitleCoroutine());
         StartCoroutine(ScoreCoroutine());
     }

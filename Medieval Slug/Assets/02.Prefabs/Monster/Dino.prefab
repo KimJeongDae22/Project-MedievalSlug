@@ -150,6 +150,7 @@ MonoBehaviour:
     attackTriggerParameterName: AttackTrigger
     randomDropTriggerParameterName: RandomDropTrigger
   <HasAnimator>k__BackingField: 1
+  Score: 600
   stateMachine: {fileID: 9039928103637061360}
   burnVFX: {fileID: 8598009463683640582}
   freezeVFX: {fileID: 2332065979791507398}
