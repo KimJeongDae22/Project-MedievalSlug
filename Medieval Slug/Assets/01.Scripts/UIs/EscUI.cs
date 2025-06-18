@@ -28,6 +28,6 @@ public class EscUI : MonoBehaviour
     public void Btn_OnGoingStartScene()
     {
         Btn_OffEscUI();
-        Singleton<SceneLoadManager>.Instance.LoadScene(SceneName.KJD_START_SCENE);
+        Singleton<SceneLoadManager>.Instance.LoadScene(SceneName.START_SCENE);
     }
 }

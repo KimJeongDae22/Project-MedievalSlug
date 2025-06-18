@@ -43,6 +43,7 @@ public class GameManager : Singleton<GameManager>
     public void AddScore(int amount)
     {
         score = Mathf.Clamp(score + amount, 0, int.MaxValue);
+        UIManager.Instance.UIUpdate_Score();
     }
     /// <summary>
     /// 씬 로더 매니저 API
