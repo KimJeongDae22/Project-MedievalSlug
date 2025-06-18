@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5829924321147921000}
   - component: {fileID: 8228489494600492931}
   - component: {fileID: 4873144319710422286}
-  - component: {fileID: 7672239689431378346}
+  - component: {fileID: 7654231500111481215}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -153,7 +153,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
---- !u!114 &7672239689431378346
+--- !u!114 &7654231500111481215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,26 +162,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2853359684138835707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef33b99e45d364942b1c1b14f390273b, type: 3}
+  m_Script: {fileID: 11500000, guid: df56b793f3cd8db47854a6456d2d0b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Animator>k__BackingField: {fileID: 5829924321147921000}
-  <AnimationHash>k__BackingField:
-    idleParameterName: Idle
-    runParameterName: Run
-    attackParameterName: Attack
-    deadParameterName: Dead
-    hitParameterName: Hit
-    halfHealthParameterName: HalfHealth
-    appearingParameterName: Appearing
-    defeatParameterName: Defeat
-    attackTriggerParameterName: AttackTrigger
-    randomDropTriggerParameterName: RandomDropTrigger
-  <HasAnimator>k__BackingField: 1
-  stateMachine: {fileID: 5582616241255311045}
-  <MonsterData>k__BackingField: {fileID: 11400000, guid: b5e4eb0b150b07c4fb5863aa4883cb25, type: 2}
-  health: 0
-  speed: 0
+  monster: {fileID: 3417120768794554956}
+  collider2D: {fileID: 4873144319710422286}
 --- !u!1 &3933116385781919578
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +179,7 @@ GameObject:
   - component: {fileID: 3137839742351185098}
   - component: {fileID: 2369755699082370906}
   - component: {fileID: 5582616241255311045}
-  - component: {fileID: 108087209811867163}
+  - component: {fileID: 3417120768794554956}
   m_Layer: 7
   m_Name: Bat
   m_TagString: Untagged
@@ -211,7 +196,7 @@ Transform:
   m_GameObject: {fileID: 3933116385781919578}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 5.9, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -302,12 +287,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf5ac662e464cfabe4c50d88632aeb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Monster>k__BackingField: {fileID: 7672239689431378346}
+  <Monster>k__BackingField: {fileID: 3417120768794554956}
   <target>k__BackingField: {fileID: 0}
   <targetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &108087209811867163
+--- !u!114 &3417120768794554956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,7 +301,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 3933116385781919578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80f8b7c7fef4ae54bad1f586e871ffde, type: 3}
+  m_Script: {fileID: 11500000, guid: ef33b99e45d364942b1c1b14f390273b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 7672239689431378346}
+  <Animator>k__BackingField: {fileID: 5829924321147921000}
+  <AnimationHash>k__BackingField:
+    idleParameterName: Idle
+    runParameterName: Run
+    attackParameterName: Attack
+    deadParameterName: Dead
+    hitParameterName: Hit
+    halfHealthParameterName: HalfHealth
+    appearingParameterName: Appearing
+    defeatParameterName: Defeat
+    attackTriggerParameterName: AttackTrigger
+    randomDropTriggerParameterName: RandomDropTrigger
+  <HasAnimator>k__BackingField: 1
+  stateMachine: {fileID: 5582616241255311045}
+  <MonsterData>k__BackingField: {fileID: 11400000, guid: b5e4eb0b150b07c4fb5863aa4883cb25, type: 2}
+  health: 0
+  speed: 0
+  <MeleeCollider>k__BackingField: {fileID: 7654231500111481215}
