@@ -119,18 +119,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         else if (cachedInput.x < 0 && facingRight) Flip();
 
     }
-    private void Update()
-    {
-        //테스트 코드
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TakeDamage(1);
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            StartCoroutine(Exploeded());
-        }
-    }
+
     void Flip()
     {
         facingRight = !facingRight;
