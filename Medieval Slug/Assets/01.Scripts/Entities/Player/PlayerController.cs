@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 1f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask VehicleLayer;
+    [SerializeField] private LayerMask MonsterLayer;
     [SerializeField] float wallRayRadius = 0.15f;
     [SerializeField] Transform wallCheckPoint;
     [SerializeField] LayerMask wallLayer;
@@ -67,7 +68,7 @@ public class PlayerController : MonoBehaviour
         if (!ctx.started) return;
 
         if (isMounted && currentVehicle.IsGrounded()) currentVehicle.RequestJump();
-        else if (IsGrounded() || IsOnVehicle()) jumpRequest = true;
+        else if (IsGrounded() || IsOnVehicle() || IsOnMonster()) jumpRequest = true;
     }
 
     public void OnFire(InputAction.CallbackContext ctx)
@@ -228,6 +229,10 @@ public class PlayerController : MonoBehaviour
     private bool IsOnVehicle()
     {
         return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, VehicleLayer);
+    }
+    private bool IsOnMonster()
+    {
+        return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, MonsterLayer);
     }
 
     bool IsAgainstWall(int sign)
