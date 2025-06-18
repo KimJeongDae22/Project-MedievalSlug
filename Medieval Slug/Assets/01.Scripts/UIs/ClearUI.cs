@@ -20,12 +20,13 @@ public class ClearUI : MonoBehaviour
         clearTime = Util.FindChild<TextMeshProUGUI>(transform, "ClearTime");
         endingCreditBtn = Util.FindChild<Button>(transform, "EndingCreditBtn");
 
-        score.text = "Score : ";
-        clearTime.text = "Clear time : ";
     }
     public void ClearUIEnable()
     {
         Awake();
+
+        score.text = "Score : ";
+        clearTime.text = "Clear time : ";
         GameManager.Instance.IsClear = true;
         StartCoroutine(BlinkingTitleCoroutine());
         StartCoroutine(ScoreCoroutine());
@@ -52,7 +53,7 @@ public class ClearUI : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        clearTime.text = $"Clear time : {GameManager.Instance.PlayTime}";
+        clearTime.text = $"Clear time : {GameManager.Instance.PlayTime.ToString("F2")}";
         endingCreditBtn.gameObject.SetActive(true);
     }
     public void Btn_GoingEndingCredit()

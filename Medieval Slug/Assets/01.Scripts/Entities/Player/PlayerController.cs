@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
 
         if (CharacterManager.Instance.StatHandler.IsDied)
         {
-            rb.velocity = Vector2.zero;
+             moveInput = Vector2.zero;
         }
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
