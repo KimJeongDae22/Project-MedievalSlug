@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
     [field: SerializeField] public MonsterAnimationHash AnimationHash { get; private set; }
     [field: SerializeField] public bool HasAnimator { get; private set; } = false;
 
+    [field: SerializeField] public float Score;
     [field: Header("Monster States")] [SerializeField]
     protected MonsterStateMachine stateMachine;
     
@@ -197,6 +198,7 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
     {
         isDead = true;
         stateMachine.ChangeState(stateMachine.DeadState);
+        GameManager.Instance.AddScore((int) Score);
     }
 
     public void OnDie()

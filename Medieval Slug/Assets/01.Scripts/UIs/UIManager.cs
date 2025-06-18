@@ -78,6 +78,12 @@ public class UIManager : Singleton<UIManager>
             case SceneName.CHARACTER_SELECT_SCENE:
                 //canvas.gameObject.SetActive(false);
                 break;
+            case SceneName.INTRO_SCENE:
+                canvas.gameObject.SetActive(false);
+                break;
+            case SceneName.ENDING_CREDIT_SCENE:
+                canvas.gameObject.SetActive(false);
+                break;
             default:
                 canvas.gameObject.SetActive(true);
                 break;
