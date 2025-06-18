@@ -12,15 +12,22 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
     [field: Header("Monster States")] [SerializeField]
     protected MonsterStateMachine stateMachine;
     
+    /// <summary>
+    /// 속성 효과용 파티클 게임오브젝트
+    /// </summary>
     [Header("VFX")]
     [SerializeField] private GameObject burnVFX;
     [SerializeField] private GameObject freezeVFX;
     [SerializeField] private GameObject poisonVFX;
-
+    
+    /// <summary>
+    /// 몬스터 체력, 속도값
+    /// </summary>
     [field: SerializeField] public virtual MonsterSO MonsterData { get; private set; }
     [SerializeField] private int health;
     [SerializeField] private float speed;
     private bool isSlowed;
+    private bool isDead;
     public float Speed => speed;
     
     // 풀링용 추가 변수
@@ -65,6 +72,7 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
 
     public void Initialize()
     {
+        isDead = false;
         health = MonsterData.Health;
         speed = MonsterData.MoveSpeed;
         isSlowed = false;
@@ -172,13 +180,14 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
         health -= damage;
         if (health <= 0)
         {
             health = 0;
             Die();
         }
-        else
+        else 
         {
             stateMachine.ChangeState(stateMachine.HitState);
         }
@@ -186,6 +195,7 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
 
     public void Die()
     {
+        isDead = true;
         stateMachine.ChangeState(stateMachine.DeadState);
     }
 
