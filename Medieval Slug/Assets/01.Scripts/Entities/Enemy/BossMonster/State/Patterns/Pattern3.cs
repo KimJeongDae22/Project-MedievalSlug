@@ -8,11 +8,11 @@ public class Pattern3 : BasePattern
     }
 
     private bool isFireing = false;
-    private int dropCount = 0;
 
     public override void Enter()
     {
         base.Enter();
+        isFireing = false;
         stateMachine.AllTurretAimTarget(stateMachine.CenterTarget, stateMachine.CenterTarget);
     }
     
@@ -35,14 +35,14 @@ public class Pattern3 : BasePattern
     {
         yield return new WaitForSeconds(4f);
         int dropCount = 0;
-        while (dropCount < 4)
+        while (dropCount < 8)
         {
             if(!stateMachine.LeftTurret.IsDead) 
                 stateMachine.MovingTargetA.DropBullet();
-            if(!stateMachine.LeftTurret.IsDead) 
+            if(!stateMachine.RightTurret.IsDead) 
                 stateMachine.MovingTargetB.DropBullet();
             dropCount++;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
         }
         stateMachine.ChangeState(stateMachine.AimingState);
     }

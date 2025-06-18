@@ -130,7 +130,5 @@ public class DestuctibleObject : MonoBehaviour, IDamagable
         {
             ItemDropManager.Instance.DropSpecificItem(transform.position, dropCount, dropItemData, dropRadius);
         }
-        
-        Debug.Log($"{name}에서 {dropCount}개 아이템 드롭됨");
     }
 }

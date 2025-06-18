@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Medieval Slug/Assets/00.Scenes/MonsterSpawnTest.unity.meta
 guid: 327b582fd3c0052498da08a70b5ede4f
+========
+guid: 41cf257994bd5ab41b035f7f1622fd85
+>>>>>>>> origin/feat/Intro:Medieval Slug/Assets/00.Scenes/EndingCreditScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

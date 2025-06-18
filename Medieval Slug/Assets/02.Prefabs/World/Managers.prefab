@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4858801951910654291}
+  - component: {fileID: 9133490105636211473}
   - component: {fileID: 4807319704765609663}
   - component: {fileID: 3530482847165556052}
   - component: {fileID: 7927638196214482133}
@@ -36,6 +37,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9133490105636211473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4045466629833914926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910e06814daedc84685441222f1c1d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <State>k__BackingField: 0
+  score: 0
+  startScene: StartScene
+  mainScene: MainStage
+  bossScene: BossStage
+  endingScene: Ending
 --- !u!114 &4807319704765609663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,6 +74,8 @@ MonoBehaviour:
   - {fileID: 6151069324415239557, guid: 0ef41af1e1add1b4089b729bead18632, type: 3}
   - {fileID: 3071809021973701136, guid: ac071a62ed76c8e4ea769d5a21dc3f06, type: 3}
   - {fileID: 4598142991692045861, guid: aeaeb14e8aa4ea44f88ada48085d31bb, type: 3}
+  - {fileID: 1522214104785138172, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
+  - {fileID: 1532668442158802693, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
 --- !u!114 &3530482847165556052
 MonoBehaviour:
   m_ObjectHideFlags: 0

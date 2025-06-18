@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MonsterSpawner : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private int[] monsterPrefabIndices; // ObjectPoolManager의 프리팹 인덱스들
     [SerializeField] private float spawnRadius;
     [SerializeField] private float spawnInterval = 2f;
@@ -11,7 +12,7 @@ public class MonsterSpawner : MonoBehaviour
     
     private int currentMonsterCount;
     private float lastSpawnTime;
-    
+
     private void Update()
     {
         if (ShouldSpawn())
@@ -28,13 +29,10 @@ public class MonsterSpawner : MonoBehaviour
     
     private void SpawnRandomMonster()
     {
-        if (spawnPoints.Length == 0 || monsterPrefabIndices.Length == 0) return;
-        
-        // 랜덤 스폰 포인트 선택
-        Transform selectedSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        if (monsterPrefabIndices.Length == 0) return;
         
         // 위치 계산
-        Vector2 spawnPosition = GetRandomSpawnPosition(selectedSpawnPoint);
+        Vector2 spawnPosition = GetRandomSpawnPosition(transform);
         int monsterIndex = Random.Range(0, monsterPrefabIndices.Length);
         
         SpawnMonster(monsterPrefabIndices[monsterIndex], spawnPosition);
@@ -75,15 +73,7 @@ public class MonsterSpawner : MonoBehaviour
     /// </summary>
     private void OnDrawGizmos()
     {
-        if (spawnPoints == null || spawnPoints.Length == 0) return;
-        
         Gizmos.color = Color.red;
-        
-        foreach (Transform spawnPoint in spawnPoints)
-        {
-            if (spawnPoint == null) continue;
-            
-            Gizmos.DrawWireSphere(spawnPoint.position, spawnRadius);
-        }
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }
 }
