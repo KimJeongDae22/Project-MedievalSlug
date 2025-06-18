@@ -151,6 +151,9 @@ MonoBehaviour:
     randomDropTriggerParameterName: RandomDropTrigger
   <HasAnimator>k__BackingField: 1
   stateMachine: {fileID: 9039928103637061360}
+  burnVFX: {fileID: 8598009463683640582}
+  freezeVFX: {fileID: 2332065979791507398}
+  poisonVFX: {fileID: 3362054405135014711}
   <MonsterData>k__BackingField: {fileID: 11400000, guid: 2e06fe5f59310b04b8466d4b97ec4e04, type: 2}
   health: 0
   speed: 0
@@ -187,7 +190,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4885710668465255907}
   m_Father: {fileID: 6675960900695027463}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7574959178625307334
@@ -322,3 +326,80 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monster: {fileID: 5715090810260234931}
   collider2D: {fileID: 2671001001177396932}
+--- !u!1001 &6655789196001069701
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4844026170911883319}
+    m_Modifications:
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735538167214532845, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_Name
+      value: EffectParticles
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+--- !u!1 &2332065979791507398 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8936043971486430531, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+  m_PrefabInstance: {fileID: 6655789196001069701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3362054405135014711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8283940135047451058, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+  m_PrefabInstance: {fileID: 6655789196001069701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4885710668465255907 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+  m_PrefabInstance: {fileID: 6655789196001069701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8598009463683640582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3101952164676347779, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+  m_PrefabInstance: {fileID: 6655789196001069701}
+  m_PrefabAsset: {fileID: 0}
