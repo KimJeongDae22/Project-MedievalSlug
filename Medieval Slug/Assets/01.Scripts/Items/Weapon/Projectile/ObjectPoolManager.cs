@@ -5,10 +5,13 @@ using UnityEngine;
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     [SerializeField] private GameObject[] prefabs;
+    private GameObject poolRoot;
     private Dictionary<int, Queue<GameObject>> pools = new Dictionary<int, Queue<GameObject>>();
 
     void Awake()
     {
+        poolRoot = new GameObject("ObjectPool_Root");
+
         for (int i = 0; i < prefabs.Length; i++)
         {
             pools[i] = new Queue<GameObject>();
@@ -35,6 +38,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
 
         obj.transform.SetPositionAndRotation(position, rotation);
+        obj.transform.SetParent(poolRoot.transform);
         obj.SetActive(true);
         obj.GetComponent<IPoolable>()?.OnSpawn();
         return obj;
@@ -50,5 +54,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
         obj.SetActive(false);
         pools[prefabIndex].Enqueue(obj);
+
+        obj.transform.SetParent(poolRoot.transform);
     }
 }

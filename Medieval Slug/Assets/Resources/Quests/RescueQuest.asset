@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68e1e426003c0f45bd23a55be6416cf, type: 3}
+  m_Name: RescueQuest
+  m_EditorClassIdentifier: 
+  questId: rescue_fox
+  questName: "\uB3D9\uC0DD\uC744 \uAD6C\uD574\uC918!"
+  description: "\uB9C8\uC744 \uC8FC\uBBFC\uC758 \uB3D9\uC0DD\uC774 \uC9C0\uD558 \uB358\uC804\uC5D0
+    \uAC07\uD600\uC788\uB2E4. \uBAAC\uC2A4\uD130\uB97C \uBB3C\uB9AC\uCE58\uACE0 \uB3D9\uC0DD\uC744
+    \uAD6C\uD574\uC8FC\uC790!"
+  questType: 0
+  targetId: fox_brother
+  targetCount: 1
+  rewardItems:
+  - {fileID: 11400000, guid: 3b26ea1584d422d42b5ea09d37c8eb10, type: 2}

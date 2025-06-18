@@ -21,4 +21,4 @@ MonoBehaviour:
   targetId: fox_brother
   targetCount: 1
   rewardItems:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 3b26ea1584d422d42b5ea09d37c8eb10, type: 2}

@@ -15,9 +15,10 @@ MonoBehaviour:
   questId: kill_slimes
   questName: "\uC2AC\uB77C\uC784\uC744 \uCC98\uCE58\uD558\uC790."
   description: "\uB9C8\uC744\uC5D0 \uC2AC\uB77C\uC784\uC774 \uBD80\uCA4D \uB298\uC5B4\uB0AC\uB2E4.
-    \uC2AC\uB77C\uC784\uC744 \uC7A1\uC544 \uB9C8\uC744 \uC8FC\uBBFC\uB4E4\uC744 \uC548\uC2EC\uC2DC\uCF1C\uC8FC\uC790."
+    \uC2AC\uB77C\uC784\uC744 100\uB9C8\uB9AC \uC7A1\uC544 \uB9C8\uC744 \uC8FC\uBBFC\uB4E4\uC744
+    \uC548\uC2EC\uC2DC\uCF1C\uC8FC\uC790."
   questType: 1
   targetId: slime
-  targetCount: 10
+  targetCount: 100
   rewardItems:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 4caf5f692e72db94e89a0197700903f1, type: 2}

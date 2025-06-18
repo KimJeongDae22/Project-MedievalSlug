@@ -204,7 +204,18 @@ MonoBehaviour:
   musicVolume: 0.5
   soundEffectPitchVariance: 0
   BGMClip:
-  - {fileID: 8300000, guid: b6dc04f2884eb5b46b675390b1e75e84, type: 3}
+  - {fileID: 8300000, guid: aa05c130e8d83b648b399bd8c8d7b09e, type: 3}
+  - {fileID: 8300000, guid: 8b4e1bce2abe81d4c8c4afe1a1b9fee4, type: 3}
+  - {fileID: 8300000, guid: c04a8e3316abc4640956cd5136dfb1ba, type: 3}
+  - {fileID: 8300000, guid: 94690973e8dcd9d40a08ab2e2cf9d197, type: 3}
+  SFXClip:
+  - {fileID: 8300000, guid: 465081afe4dc4154d9ec4baac249c37d, type: 3}
+  - {fileID: 8300000, guid: 0c46dddadbd9f954589378b14b1821ea, type: 3}
+  - {fileID: 8300000, guid: 7c9eeef3d125f804ab94a65843a01436, type: 3}
+  - {fileID: 8300000, guid: e46ca5770b278744ebfb75d2d59b2f67, type: 3}
+  - {fileID: 8300000, guid: b1fff165fee318c48a7993790f6fb7ce, type: 3}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 131cc8285179cff418bfe338bb2eb66e, type: 3}
   SFXPrefabs:
   - {fileID: 1194426706018000963, guid: aeaeb14e8aa4ea44f88ada48085d31bb, type: 3}
   soundSourcePoolIndex: 5

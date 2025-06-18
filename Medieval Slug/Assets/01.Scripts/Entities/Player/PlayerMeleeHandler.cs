@@ -13,9 +13,7 @@ public class PlayerMeleeHandler : MonoBehaviour
     [SerializeField] private float windupTime = 0.2f;
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerRangedHandler prh;
-    private bool isAttacking;
-
-    [SerializeField] private AudioClip attackAudioClip;   
+    private bool isAttacking; 
     
     public void OnMelee()
     {
