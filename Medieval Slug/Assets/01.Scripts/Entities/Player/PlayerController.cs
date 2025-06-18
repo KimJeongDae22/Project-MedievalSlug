@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
     private bool jumpRequest;
 
     int cachedSignBeforeMount = 1;   // 탑승 직전 부호
-    bool blockSelfFlip = false; // 탑승 중엔 Update → Flip 금지
     public bool IsFacingRight() => isFacingRight;
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
@@ -121,11 +120,9 @@ public class PlayerController : MonoBehaviour
         if (mounted)
         {
             cachedSignBeforeMount = transform.localScale.x >= 0 ? 1 : -1;
-            blockSelfFlip = true;
         }
         else
         {
-            blockSelfFlip = false;
             SetFacing(cachedSignBeforeMount > 0);
             playerRanged.SetWeaponEnabled(true);
         }
