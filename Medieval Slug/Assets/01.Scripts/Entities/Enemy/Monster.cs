@@ -11,6 +11,11 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
 
     [field: Header("Monster States")] [SerializeField]
     protected MonsterStateMachine stateMachine;
+    
+    [Header("VFX")]
+    [SerializeField] private GameObject burnVFX;
+    [SerializeField] private GameObject freezeVFX;
+    [SerializeField] private GameObject poisonVFX;
 
     [field: SerializeField] public virtual MonsterSO MonsterData { get; private set; }
     [SerializeField] private int health;
@@ -29,6 +34,10 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
             HasAnimator = true;
 
         stateMachine = GetComponent<MonsterStateMachine>();
+        
+        burnVFX = transform.Find("Sprite/EffectParticles/BurnEffect").gameObject;
+        freezeVFX = transform.Find("Sprite/EffectParticles/FreezeEffect").gameObject;
+        poisonVFX = transform.Find("Sprite/EffectParticles/PoisonEffect").gameObject;
     }
 
     protected virtual void Awake()
@@ -46,6 +55,10 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
         {
             stateMachine = GetComponent<MonsterStateMachine>();
         }
+        
+        burnVFX?.SetActive(false);
+        freezeVFX?.SetActive(false);
+        poisonVFX?.SetActive(false);
         
         Initialize();
     }
@@ -75,6 +88,9 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
     public void OnDespawn()
     {
         StopAllCoroutines();
+        burnVFX?.SetActive(false);
+        freezeVFX?.SetActive(false);
+        poisonVFX?.SetActive(false);
         returnToPool?.Invoke(gameObject);
     }
     
@@ -85,6 +101,9 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
     
     #endregion
     
+    private Coroutine burnVFXCoroutine;
+    private Coroutine lastPoisonVFXCoroutine;
+    
     public void ApplyEffect(EffectType effectType)
     {
         switch (effectType)
@@ -92,28 +111,50 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
             case EffectType.Nomal:
                 break;
             case EffectType.Burn:
+                if (burnVFXCoroutine != null)
+                {
+                    StopCoroutine(burnVFXCoroutine);
+                }
+                burnVFXCoroutine = StartCoroutine(BurningEffectCoroutine());
                 TakeDamage(1); // 추가 1 데미지
                 break;
             case EffectType.Deceleration:
                 if (!isSlowed)
                 {
+                    freezeVFX?.SetActive(true);
                     StartCoroutine(SlowSpeedCoroutine(2)); // 속도 절반으로 감속
                 }
                 break;
             case EffectType.Poisoning:
-                StartCoroutine(PoisoningCoroutine()); // 중족 데미지
+                poisonVFX?.SetActive(true);
+                lastPoisonVFXCoroutine = StartCoroutine(PoisoningCoroutine()); // 중족 데미지
                 break;
         }
     }
 
+    private IEnumerator BurningEffectCoroutine()
+    {
+        burnVFX?.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        burnVFX?.SetActive(false);
+        burnVFXCoroutine = null;
+    }
+
     private IEnumerator PoisoningCoroutine()
     {
+        Coroutine myCoroutine = lastPoisonVFXCoroutine;
+        
         int tick = 3;
 
         for (int i = 0; i < tick; i++)
         {
             TakeDamage(1);
             yield return new WaitForSeconds(1f);
+        }
+
+        if (myCoroutine == lastPoisonVFXCoroutine)
+        {
+            poisonVFX?.SetActive(false);
         }
     }
 
@@ -126,6 +167,7 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
 
         speed = MonsterData.MoveSpeed;
         isSlowed = false;
+        freezeVFX?.SetActive(false);
     }
 
     public void TakeDamage(int damage)
