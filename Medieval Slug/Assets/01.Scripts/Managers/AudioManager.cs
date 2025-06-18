@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : Singleton<AudioManager>
 {
@@ -15,16 +16,34 @@ public class AudioManager : Singleton<AudioManager>
 
     private AudioSource musicAudioSource;
     
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         musicAudioSource = GetComponent<AudioSource>();
         musicAudioSource.volume = musicVolume;
-        musicAudioSource.loop = true;
     }
 
-    private void Start()
+    protected override void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        ChangeBGM(BGMClip[2]);
+        switch (scene.name)
+        {
+            case SceneName.INTRO_SCENE:
+                ChangeBGM(BGMClip[0]);
+                break;
+            case SceneName.START_SCENE:
+                ChangeBGM(BGMClip[1]);
+                break;
+            case SceneName.MAIN_SCENE:
+                ChangeBGM(BGMClip[2]);
+                break;
+            case SceneName.BOSS_SCENE:
+                ChangeBGM(BGMClip[4]);
+                break;
+            case SceneName.ENDING_CREDIT_SCENE:
+                ChangeBGM(BGMClip[5]);
+                break;
+        }
     }
 
     public void ChangeBGM(AudioClip clip)
