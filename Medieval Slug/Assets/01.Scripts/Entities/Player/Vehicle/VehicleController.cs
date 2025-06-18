@@ -32,6 +32,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     
     [Header("[Stat]")]
     [SerializeField] float maxHp = 250; //HP를 별도의 필드로 정의
+    [SerializeField] private float currentHp;
 
     [Header("[Melee Weapon Setting]")]
     [SerializeField] private int meleeDamage = 10;
@@ -48,12 +49,18 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask wallLayer;
 
+    [SerializeField] string layerPlayer = "Player";
+    [SerializeField] string layerVehicle = "Vehicle";
+
+
     //유틸
-    private float currentHp;
     Rigidbody2D rb;
     private bool isAttacking;
     public bool jumpRequest;
     Vector2 cachedInput;
+    int playerLayer;   // 런타임에 미리 계산
+    int vehicleLayer;
+    int ignoreLayer;
 
     // 원거리 무기 관련 필드
     private ProjectileData currentArrowData;
@@ -75,11 +82,15 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     bool IsAgainstWall(int sign) =>
         Physics2D.OverlapCircle(wallCheckPoint.position + Vector3.right * wallRadius * sign, wallRadius, wallLayer);
 
+    public float VehicleHP() => currentHp;//정대님을 위한 프로포티><
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+
+        playerLayer = LayerMask.NameToLayer(layerPlayer);
+        vehicleLayer = LayerMask.NameToLayer(layerVehicle);
+
         currentHp = maxHp;
         currentArrowData = crossbow.projectileData;
         indicator.Show(true);
@@ -148,6 +159,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         rs.x = Mathf.Abs(rs.x);
         p.transform.localScale = rs;
 
+        SetLayerRecursively(transform, playerLayer);
         p.SetMountedState(true, this);
         indicator.Show(false);
 
@@ -172,6 +184,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         rider.SetMountedState(false, null);
         rider = null;
         indicator.Show(true);
+        SetLayerRecursively(transform, vehicleLayer);
         collector.ResetSetup();
     }
     #endregion
@@ -295,7 +308,13 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     {
         throw new System.NotImplementedException();
     }
+    void SetLayerRecursively(Transform root, int layer)
+    {
+        root.gameObject.layer = layer;
 
+        foreach (Transform child in root)
+            SetLayerRecursively(child, layer);
+    }
 
     #endregion
 
