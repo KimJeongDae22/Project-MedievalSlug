@@ -306,7 +306,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
 
     public void ApplyEffect(EffectType effectType)
     {
-        throw new System.NotImplementedException();
+
     }
     void SetLayerRecursively(Transform root, int layer)
     {
