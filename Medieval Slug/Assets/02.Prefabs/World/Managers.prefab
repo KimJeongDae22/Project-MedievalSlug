@@ -51,10 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <State>k__BackingField: 0
   score: 0
-  startScene: StartScene
-  mainScene: MainStage
-  bossScene: BossStage
-  endingScene: Ending
 --- !u!114 &4807319704765609663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +74,8 @@ MonoBehaviour:
   - {fileID: 1522214104785138172, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
   - {fileID: 1532668442158802693, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
   - {fileID: 3298963374946433179, guid: ee790ea1f852a4e47ad6c7b2e4666ee7, type: 3}
+  - {fileID: 647741398944936912, guid: a6808bb25c7aac04b9fe286800954b2e, type: 3}
+  - {fileID: 3933116385781919578, guid: df57abed95b0c4c4a8378e3372c6b307, type: 3}
 --- !u!114 &3530482847165556052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,17 +226,19 @@ MonoBehaviour:
   musicVolume: 0.5
   soundEffectPitchVariance: 0
   BGMClip:
+  - {fileID: 8300000, guid: 3e613b6aadae25a48928de7b65bf8871, type: 3}
   - {fileID: 8300000, guid: aa05c130e8d83b648b399bd8c8d7b09e, type: 3}
   - {fileID: 8300000, guid: 8b4e1bce2abe81d4c8c4afe1a1b9fee4, type: 3}
   - {fileID: 8300000, guid: c04a8e3316abc4640956cd5136dfb1ba, type: 3}
   - {fileID: 8300000, guid: 94690973e8dcd9d40a08ab2e2cf9d197, type: 3}
+  - {fileID: 8300000, guid: 73df9fa64e322c54baab75e2f112e82e, type: 3}
   SFXClip:
   - {fileID: 8300000, guid: 465081afe4dc4154d9ec4baac249c37d, type: 3}
   - {fileID: 8300000, guid: 0c46dddadbd9f954589378b14b1821ea, type: 3}
   - {fileID: 8300000, guid: 7c9eeef3d125f804ab94a65843a01436, type: 3}
   - {fileID: 8300000, guid: e46ca5770b278744ebfb75d2d59b2f67, type: 3}
   - {fileID: 8300000, guid: b1fff165fee318c48a7993790f6fb7ce, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: b1fff165fee318c48a7993790f6fb7ce, type: 3}
   - {fileID: 8300000, guid: 131cc8285179cff418bfe338bb2eb66e, type: 3}
   SFXPrefabs:
   - {fileID: 1194426706018000963, guid: aeaeb14e8aa4ea44f88ada48085d31bb, type: 3}
