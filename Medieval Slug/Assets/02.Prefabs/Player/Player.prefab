@@ -239,7 +239,7 @@ MonoBehaviour:
     m_Bits: 256
   VehicleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   wallRayRadius: 0.15
   wallCheckPoint: {fileID: 1773291076220465908}
   wallLayer:

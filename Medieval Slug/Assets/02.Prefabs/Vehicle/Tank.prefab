@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3473360710309007466}
   m_Layer: 9
   m_Name: Tank
-  m_TagString: Vehicle
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,13 +211,14 @@ MonoBehaviour:
   MeleeFx2: {fileID: 1199627267381111026}
   MoveFx: {fileID: 546164350741217106}
   maxHp: 250
+  currentHp: 0
   meleeDamage: 10
   meleeRange: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   windupTime: 0.2
-  meleeOffset: {x: 3, y: 0}
+  meleeOffset: {x: 3.5, y: 0}
   groundCheckPoint: {fileID: 2796268951183453614}
   wallCheckPoint: {fileID: 4130584906487627919}
   groundRadius: 0.18
@@ -228,6 +229,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 1024
+  layerPlayer: Player
+  layerVehicle: Vehicle
   jumpRequest: 0
 --- !u!1 &1909252854149196652
 GameObject:
@@ -714,7 +717,7 @@ GameObject:
   - component: {fileID: 3016855445302639523}
   m_Layer: 6
   m_Name: ItemCollectorProxy
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -947,7 +950,6 @@ MonoBehaviour:
   spawnPosition: {fileID: 9092983695796742825}
   projectileType: 4
   animator: {fileID: 2056895891132095980}
-  attackSoundClip: []
   user: {fileID: 0}
   projectileData: {fileID: 11400000, guid: f13aeae2cb5302a419742d8c5d87663f, type: 2}
 --- !u!1 &8641623648880255465
