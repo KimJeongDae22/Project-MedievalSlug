@@ -605,22 +605,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
-    - target: {fileID: 4807319704765609663, guid: 847118b8bb860904a8f68dcc24e9c351, type: 3}
-      propertyPath: prefabs.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4807319704765609663, guid: 847118b8bb860904a8f68dcc24e9c351, type: 3}
-      propertyPath: prefabs.Array.data[6]
-      value: 
-      objectReference: {fileID: 1522214104785138172, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
-    - target: {fileID: 4807319704765609663, guid: 847118b8bb860904a8f68dcc24e9c351, type: 3}
-      propertyPath: prefabs.Array.data[7]
-      value: 
-      objectReference: {fileID: 1532668442158802693, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
-    - target: {fileID: 4807319704765609663, guid: 847118b8bb860904a8f68dcc24e9c351, type: 3}
-      propertyPath: prefabs.Array.data[8]
-      value: 
-      objectReference: {fileID: 1532668442158802693, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
     - target: {fileID: 4858801951910654291, guid: 847118b8bb860904a8f68dcc24e9c351, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.460686

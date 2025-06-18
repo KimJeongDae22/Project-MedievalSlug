@@ -49,6 +49,11 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
     {
         ModifyStat(StatType.Health, -damage);
         animator.SetTrigger("Hurt");
+        UIManager.Instance.UIUpdate_PlayerHP();
+        if (GetStat(StatType.Health) <= 0)
+        {
+            Die();
+        }
     }
 
     public void ApplyEffect(EffectType effectType)

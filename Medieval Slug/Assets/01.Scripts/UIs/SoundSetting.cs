@@ -12,18 +12,16 @@ public class SoundSetting : MonoBehaviour
         bgmSlider.onValueChanged.AddListener(ChangeBGMVolume);
         sfxSlider.onValueChanged.AddListener(ChangeSFXVolume);
     }
-
-    // Update is called once per frame
     public void ChangeBGMVolume(float value)
     {
         // TODO
         // 사운드매니저 싱글톤 할당 후 인스턴스 불러오기
-        // ex) Singleton<AudioManager>.Instance().SetBGMVolume(value);
+        Singleton<AudioManager>.Instance.SetBGMVolume(value);
 
     }
     public void ChangeSFXVolume(float value)
     {
         // TODO
-        // 사운드매니저 싱글톤 할당 후 인스턴스 불러오기
+        Singleton<AudioManager>.Instance.SetSFXVolume(value);
     }
 }
