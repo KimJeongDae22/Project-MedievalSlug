@@ -79,14 +79,17 @@ public class Item : MonoBehaviour
         {
             case ItemType.Score:
                 GameManager.Instance.AddScore(itemData.value);
+                UIManager.Instance.UIUpdate_Score();
                 break;
             
             case ItemType.Weapon:
                 CharacterManager.Instance.PlayerItemCollector.OnArrowPickup(itemData.projectileData);
+                UIManager.Instance.UIUpdate_CurrentAmmo();
                 break;
             
             case ItemType.Health:
                 CharacterManager.Instance.PlayerItemCollector.OnHealthPickup(itemData.value);
+                UIManager.Instance.UIUpdate_PlayerHP();
                 break;
         }
     }
