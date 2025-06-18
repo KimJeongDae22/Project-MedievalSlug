@@ -13,17 +13,13 @@ public class PlayerMeleeHandler : MonoBehaviour
     [SerializeField] private float windupTime = 0.2f;
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerRangedHandler prh;
-    private bool isAttacking; 
-    
+    private bool isAttacking;
+    [SerializeField] private AudioClip attackAudioClip;
     public void OnMelee()
     {
         if (isAttacking) return;  
         StartCoroutine(PerformMelee());
 
-        if(AudioManager.Instance.SFXClip != null)
-        {
-            AudioManager.PlaySFXClip(AudioManager.Instance.SFXClip[0]);
-        }
     }
     private IEnumerator PerformMelee()
     {
@@ -42,7 +38,14 @@ public class PlayerMeleeHandler : MonoBehaviour
         if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
             target.TakeDamage(meleeDamage);
 
-        prh.SetWeaponEnabled(true);  
+        if(attackAudioClip != null)
+        {
+            AudioManager.PlaySFXClip(attackAudioClip);
+        }
+        prh.SetWeaponEnabled(true);
+
+        yield return new WaitForSeconds(0.21f); //방어코드
+        UnlockMelee();
     }
     public void UnlockMelee() => isAttacking = false;
 
