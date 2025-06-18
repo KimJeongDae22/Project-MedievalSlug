@@ -314,6 +314,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank
       objectReference: {fileID: 0}
+    - target: {fileID: 3473360710309007466, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: meleeRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3473360710309007466, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
+      propertyPath: meleeWidth
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7315879554401081948, guid: 2d7e720fc50ca4c47a3fec56088f7547, type: 3}
       propertyPath: m_LocalPosition.x
       value: 82.1
