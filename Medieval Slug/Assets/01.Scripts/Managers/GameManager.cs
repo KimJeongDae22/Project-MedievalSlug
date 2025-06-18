@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-public enum GameState { 
+public enum GameState
+{
     Start, // 게임 시작 화면 
     Playing, // 게임 중
     Paused, // 일시 정지
@@ -17,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     public bool IsPaused => State == GameState.Paused;
 
     [Header("[Score(Coin)]")]
-    [SerializeField] private int score= 0;
+    [SerializeField] private int score = 0;
 
     [Header("Scene Names")]
     [SerializeField] string startScene = "StartScene";   // 캐릭터 선택 포함 첫 화면
@@ -47,6 +45,25 @@ public class GameManager : Singleton<GameManager>
     }
     protected override void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
+        // 특정 씬에서는 캐릭터 비활성화
+        switch (scene.name)
+        {
+            case SceneName.INTRO_SCENE:
+                CharacterManager.Instance.gameObject.SetActive(false);
+                break;
+            case SceneName.CHARACTER_SELECT_SCENE:
+                CharacterManager.Instance.gameObject.SetActive(false);
+                break;
+            case SceneName.START_SCENE:
+                CharacterManager.Instance.gameObject.SetActive(false);
+                break;
+            case SceneName.ENDING_CREDIT_SCENE:
+                CharacterManager.Instance.gameObject.SetActive(false);
+                break;
+            default:
+                CharacterManager.Instance.gameObject.SetActive(true);
+                break;
+        }
         // 메인 씬에 갈 때마다 캐릭터 상태 초기화
         if (scene.name == SceneName.MAIN_SCENE)
         {
@@ -57,6 +74,7 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.UIUpdate_PlayerHP();
             UIManager.Instance.UIUpdate_CurrentAmmo();
         }
+
     }
     /// <summary>
     /// 씬 로더 매니저 API
