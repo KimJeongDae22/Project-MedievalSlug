@@ -213,7 +213,8 @@ MonoBehaviour:
   maxHp: 250
   currentHp: 0
   meleeDamage: 10
-  meleeRange: 1
+  meleeRange: 2
+  meleeWidth: 1.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -231,6 +232,7 @@ MonoBehaviour:
     m_Bits: 1024
   layerPlayer: Player
   layerVehicle: Vehicle
+  vehicleItemCollector: {fileID: 3016855445302639523}
   jumpRequest: 0
 --- !u!1 &1909252854149196652
 GameObject:
