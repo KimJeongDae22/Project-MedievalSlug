@@ -12,6 +12,7 @@ public class Pattern3 : BasePattern
     public override void Enter()
     {
         base.Enter();
+        isFireing = false;
         stateMachine.AllTurretAimTarget(stateMachine.CenterTarget, stateMachine.CenterTarget);
     }
     
@@ -38,7 +39,7 @@ public class Pattern3 : BasePattern
         {
             if(!stateMachine.LeftTurret.IsDead) 
                 stateMachine.MovingTargetA.DropBullet();
-            if(!stateMachine.LeftTurret.IsDead) 
+            if(!stateMachine.RightTurret.IsDead) 
                 stateMachine.MovingTargetB.DropBullet();
             dropCount++;
             yield return new WaitForSeconds(0.5f);

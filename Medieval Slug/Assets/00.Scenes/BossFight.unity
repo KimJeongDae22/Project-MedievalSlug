@@ -627,20 +627,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 686707927443687157}
     m_Modifications:
-    - target: {fileID: 540224687213888304, guid: d4ab664d38646ec489855fe677177641, type: 3}
-      propertyPath: pointA.x
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4217685978182533801, guid: d4ab664d38646ec489855fe677177641, type: 3}
       propertyPath: m_Name
       value: BossTurret
       objectReference: {fileID: 0}
     - target: {fileID: 4217685978182533801, guid: d4ab664d38646ec489855fe677177641, type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5864336991564043909, guid: d4ab664d38646ec489855fe677177641, type: 3}
-      propertyPath: pointA.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8084538234769640650, guid: d4ab664d38646ec489855fe677177641, type: 3}

@@ -247,7 +247,7 @@ PolygonCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 16448
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd85fc9040e321f4993d8d554af1e73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: -7, y: 2, z: 0}
+  pointA: {x: 0, y: 2, z: 0}
   pointB: {x: 13, y: 2, z: 0}
   speed: 0.4
   setSpeedRandom: 1
@@ -1374,7 +1374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd85fc9040e321f4993d8d554af1e73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: 13, y: 2, z: 0}
+  pointA: {x: 5, y: 2, z: 0}
   pointB: {x: -7, y: 2, z: 0}
   speed: 0.4
   setSpeedRandom: 1
@@ -2103,7 +2103,7 @@ PolygonCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 16448
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
