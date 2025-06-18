@@ -143,6 +143,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         vehicle.Mount(this);
+        UIManager.Instance.UIUpdate_TankUI();
     }
 
     Vector2 GetAimDir()
