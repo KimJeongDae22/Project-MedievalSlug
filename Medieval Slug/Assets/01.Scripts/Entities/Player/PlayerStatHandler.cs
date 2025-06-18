@@ -26,6 +26,7 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
     {
         currentStats.Clear();
         isDied = false;
+        animator.SetTrigger("Idle");
         foreach (var entry in statData.stat)
             currentStats[entry.statType] = entry.basevalue;
     }
