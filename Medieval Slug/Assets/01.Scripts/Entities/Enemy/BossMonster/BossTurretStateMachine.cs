@@ -122,6 +122,7 @@ public class BossTurretStateMachine : MonoBehaviour
 
     public void Defeat()
     {
+        StopAllCoroutines();
         LeftTurret.Animator.SetBool(LeftTurret.AnimationHash.DefeatParameterHash, true);
         RightTurret.Animator.SetBool(RightTurret.AnimationHash.DefeatParameterHash, true);
     }
