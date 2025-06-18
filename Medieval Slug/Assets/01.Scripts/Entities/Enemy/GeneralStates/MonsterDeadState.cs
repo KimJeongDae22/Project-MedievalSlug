@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class MonsterDeadState : MonsterBaseState
 {
     public MonsterDeadState(MonsterStateMachine stateMachine) : base(stateMachine)
