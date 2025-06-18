@@ -82,13 +82,11 @@ public class PlayerController : MonoBehaviour
         {
             // F키로 하차
             currentVehicle.Dismount();
-            playerRanged.SetWeaponEnabled(true);
         }
         else
         {
             // F키로 탑승
             TryMountNearestTank();
-            playerRanged.SetWeaponEnabled(false);
         }
     }
 
@@ -115,7 +113,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             blockSelfFlip = false;
-            SetFacing(cachedSignBeforeMount > 0);            // 원본 복구
+            SetFacing(cachedSignBeforeMount > 0);
+            playerRanged.SetWeaponEnabled(true);
         }
 
         isMounted = mounted;
@@ -132,8 +131,15 @@ public class PlayerController : MonoBehaviour
         {
             // 점프 애니메이션 & 힘
             rb.velocity = new Vector2(rb.velocity.x, mountJumpForce);
+            playerRanged.SetWeaponEnabled(false);
             StartCoroutine(MountAfterDelay(vehicle, 0.25f)); // 살짝 뜀 → 착지 시 탑승
         }
+        else 
+        {
+            Debug.Log("탈 것이 없습니다.");
+            return;
+        } 
+            
     }
 
     IEnumerator MountAfterDelay(VehicleController vehicle, float delay)
@@ -195,7 +201,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {   
-            return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);  
+        return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);  
     }
 
     private bool IsOnVehicle()
