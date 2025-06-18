@@ -4875,7 +4875,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2394577005294797508}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5061516391102690413}
+        m_TargetAssemblyTypeName: ClearUI, Assembly-CSharp
+        m_MethodName: Btn_GoingEndingCredit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6385823360040909085
 GameObject:
   m_ObjectHideFlags: 0

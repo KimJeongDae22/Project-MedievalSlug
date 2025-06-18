@@ -55,5 +55,6 @@ public class ClearUI : MonoBehaviour
     public void Btn_GoingEndingCredit()
     {
         SceneLoadManager.Instance.LoadScene(SceneName.ENDING_CREDIT_SCENE);
+        this.gameObject.SetActive(false);
     }
 }
