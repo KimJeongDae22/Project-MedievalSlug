@@ -21,7 +21,11 @@ namespace Entities.Player
         [SerializeField] private int currentAmmo;
 
         private RangeWeaponHandler bowHandler;
+
+        private ProjectileData defaultArrowData;
+        public ProjectileData DefaultArrowData => defaultArrowData;
         private ProjectileData currentArrowData;
+
         private float nextFireTime = 0f;
         private bool isBursting;
 
@@ -77,6 +81,7 @@ namespace Entities.Player
             bow.transform.localRotation = Quaternion.identity;
             bowHandler = bow.GetComponent<RangeWeaponHandler>();
             SetArrowData(bowHandler.projectileData);
+            defaultArrowData = bowHandler.projectileData;
             bowHandler.Setting(gameObject);
 
             if (bowHandler == null)
@@ -93,6 +98,12 @@ namespace Entities.Player
             currentAmmo = data.MaxNum;
             bowHandler.SetProjectileType(data.Type);
             // TODO: UI 이벤트 OnAmmoChanged?.Invoke(currentAmmo);
+        }
+        public void SetDefaultArrowData()
+        {
+            currentArrowData = defaultArrowData;
+            currentAmmo = defaultArrowData.MaxNum;
+            bowHandler.SetProjectileType(currentArrowData.Type);
         }
 
         public void HandleArrowPickup(ProjectileData data)

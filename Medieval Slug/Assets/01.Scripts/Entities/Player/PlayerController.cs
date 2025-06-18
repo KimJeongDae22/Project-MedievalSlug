@@ -55,12 +55,15 @@ public class PlayerController : MonoBehaviour
 
     public void OnMovement(InputAction.CallbackContext ctx)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
+
         moveInput = ctx.ReadValue<Vector2>();
         if (isMounted) currentVehicle.ReceiveInput(moveInput, moveInput.x);
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
         if (!ctx.started) return;
 
         if (isMounted && currentVehicle.IsGrounded()) currentVehicle.RequestJump();
@@ -69,7 +72,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext ctx)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
         if (!ctx.started) return;
+
         if (isMounted) currentVehicle.Fire(GetAimDir());
         else
         {
@@ -79,6 +84,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMount(InputAction.CallbackContext ctx)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
         if (!ctx.started) return;
 
         if (isMounted)
@@ -95,7 +101,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnMelee(InputAction.CallbackContext ctx)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
         if (!ctx.started) return;
+
         if (isMounted)
         {
             currentVehicle.Melee(ctx);
@@ -107,6 +115,7 @@ public class PlayerController : MonoBehaviour
     }
     public void SetMountedState(bool mounted, VehicleController vehicle)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
 
         if (mounted)
         {
@@ -129,6 +138,8 @@ public class PlayerController : MonoBehaviour
 
     void TryMountNearestTank()
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
+
         Collider2D hit = Physics2D.OverlapCircle(transform.position, mountCheckRadius, mountLayer);
         if (hit && hit.TryGetComponent(out VehicleController vehicle))
         {
@@ -193,6 +204,12 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpRequest = false;
         }
+
+        if (CharacterManager.Instance.StatHandler.IsDied)
+        {
+            rb.velocity = Vector2.zero;
+        }
+
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
     }
     public void SetFacing(bool right)
