@@ -146,12 +146,6 @@ public class PlayerController : MonoBehaviour
             playerRanged.SetWeaponEnabled(false);
             StartCoroutine(MountAfterDelay(vehicle, 0.25f)); // 살짝 뜀 → 착지 시 탑승
         }
-        else 
-        {
-            Debug.Log("탈 것이 없습니다.");
-            return;
-        } 
-            
     }
 
     IEnumerator MountAfterDelay(VehicleController vehicle, float delay)

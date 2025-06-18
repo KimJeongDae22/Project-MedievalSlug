@@ -15,16 +15,10 @@ public class GameManager : Singleton<GameManager>
     public bool IsPlaying => State == GameState.Playing || State == GameState.Boss;
     public bool IsPaused => State == GameState.Paused;
 
-    private bool isClear = false;
+    private bool isClear;
     public bool IsClear { get {return isClear; } set { isClear = value; } }
     [Header("[Score(Coin)]")]
-    [SerializeField] private int score = 0;
-
-    [Header("Scene Names")]
-    [SerializeField] string startScene = "StartScene";   // 캐릭터 선택 포함 첫 화면
-    [SerializeField] string mainScene = "MainStage";     // 메인 게임
-    [SerializeField] string bossScene = "BossStage";
-    [SerializeField] string endingScene = "Ending";
+    [SerializeField] private int score;
 
     float sessionStartRealtime;      // 실질적인 플레이 시간 계산을 위해 빼야 할 시각
     float accumulatedTime;           // 누적된 플레이 타임
@@ -139,7 +133,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (!IsPaused) return;
         // Boss 씬이면 Boss, 아니면 Playing
-        State = SceneManager.GetActiveScene().name == bossScene ? GameState.Boss : GameState.Playing;
+        State = SceneManager.GetActiveScene().name == SceneName.BOSS_SCENE ? GameState.Boss : GameState.Playing;
         Time.timeScale = 1f;
     }
     #endregion
