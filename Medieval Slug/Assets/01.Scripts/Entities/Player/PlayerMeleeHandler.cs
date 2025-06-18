@@ -44,7 +44,7 @@ public class PlayerMeleeHandler : MonoBehaviour
         }
         prh.SetWeaponEnabled(true);
 
-        yield return new WaitForSeconds(0.21f); //방어코드
+        yield return new WaitForSeconds(0.25f); //방어코드
         UnlockMelee();
     }
     public void UnlockMelee() => isAttacking = false;

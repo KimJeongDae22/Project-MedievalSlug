@@ -22,6 +22,7 @@ namespace Entities.Player
 
         private RangeWeaponHandler bowHandler;
         private ProjectileData currentArrowData;
+        private PlayerController player;
         private float nextFireTime = 0f;
         private bool isBursting;
 
@@ -62,10 +63,16 @@ namespace Entities.Player
                 /* 연사 간 미세 지연 */
                 if (i < burst - 1)
                     yield return new WaitForSeconds(0.11f);
+                    
             }
             isBursting = false;
+           
         }
-
+        void AlignBowToFacing()
+        {
+            float z = player.IsFacingRight() ? 0f : 180f;
+            bowHandler.transform.rotation = Quaternion.Euler(0f, 0f, z);
+        }
         /// <summary>
         /// 시작 시 기본활 생성
         /// </summary>
