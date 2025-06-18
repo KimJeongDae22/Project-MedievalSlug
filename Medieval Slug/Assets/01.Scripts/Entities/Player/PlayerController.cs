@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     int cachedSignBeforeMount = 1;   // 탑승 직전 부호
     bool blockSelfFlip = false; // 탑승 중엔 Update → Flip 금지
-
+    public bool IsFacingRight() => isFacingRight;
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
 
