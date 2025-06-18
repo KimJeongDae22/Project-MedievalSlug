@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6745470527682787094}
   - component: {fileID: 6551657610800734788}
   - component: {fileID: 633921220804297656}
-  - component: {fileID: 1565117062265877348}
   - component: {fileID: 2158622018464628264}
+  - component: {fileID: 5903736949521083967}
   m_Layer: 7
   m_Name: Eagle
   m_TagString: Untagged
@@ -108,23 +108,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1565117062265877348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3298963374946433179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcf5ac662e464cfabe4c50d88632aeb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Monster>k__BackingField: {fileID: 2158622018464628264}
-  <target>k__BackingField: {fileID: 0}
-  <targetLayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &2158622018464628264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +133,7 @@ MonoBehaviour:
     attackTriggerParameterName: AttackTrigger
     randomDropTriggerParameterName: RandomDropTrigger
   <HasAnimator>k__BackingField: 1
-  stateMachine: {fileID: 1565117062265877348}
+  stateMachine: {fileID: 0}
   burnVFX: {fileID: 7256418672518160464}
   freezeVFX: {fileID: 3728021702970798736}
   poisonVFX: {fileID: 4416295039339566689}
@@ -158,6 +141,23 @@ MonoBehaviour:
   health: 0
   speed: 0
   <MeleeCollider>k__BackingField: {fileID: 8865103176045662107}
+--- !u!114 &5903736949521083967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3298963374946433179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494ca29acd43a8c4aad5c6dea6147a3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Monster>k__BackingField: {fileID: 2158622018464628264}
+  <target>k__BackingField: {fileID: 0}
+  <targetLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8120944490431652483
 GameObject:
   m_ObjectHideFlags: 0

@@ -114,7 +114,7 @@ MonoBehaviour:
   scatterForce: 3
   upwardForce: 1
   scatterDelay: 0.1
-  physicsDisableTime: 1
+  physicsDisableTime: 2
   player: {fileID: 0}
 --- !u!82 &7731019544260143730
 AudioSource:

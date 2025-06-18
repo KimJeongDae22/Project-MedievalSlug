@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8f5a7bafc3945428249e6e80bdb3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabIndices: 060000000700000008000000
+  monsterPrefabIndices: 070000000800000009000000
   spawnRadius: 4
   spawnInterval: 3
   maxMonsters: 5
