@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = System.Random;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
@@ -21,7 +22,6 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
     
     // 풀링용 추가 변수
     private Action<GameObject> returnToPool;
-    private int prefabIndex;
 
     protected virtual void Reset()
     {
@@ -43,7 +43,6 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
         health = MonsterData.Health;
         speed = MonsterData.MoveSpeed;
         isSlowed = false;
-        stateMachine.ChangeState(stateMachine.IdleState);
         AnimationHash.Initialize();
     }
     
@@ -52,6 +51,7 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
     public void Initialize(Action<GameObject> returnAction)
     {
         returnToPool = returnAction;
+        Initialize();
     }
 
     public void OnSpawn()
@@ -62,12 +62,13 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
 
     public void OnDespawn()
     {
+        StopAllCoroutines();
         returnToPool?.Invoke(gameObject);
     }
     
     public void SetPrefabIndex(int index)
     {
-        prefabIndex = index;
+        
     }
     
     #endregion
@@ -134,10 +135,8 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
         stateMachine.ChangeState(stateMachine.DeadState);
     }
 
-    public void DisableGameObject()
+    public void OnDie()
     {
-        returnToPool.Invoke(transform.parent.gameObject);
+        
     }
-
-    
 }

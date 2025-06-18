@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MonsterSpawner : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private int[] monsterPrefabIndices; // ObjectPoolManager의 프리팹 인덱스들
+    [SerializeField] private float spawnRadius;
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private int maxMonsters = 10;
     
     private int currentMonsterCount;
     private float lastSpawnTime;
-    
+
     private void Update()
     {
         if (ShouldSpawn())
@@ -27,14 +29,22 @@ public class MonsterSpawner : MonoBehaviour
     
     private void SpawnRandomMonster()
     {
-        if (spawnPoints.Length == 0 || monsterPrefabIndices.Length == 0) return;
+        if (monsterPrefabIndices.Length == 0) return;
         
-        // 랜덤 스폰 포인트, 몬스터 타입 선택
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        // 위치 계산
+        Vector2 spawnPosition = GetRandomSpawnPosition(transform);
         int monsterIndex = Random.Range(0, monsterPrefabIndices.Length);
         
-        SpawnMonster(monsterPrefabIndices[monsterIndex], spawnPoint.position);
+        SpawnMonster(monsterPrefabIndices[monsterIndex], spawnPosition);
     }
+    
+    
+    private Vector2 GetRandomSpawnPosition(Transform spawnPoint)
+    {
+        Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
+        return (Vector2)spawnPoint.position + randomCircle;
+    }
+    
     
     public void SpawnMonster(int prefabIndex, Vector2 position)
     {
@@ -58,9 +68,12 @@ public class MonsterSpawner : MonoBehaviour
         }
     }
     
-    // 몬스터 죽었을 때
-    public void OnMonsterDied()
+    /// <summary>
+    /// 디버그용 기즈모 표시
+    /// </summary>
+    private void OnDrawGizmos()
     {
-        currentMonsterCount = Mathf.Max(0, currentMonsterCount - 1);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }
 }

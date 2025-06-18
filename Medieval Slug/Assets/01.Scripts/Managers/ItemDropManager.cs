@@ -25,7 +25,6 @@ public class ItemDropManager : Singleton<ItemDropManager>
         availableItems = Resources.LoadAll<ItemData>("Items");
         
         if (availableItems.Length == 0) Debug.LogError("No Items Available");
-        else Debug.Log($"{availableItems.Length} Items Loaded");
     }
     
     /// <summary>
