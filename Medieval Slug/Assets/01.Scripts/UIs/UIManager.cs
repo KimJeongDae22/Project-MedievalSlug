@@ -12,6 +12,7 @@ public class UIManager : Singleton<UIManager>
 {
     private UsuallyMessage usuallyMessage;
     private ClearUI clearUI;
+    private DeadUI deadUI;
     private Canvas canvas;
     private TextMeshProUGUI score;
 
@@ -35,6 +36,7 @@ public class UIManager : Singleton<UIManager>
     {
         usuallyMessage = Util.FindChild<UsuallyMessage>(transform, "UsuallyMessage");
         clearUI = Util.FindChild<ClearUI>(transform, "ClearCanvas");
+        deadUI = Util.FindChild<DeadUI>(transform, "DeadCanvas");
         canvas = Util.FindChild<Canvas>(transform, "Canvas");
         score = Util.FindChild<TextMeshProUGUI>(transform, "ScoreText");
         currentAmmo = Util.FindChild<TextMeshProUGUI>(transform, "PTAmount");
@@ -156,7 +158,7 @@ public class UIManager : Singleton<UIManager>
         // 일시 정지 기능 활성화, 로딩 중이거나 특정 씬에서는 안뜨도록 설정
         if (!SceneLoadManager.Instance.IsLoading)
         {
-            if (canvas.gameObject.activeSelf && !clearUI.gameObject.activeSelf)
+            if (canvas.gameObject.activeSelf && !clearUI.gameObject.activeSelf && !CharacterManager.Instance.StatHandler.IsDied)
             {
                 if (Time.timeScale == 1f)
                 {
@@ -176,6 +178,11 @@ public class UIManager : Singleton<UIManager>
     {
         clearUI.gameObject.SetActive(true);
         clearUI.ClearUIEnable();
+    }
+    public void ShowDeadUI()
+    {
+        deadUI.gameObject.SetActive(true);
+        deadUI.DeadUIEnable();
     }
     public void UIUpdate_CurrentAmmo()
     {
