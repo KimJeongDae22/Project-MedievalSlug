@@ -8,7 +8,7 @@ public class CharacterSelectSceneUI : MonoBehaviour
     {
         // TODO
         // 캐릭터가 일단 하나이므로 별다른 코드 없이 씬 전환
-        SceneLoadManager.Instance.LoadScene(SceneName.KJD_SCENE);
+        SceneLoadManager.Instance.LoadScene(SceneName.MAIN_SCENE);
     }
     public void Btn_CharacterSelect_2()
     {

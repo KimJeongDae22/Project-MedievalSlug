@@ -24,6 +24,8 @@ public class FlyingMonsterAttackState : MonsterBaseState
         originalPosition = StateMachine.Monster.transform.position;
         attackTargetPosition = StateMachine.target.position;
         
+        FlyingStateMachine.MeleeMonster.MeleeCollider.EnableCollider();
+        
         if (StateMachine.Monster.HasAnimator) 
             StartAnimation(StateMachine.Monster.AnimationHash.AttackParameterHash);
     }
@@ -38,7 +40,7 @@ public class FlyingMonsterAttackState : MonsterBaseState
         }
         else if (!isReturning && IsReachedPlayer())
         {
-            FlyingStateMachine.MeleeMonster.DisableCollider();
+            FlyingStateMachine.MeleeMonster.MeleeCollider.DisableCollider();
             isReturning = true;
             
             if (StateMachine.Monster.HasAnimator) 

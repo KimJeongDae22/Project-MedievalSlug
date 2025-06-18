@@ -9,17 +9,15 @@ public class ProjectileController : MonoBehaviour, IPoolable
     [SerializeField] private Faction faction;
     [SerializeField] private EffectType curEffectType;
 
-    [SerializeField] private List<AudioClip> attackSoundClip;
-
     private Vector2 direction;
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D _rigidbody;
     private float curduration;
 
     private Action<GameObject> returnToPool;
 
     void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     public void Init(Vector2 shootDircetion)
@@ -27,7 +25,7 @@ public class ProjectileController : MonoBehaviour, IPoolable
         this.direction = shootDircetion.normalized;
         this.curduration = 0f;
 
-        rigidbody.velocity = direction * projectileData.ShotSpeed;
+        _rigidbody.velocity = direction * projectileData.ShotSpeed;
     }
 
     void Update()
@@ -46,13 +44,13 @@ public class ProjectileController : MonoBehaviour, IPoolable
         {
             int playerLayer = LayerMask.NameToLayer("Player");
             int enemyLayer = LayerMask.NameToLayer("Enemy");
-            Debug.Log(target);
+            //Debug.Log(target);
             if ((faction == Faction.Player && collision.gameObject.layer == enemyLayer) || // Layer에 따른 화살 공격 여부
                 (faction == Faction.Enemy && collision.gameObject.layer == playerLayer))
             {
-                if (attackSoundClip != null)
+                if (AudioManager.Instance.SFXClip != null)
                 {
-                    AudioManager.PlaySFXClip(attackSoundClip[0]);
+                    AudioManager.PlaySFXClip(AudioManager.Instance.SFXClip[6]);
                 }
                 target.TakeDamage((int)projectileData.Damage);
                 target.ApplyEffect(curEffectType);

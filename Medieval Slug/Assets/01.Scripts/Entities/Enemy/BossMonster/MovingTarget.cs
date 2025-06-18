@@ -20,9 +20,18 @@ public class MovingTarget : MonoBehaviour
         transform.position = Vector3.Lerp(pointA, pointB, t);
     }
 
-    public void DropBullet()
+    public void DropBullet(Transform target, bool towardPlayer = false)
     {
-        ProjectileManager.Instance.Shoot(Vector2.down, transform, ProjectileType.Slime);
+        switch (towardPlayer)
+        {
+            case false:
+                ProjectileManager.Instance.Shoot(Vector2.down, transform, ProjectileType.Slime);
+                break;
+            case true:
+                Vector2 dir = (target.position - transform.position).normalized;
+                ProjectileManager.Instance.Shoot(dir, transform, ProjectileType.Slime);
+                break;
+        }
     }
     
     private void OnDrawGizmos()

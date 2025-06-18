@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 8163179160973770422}
   - component: {fileID: 6799457534693210753}
   - component: {fileID: 5510620291520525985}
+  - component: {fileID: 5150746925184293626}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9056047054283940948
 Transform:
   m_ObjectHideFlags: 0
@@ -119,11 +120,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c614a452d58ca498722f5dc02d17cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Monster>k__BackingField: {fileID: 1301285300495454382}
+  <Monster>k__BackingField: {fileID: 5150746925184293626}
   <target>k__BackingField: {fileID: 0}
   <targetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &5150746925184293626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522214104785138172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef33b99e45d364942b1c1b14f390273b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Animator>k__BackingField: {fileID: 3527447057664856588}
+  <AnimationHash>k__BackingField:
+    idleParameterName: Idle
+    runParameterName: Run
+    attackParameterName: Attack
+    deadParameterName: Dead
+    hitParameterName: Hit
+    halfHealthParameterName: HalfHealth
+    appearingParameterName: Appearing
+    defeatParameterName: Defeat
+    attackTriggerParameterName: AttackTrigger
+    randomDropTriggerParameterName: RandomDropTrigger
+  <HasAnimator>k__BackingField: 1
+  Score: 200
+  stateMachine: {fileID: 5510620291520525985}
+  burnVFX: {fileID: 8464068931336871100}
+  freezeVFX: {fileID: 2484021564571422332}
+  poisonVFX: {fileID: 3210019247360207501}
+  <MonsterData>k__BackingField: {fileID: 11400000, guid: 5d983d5473ee4d349be0710859bc58e7, type: 2}
+  health: 0
+  speed: 0
+  <MeleeCollider>k__BackingField: {fileID: 8804629628678753413}
 --- !u!1 &3504495294394464896
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +171,7 @@ GameObject:
   - component: {fileID: 3527447057664856588}
   - component: {fileID: 8604316065426993281}
   - component: {fileID: 2738684958390053259}
-  - component: {fileID: 1301285300495454382}
+  - component: {fileID: 8804629628678753413}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -156,7 +191,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4749514349368525913}
   m_Father: {fileID: 9056047054283940948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3527447057664856588
@@ -277,7 +313,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.25}
   m_EdgeRadius: 0
---- !u!114 &1301285300495454382
+--- !u!114 &8804629628678753413
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,23 +322,85 @@ MonoBehaviour:
   m_GameObject: {fileID: 3504495294394464896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef33b99e45d364942b1c1b14f390273b, type: 3}
+  m_Script: {fileID: 11500000, guid: df56b793f3cd8db47854a6456d2d0b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Animator>k__BackingField: {fileID: 3527447057664856588}
-  <AnimationHash>k__BackingField:
-    idleParameterName: Idle
-    runParameterName: Run
-    attackParameterName: Attack
-    deadParameterName: Dead
-    hitParameterName: Hit
-    halfHealthParameterName: HalfHealth
-    appearingParameterName: Appearing
-    defeatParameterName: Defeat
-    attackTriggerParameterName: AttackTrigger
-    randomDropTriggerParameterName: RandomDropTrigger
-  <HasAnimator>k__BackingField: 1
-  stateMachine: {fileID: 5510620291520525985}
-  <MonsterData>k__BackingField: {fileID: 11400000, guid: 5d983d5473ee4d349be0710859bc58e7, type: 2}
-  health: 0
-  speed: 0
+  monster: {fileID: 5150746925184293626}
+  collider2D: {fileID: 2738684958390053259}
+--- !u!1001 &6807807482992835391
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2013411201887392425}
+    m_Modifications:
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735538167214532845, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+      propertyPath: m_Name
+      value: EffectParticles
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+--- !u!1 &2484021564571422332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8936043971486430531, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+  m_PrefabInstance: {fileID: 6807807482992835391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3210019247360207501 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8283940135047451058, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+  m_PrefabInstance: {fileID: 6807807482992835391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4749514349368525913 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2275332614392119142, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+  m_PrefabInstance: {fileID: 6807807482992835391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8464068931336871100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3101952164676347779, guid: 8a9fba42febcd4d4b8444b54d08c873a, type: 3}
+  m_PrefabInstance: {fileID: 6807807482992835391}
+  m_PrefabAsset: {fileID: 0}

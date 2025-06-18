@@ -32,10 +32,14 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     
     [Header("[Stat]")]
     [SerializeField] float maxHp = 250; //HP를 별도의 필드로 정의
+    public float MaxHp => maxHp;
+
+    [SerializeField] private float currentHp;
 
     [Header("[Melee Weapon Setting]")]
     [SerializeField] private int meleeDamage = 10;
     [SerializeField] private float meleeRange = 1f;
+    [SerializeField] private float meleeWidth;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float windupTime = 0.5f;
     [SerializeField] private Vector2 meleeOffset = new Vector2(1.0f, 0.0f);
@@ -48,12 +52,17 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask wallLayer;
 
+    [SerializeField] string layerPlayer = "Player";
+    [SerializeField] string layerVehicle = "Vehicle";
+    [SerializeField] VehicleItemCollector vehicleItemCollector;
+
     //유틸
-    private float currentHp;
     Rigidbody2D rb;
     private bool isAttacking;
     public bool jumpRequest;
     Vector2 cachedInput;
+    int playerLayer;   // 런타임에 미리 계산
+    int vehicleLayer;
 
     // 원거리 무기 관련 필드
     private ProjectileData currentArrowData;
@@ -75,11 +84,15 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     bool IsAgainstWall(int sign) =>
         Physics2D.OverlapCircle(wallCheckPoint.position + Vector3.right * wallRadius * sign, wallRadius, wallLayer);
 
+    public float VehicleHP() => currentHp;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+
+        playerLayer = LayerMask.NameToLayer(layerPlayer);
+        vehicleLayer = LayerMask.NameToLayer(layerVehicle);
+        vehicleItemCollector.gameObject.SetActive(false);
         currentHp = maxHp;
         currentArrowData = crossbow.projectileData;
         indicator.Show(true);
@@ -148,9 +161,11 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         rs.x = Mathf.Abs(rs.x);
         p.transform.localScale = rs;
 
+        SetLayerRecursively(transform, playerLayer);
         p.SetMountedState(true, this);
         indicator.Show(false);
-
+        vehicleItemCollector.gameObject.SetActive(true);
+        UIManager.Instance.UIUpdate_TankUI();
     }
 
     /// <summary>
@@ -172,7 +187,10 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         rider.SetMountedState(false, null);
         rider = null;
         indicator.Show(true);
+        SetLayerRecursively(transform, vehicleLayer);
         collector.ResetSetup();
+        vehicleItemCollector.gameObject.SetActive(false);
+        UIManager.Instance.UIUpdate_TankUI();
     }
     #endregion
 
@@ -231,33 +249,44 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         StartMeleeFx("Attack");
         yield return new WaitForSeconds(windupTime);
 
-
-        float sign = Mathf.Sign(transform.lossyScale.x);   // +1 : 오른쪽,  -1 : 왼쪽
+        float sign = Mathf.Sign(transform.lossyScale.x);     // +1 오른쪽, -1 왼쪽
         Vector2 dir = Vector2.right * sign;
+        Vector2 center = (Vector2)transform.position           // 전차 기준
+                        + dir * meleeOffset.x                   // 앞뒤 오프셋
+                        + Vector2.up * meleeOffset.y;           // 높이
+        Vector2 size = new Vector2(meleeRange, meleeWidth);  // ★ 가로·세로
+        float angle = 0f;
 
-        Vector2 origin = (Vector2)transform.position
-                       + Vector2.right * meleeOffset.x * sign   // 앞뒤 오프셋
-                       + Vector2.up * meleeOffset.y;         // 높이
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(center, size, angle, dir, 0f, enemyLayer);
+        foreach (var h in hits)
+            if (h.collider.TryGetComponent<IDamagable>(out var target))
+                target.TakeDamage(meleeDamage);
 
-        RaycastHit2D hit = Physics2D.Raycast(origin, dir, meleeRange, enemyLayer);
-        if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
-            target.TakeDamage(meleeDamage);
-
+        DebugDrawBoxCast(center, size, angle, Color.red, 0.2f); // 개발용 시각화
         isAttacking = false;
     }
-    void OnDrawGizmosSelected()
+    void DebugDrawBoxCast(Vector2 center, Vector2 size, float angle, Color col, float dur)
     {
-        Gizmos.color = Color.red;
+        Vector2 half = size * 0.5f;
 
-        float sign = Mathf.Sign(transform.lossyScale.x);
-        Vector2 dir = Vector2.right * sign;
-        Vector2 origin = (Vector2)transform.position
-                       + Vector2.right * meleeOffset.x * sign
-                       + Vector2.up * meleeOffset.y;
+        // Vector3 배열로 선언해 타입 충돌 원천 차단
+        Vector3[] p = new Vector3[4] {
+        new Vector3(-half.x, -half.y, 0),
+        new Vector3(-half.x,  half.y, 0),
+        new Vector3( half.x,  half.y, 0),
+        new Vector3( half.x, -half.y, 0)
+    };
 
-        Gizmos.DrawWireSphere(origin, meleeRange);
-        Gizmos.DrawLine(origin, origin + dir * meleeRange);
+        Quaternion rot = Quaternion.Euler(0, 0, angle);
+        Vector3 center3 = new Vector3(center.x, center.y, 0);
 
+        for (int i = 0; i < 4; i++)
+            p[i] = center3 + rot * p[i];
+
+        Debug.DrawLine(p[0], p[1], col, dur);
+        Debug.DrawLine(p[1], p[2], col, dur);
+        Debug.DrawLine(p[2], p[3], col, dur);
+        Debug.DrawLine(p[3], p[0], col, dur);
     }
 
     private void StartMeleeFx(string name)
@@ -274,6 +303,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         currentHp -= dmg;
         animator.SetTrigger("Hurt");
         if (currentHp <= 0) StartCoroutine(Exploeded());
+        UIManager.Instance.UIUpdate_TankUI();
     }
 
     public IEnumerator Exploeded()
@@ -293,9 +323,15 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
 
     public void ApplyEffect(EffectType effectType)
     {
-        throw new System.NotImplementedException();
-    }
 
+    }
+    void SetLayerRecursively(Transform root, int layer)
+    {
+        root.gameObject.layer = layer;
+
+        foreach (Transform child in root)
+            SetLayerRecursively(child, layer);
+    }
 
     #endregion
 

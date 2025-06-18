@@ -8,6 +8,8 @@ public static class SceneName
 {
     public const string START_SCENE = "StartScene";
     public const string CHARACTER_SELECT_SCENE = "CharacterSelectScene";
-    public const string KJD_SCENE = "KJDScene";
-    public const string KJD_START_SCENE = "KJDStartScene";
+    public const string INTRO_SCENE = "IntroScene";
+    public const string MAIN_SCENE = "MainScene";
+    public const string BOSS_SCENE = "BossScene";
+    public const string ENDING_CREDIT_SCENE = "EndingCreditScene";
 }

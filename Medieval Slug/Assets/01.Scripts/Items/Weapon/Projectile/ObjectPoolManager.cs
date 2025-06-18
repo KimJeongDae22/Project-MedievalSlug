@@ -1,20 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     [SerializeField] private GameObject[] prefabs;
+    private GameObject poolRoot;
     private Dictionary<int, Queue<GameObject>> pools = new Dictionary<int, Queue<GameObject>>();
 
-    void Awake()
+    protected override void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
+        if (poolRoot != null)
+        {
+            return;
+        }
+        poolRoot = new GameObject("ObjectPool_Root");
+        //DontDestroyOnLoad(poolRoot);
+
         for (int i = 0; i < prefabs.Length; i++)
         {
             pools[i] = new Queue<GameObject>();
         }
     }
-
     public GameObject GetObject(int prefabIndex, Vector2 position, Quaternion rotation)
     {
         if (!pools.ContainsKey(prefabIndex))
@@ -35,6 +42,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
 
         obj.transform.SetPositionAndRotation(position, rotation);
+        obj.transform.SetParent(poolRoot.transform);
         obj.SetActive(true);
         obj.GetComponent<IPoolable>()?.OnSpawn();
         return obj;
@@ -50,5 +58,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
         obj.SetActive(false);
         pools[prefabIndex].Enqueue(obj);
+
+        obj.transform.SetParent(poolRoot.transform);
     }
 }

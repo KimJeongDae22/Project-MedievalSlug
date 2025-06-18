@@ -8,10 +8,13 @@ public class ItemDropManager : Singleton<ItemDropManager>
     [SerializeField] private ItemData[] availableItems; // 드롭 가능한 아이템들
     
     [Header("Scatter Effect Settings")]
-    [SerializeField] private float scatterForce = 3f;
-    [SerializeField] private float upwardForce = 1f;
-    [SerializeField] private float scatterDelay = 0.1f;
-    [SerializeField] private float physicsDisableTime = 1f; // 물리엔진 비활성화
+    [SerializeField] private float scatterForce;
+    [SerializeField] private float upwardForce;
+    [SerializeField] private float scatterDelay;
+    [SerializeField] private float physicsDisableTime; // 물리엔진 비활성화
+    
+    
+    // constants
 
 
     protected override void Awake()
@@ -25,7 +28,6 @@ public class ItemDropManager : Singleton<ItemDropManager>
         availableItems = Resources.LoadAll<ItemData>("Items");
         
         if (availableItems.Length == 0) Debug.LogError("No Items Available");
-        else Debug.Log($"{availableItems.Length} Items Loaded");
     }
     
     /// <summary>
@@ -113,7 +115,7 @@ public class ItemDropManager : Singleton<ItemDropManager>
         
         // 힘 방향 계산
         Vector2 forceDirection = scatterDirection;
-        forceDirection.y += upwardForce * 0.5f;
+        forceDirection.y += upwardForce;
         float forceMagnitude = scatterForce * Random.Range(0.8f, 1.2f);
         
         // 힘 적용

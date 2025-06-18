@@ -10,6 +10,8 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
     public StatData statData;
     [SerializeField]private Dictionary<StatType, float> currentStats = new Dictionary<StatType, float>();
 
+    private bool isDied;
+    public bool IsDied => isDied;
     public event Action<StatType, float> OnStatChanged;
 
     [SerializeField]private Animator animator;
@@ -20,9 +22,11 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
 
     }
 
-    private void InitializeStats()
+    public void InitializeStats()
     {
         currentStats.Clear();
+        isDied = false;
+        animator.SetTrigger("Idle");
         foreach (var entry in statData.stat)
             currentStats[entry.statType] = entry.basevalue;
     }
@@ -47,8 +51,15 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
 
     public void TakeDamage(int damage)
     {
+        if (isDied) return;
+
         ModifyStat(StatType.Health, -damage);
         animator.SetTrigger("Hurt");
+        UIManager.Instance.UIUpdate_PlayerHP();
+        if (GetStat(StatType.Health) <= 0)
+        {
+            Die();
+        }
     }
 
     public void ApplyEffect(EffectType effectType)
@@ -57,7 +68,9 @@ public class PlayerStatHandler : MonoBehaviour, IDamagable
 
     public void Die()
     {
+        isDied = true;
         animator.SetTrigger("Die");
+        UIManager.Instance.ShowDeadUI();
     }
 }
 

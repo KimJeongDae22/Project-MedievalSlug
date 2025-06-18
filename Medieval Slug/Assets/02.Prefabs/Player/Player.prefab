@@ -239,7 +239,10 @@ MonoBehaviour:
     m_Bits: 256
   VehicleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  MonsterLayer:
+    serializedVersion: 2
+    m_Bits: 128
   wallRayRadius: 0.15
   wallCheckPoint: {fileID: 1773291076220465908}
   wallLayer:
@@ -425,7 +428,7 @@ Transform:
   m_GameObject: {fileID: 4195014018803913601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.26, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -472,7 +475,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 713849428417524475, guid: bd20d8352d37a8242babc0457c52b048, type: 3}
+  m_Sprite: {fileID: 1033881276, guid: 63389455a7f77c348909656704961c0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

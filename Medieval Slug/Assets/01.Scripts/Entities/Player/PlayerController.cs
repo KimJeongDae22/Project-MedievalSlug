@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 1f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask VehicleLayer;
+    [SerializeField] private LayerMask MonsterLayer;
     [SerializeField] float wallRayRadius = 0.15f;
     [SerializeField] Transform wallCheckPoint;
     [SerializeField] LayerMask wallLayer;
@@ -38,35 +39,42 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask mountLayer;
     [SerializeField] float mountJumpForce = 4f;
     [SerializeField] VehicleController currentVehicle;
+    public VehicleController CurrentVehicle => currentVehicle;
+
     bool isMounted;
+    public bool IsMounted => isMounted;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool jumpRequest;
 
     int cachedSignBeforeMount = 1;   // 탑승 직전 부호
-    bool blockSelfFlip = false; // 탑승 중엔 Update → Flip 금지
-
+    public bool IsFacingRight() => isFacingRight;
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
 
     public void OnMovement(InputAction.CallbackContext ctx)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
+
         moveInput = ctx.ReadValue<Vector2>();
         if (isMounted) currentVehicle.ReceiveInput(moveInput, moveInput.x);
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
         if (!ctx.started) return;
 
         if (isMounted && currentVehicle.IsGrounded()) currentVehicle.RequestJump();
-        else if (IsGrounded() || IsOnVehicle()) jumpRequest = true;
+        else if (IsGrounded() || IsOnVehicle() || IsOnMonster()) jumpRequest = true;
     }
 
     public void OnFire(InputAction.CallbackContext ctx)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
         if (!ctx.started) return;
+
         if (isMounted) currentVehicle.Fire(GetAimDir());
         else
         {
@@ -76,25 +84,26 @@ public class PlayerController : MonoBehaviour
 
     public void OnMount(InputAction.CallbackContext ctx)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
         if (!ctx.started) return;
 
         if (isMounted)
         {
             // F키로 하차
             currentVehicle.Dismount();
-            playerRanged.SetWeaponEnabled(true);
         }
         else
         {
             // F키로 탑승
             TryMountNearestTank();
-            playerRanged.SetWeaponEnabled(false);
         }
     }
 
     public void OnMelee(InputAction.CallbackContext ctx)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
         if (!ctx.started) return;
+
         if (isMounted)
         {
             currentVehicle.Melee(ctx);
@@ -106,16 +115,16 @@ public class PlayerController : MonoBehaviour
     }
     public void SetMountedState(bool mounted, VehicleController vehicle)
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
 
         if (mounted)
         {
             cachedSignBeforeMount = transform.localScale.x >= 0 ? 1 : -1;
-            blockSelfFlip = true;
         }
         else
         {
-            blockSelfFlip = false;
-            SetFacing(cachedSignBeforeMount > 0);            // 원본 복구
+            SetFacing(cachedSignBeforeMount > 0);
+            playerRanged.SetWeaponEnabled(true);
         }
 
         isMounted = mounted;
@@ -127,11 +136,14 @@ public class PlayerController : MonoBehaviour
 
     void TryMountNearestTank()
     {
+        if (CharacterManager.Instance.StatHandler.IsDied) return;
+
         Collider2D hit = Physics2D.OverlapCircle(transform.position, mountCheckRadius, mountLayer);
         if (hit && hit.TryGetComponent(out VehicleController vehicle))
         {
             // 점프 애니메이션 & 힘
             rb.velocity = new Vector2(rb.velocity.x, mountJumpForce);
+            playerRanged.SetWeaponEnabled(false);
             StartCoroutine(MountAfterDelay(vehicle, 0.25f)); // 살짝 뜀 → 착지 시 탑승
         }
     }
@@ -140,6 +152,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         vehicle.Mount(this);
+        UIManager.Instance.UIUpdate_TankUI();
     }
 
     Vector2 GetAimDir()
@@ -183,6 +196,12 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpRequest = false;
         }
+
+        if (CharacterManager.Instance.StatHandler.IsDied)
+        {
+             moveInput = Vector2.zero;
+        }
+
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
     }
     public void SetFacing(bool right)
@@ -195,12 +214,16 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {   
-            return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);  
+        return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);  
     }
 
     private bool IsOnVehicle()
     {
         return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, VehicleLayer);
+    }
+    private bool IsOnMonster()
+    {
+        return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, MonsterLayer);
     }
 
     bool IsAgainstWall(int sign)

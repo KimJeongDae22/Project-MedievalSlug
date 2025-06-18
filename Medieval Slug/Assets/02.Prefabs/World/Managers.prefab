@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4858801951910654291}
+  - component: {fileID: 9133490105636211473}
   - component: {fileID: 4807319704765609663}
   - component: {fileID: 3530482847165556052}
   - component: {fileID: 7927638196214482133}
@@ -36,6 +37,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9133490105636211473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4045466629833914926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910e06814daedc84685441222f1c1d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <State>k__BackingField: 0
+  score: 0
 --- !u!114 &4807319704765609663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,8 +68,14 @@ MonoBehaviour:
   - {fileID: 8680024578488899071, guid: bbc5f5096334c34428dac69453a799f3, type: 3}
   - {fileID: 7070732628925078540, guid: dc799518451ebd54986cf0a403ca20db, type: 3}
   - {fileID: 6151069324415239557, guid: 0ef41af1e1add1b4089b729bead18632, type: 3}
+  - {fileID: 7359629827296514976, guid: 397379a4c9b6bb449bac107fa5ffbc4b, type: 3}
   - {fileID: 3071809021973701136, guid: ac071a62ed76c8e4ea769d5a21dc3f06, type: 3}
   - {fileID: 4598142991692045861, guid: aeaeb14e8aa4ea44f88ada48085d31bb, type: 3}
+  - {fileID: 1522214104785138172, guid: bb28427d232e55a47bddf2fc4321b32f, type: 3}
+  - {fileID: 1532668442158802693, guid: 776ff647aa48b0844b751c2dd18ecc6f, type: 3}
+  - {fileID: 3298963374946433179, guid: ee790ea1f852a4e47ad6c7b2e4666ee7, type: 3}
+  - {fileID: 647741398944936912, guid: a6808bb25c7aac04b9fe286800954b2e, type: 3}
+  - {fileID: 3933116385781919578, guid: df57abed95b0c4c4a8378e3372c6b307, type: 3}
 --- !u!114 &3530482847165556052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +93,7 @@ MonoBehaviour:
   - {fileID: 8680024578488899071, guid: bbc5f5096334c34428dac69453a799f3, type: 3}
   - {fileID: 7070732628925078540, guid: dc799518451ebd54986cf0a403ca20db, type: 3}
   - {fileID: 6151069324415239557, guid: 0ef41af1e1add1b4089b729bead18632, type: 3}
+  - {fileID: 7359629827296514976, guid: 397379a4c9b6bb449bac107fa5ffbc4b, type: 3}
   - {fileID: 3071809021973701136, guid: ac071a62ed76c8e4ea769d5a21dc3f06, type: 3}
 --- !u!114 &7927638196214482133
 MonoBehaviour:
@@ -90,7 +112,7 @@ MonoBehaviour:
   scatterForce: 3
   upwardForce: 1
   scatterDelay: 0.1
-  physicsDisableTime: 1
+  physicsDisableTime: 2
   player: {fileID: 0}
 --- !u!82 &7731019544260143730
 AudioSource:
@@ -204,7 +226,20 @@ MonoBehaviour:
   musicVolume: 0.5
   soundEffectPitchVariance: 0
   BGMClip:
-  - {fileID: 8300000, guid: b6dc04f2884eb5b46b675390b1e75e84, type: 3}
+  - {fileID: 8300000, guid: 3e613b6aadae25a48928de7b65bf8871, type: 3}
+  - {fileID: 8300000, guid: aa05c130e8d83b648b399bd8c8d7b09e, type: 3}
+  - {fileID: 8300000, guid: 8b4e1bce2abe81d4c8c4afe1a1b9fee4, type: 3}
+  - {fileID: 8300000, guid: c04a8e3316abc4640956cd5136dfb1ba, type: 3}
+  - {fileID: 8300000, guid: 94690973e8dcd9d40a08ab2e2cf9d197, type: 3}
+  - {fileID: 8300000, guid: 73df9fa64e322c54baab75e2f112e82e, type: 3}
+  SFXClip:
+  - {fileID: 8300000, guid: 465081afe4dc4154d9ec4baac249c37d, type: 3}
+  - {fileID: 8300000, guid: 0c46dddadbd9f954589378b14b1821ea, type: 3}
+  - {fileID: 8300000, guid: 7c9eeef3d125f804ab94a65843a01436, type: 3}
+  - {fileID: 8300000, guid: e46ca5770b278744ebfb75d2d59b2f67, type: 3}
+  - {fileID: 8300000, guid: b1fff165fee318c48a7993790f6fb7ce, type: 3}
+  - {fileID: 8300000, guid: b1fff165fee318c48a7993790f6fb7ce, type: 3}
+  - {fileID: 8300000, guid: 131cc8285179cff418bfe338bb2eb66e, type: 3}
   SFXPrefabs:
   - {fileID: 1194426706018000963, guid: aeaeb14e8aa4ea44f88ada48085d31bb, type: 3}
-  soundSourcePoolIndex: 5
+  soundSourcePoolIndex: 6
