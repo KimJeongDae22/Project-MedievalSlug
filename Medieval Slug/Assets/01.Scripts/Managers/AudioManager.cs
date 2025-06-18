@@ -41,5 +41,14 @@ public class AudioManager : Singleton<AudioManager>
         soundSource.Play(clip, Instance.soundEffectVolume, Instance.soundEffectPitchVariance);
     }
 
+    public void SetBGMVolume(float value)
+    {
+        musicVolume = value;
+        musicAudioSource.volume = musicVolume;
+    }
 
+    public void SetSFXVolume(float value)
+    {
+        soundEffectVolume = value;
+    }
 }

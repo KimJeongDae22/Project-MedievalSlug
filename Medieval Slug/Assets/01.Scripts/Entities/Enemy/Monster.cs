@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine;
 using Random = System.Random;
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Animator))]
 public class Monster : MonoBehaviour, IDamagable, IPoolable
 {
     [field: SerializeField] public Animator Animator { get; private set; }
@@ -25,16 +23,30 @@ public class Monster : MonoBehaviour, IDamagable, IPoolable
 
     protected virtual void Reset()
     {
-        Animator = GetComponent<Animator>();
+        Animator = GetComponentInChildren<Animator>();
 
         if (Animator != null)
             HasAnimator = true;
 
-        stateMachine = transform.parent.GetComponent<MonsterStateMachine>();
+        stateMachine = GetComponent<MonsterStateMachine>();
     }
 
     protected virtual void Awake()
     {
+        if (Animator == null)
+        {
+            Animator = GetComponentInChildren<Animator>();
+            if (Animator != null)
+            {
+                HasAnimator = true;
+            }
+        }
+
+        if (stateMachine == null)
+        {
+            stateMachine = GetComponent<MonsterStateMachine>();
+        }
+        
         Initialize();
     }
 

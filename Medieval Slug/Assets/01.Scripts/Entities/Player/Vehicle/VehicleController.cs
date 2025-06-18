@@ -32,6 +32,8 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     
     [Header("[Stat]")]
     [SerializeField] float maxHp = 250; //HP를 별도의 필드로 정의
+    public float MaxHp => maxHp;
+
     [SerializeField] private float currentHp;
 
     [Header("[Melee Weapon Setting]")]
@@ -162,7 +164,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         SetLayerRecursively(transform, playerLayer);
         p.SetMountedState(true, this);
         indicator.Show(false);
-
+        UIManager.Instance.UIUpdate_TankUI();
     }
 
     /// <summary>
@@ -186,6 +188,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         indicator.Show(true);
         SetLayerRecursively(transform, vehicleLayer);
         collector.ResetSetup();
+        UIManager.Instance.UIUpdate_TankUI();
     }
     #endregion
 
@@ -287,6 +290,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         currentHp -= dmg;
         animator.SetTrigger("Hurt");
         if (currentHp <= 0) StartCoroutine(Exploeded());
+        UIManager.Instance.UIUpdate_TankUI();
     }
 
     public IEnumerator Exploeded()

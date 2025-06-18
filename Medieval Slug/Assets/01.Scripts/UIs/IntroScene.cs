@@ -114,7 +114,7 @@ public class IntroScene : MonoBehaviour
     private void GameStart()
     {
         StopCoroutine(TypingCoroutine());
-        SceneLoadManager.Instance.LoadScene(SceneName.KJD_START_SCENE);
+        SceneLoadManager.Instance.LoadScene(SceneName.START_SCENE);
     }
     private void Update()
     {
