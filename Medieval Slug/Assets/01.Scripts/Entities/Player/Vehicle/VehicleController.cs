@@ -54,7 +54,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
 
     [SerializeField] string layerPlayer = "Player";
     [SerializeField] string layerVehicle = "Vehicle";
-
+    [SerializeField] VehicleItemCollector vehicleItemCollector;
 
     //유틸
     Rigidbody2D rb;
@@ -84,7 +84,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     bool IsAgainstWall(int sign) =>
         Physics2D.OverlapCircle(wallCheckPoint.position + Vector3.right * wallRadius * sign, wallRadius, wallLayer);
 
-    public float VehicleHP() => currentHp;//정대님을 위한 프로포티><
+    public float VehicleHP() => currentHp;
 
     void Awake()
     {
@@ -92,7 +92,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
 
         playerLayer = LayerMask.NameToLayer(layerPlayer);
         vehicleLayer = LayerMask.NameToLayer(layerVehicle);
-
+        vehicleItemCollector.gameObject.SetActive(false);
         currentHp = maxHp;
         currentArrowData = crossbow.projectileData;
         indicator.Show(true);
@@ -164,6 +164,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         SetLayerRecursively(transform, playerLayer);
         p.SetMountedState(true, this);
         indicator.Show(false);
+        vehicleItemCollector.gameObject.SetActive(true);
         UIManager.Instance.UIUpdate_TankUI();
     }
 
@@ -188,6 +189,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         indicator.Show(true);
         SetLayerRecursively(transform, vehicleLayer);
         collector.ResetSetup();
+        vehicleItemCollector.gameObject.SetActive(false);
         UIManager.Instance.UIUpdate_TankUI();
     }
     #endregion

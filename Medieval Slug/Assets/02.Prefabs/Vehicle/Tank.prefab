@@ -213,7 +213,8 @@ MonoBehaviour:
   maxHp: 250
   currentHp: 0
   meleeDamage: 10
-  meleeRange: 1
+  meleeRange: 2
+  meleeWidth: 2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
