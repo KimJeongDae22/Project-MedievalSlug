@@ -88,8 +88,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924291535954921631}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -1, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -107,8 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd85fc9040e321f4993d8d554af1e73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: 0, y: 5, z: 0}
-  pointB: {x: 0, y: -2, z: 0}
+  pointA: {x: 3, y: -11, z: 0}
+  pointB: {x: 3, y: -2, z: 0}
   speed: 1
   setSpeedRandom: 0
 --- !u!1 &1139323558134252599
@@ -1166,8 +1166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd85fc9040e321f4993d8d554af1e73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: -10, y: 10, z: 0}
-  pointB: {x: 10, y: 10, z: 0}
+  pointA: {x: -7, y: 2, z: 0}
+  pointB: {x: 13, y: 2, z: 0}
   speed: 0.4
   setSpeedRandom: 1
 --- !u!1 &4117184174349997114
@@ -1374,8 +1374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd85fc9040e321f4993d8d554af1e73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: 10, y: 10, z: 0}
-  pointB: {x: -10, y: 10, z: 0}
+  pointA: {x: 13, y: 2, z: 0}
+  pointB: {x: -7, y: 2, z: 0}
   speed: 0.4
   setSpeedRandom: 1
 --- !u!1 &5026460493881381080
@@ -1699,8 +1699,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6253085796307985305}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.5, y: -1, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1718,8 +1718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd85fc9040e321f4993d8d554af1e73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: 0, y: -2, z: 0}
-  pointB: {x: 0, y: 10, z: 0}
+  pointA: {x: 3, y: -2, z: 0}
+  pointB: {x: 3, y: -11, z: 0}
   speed: 1
   setSpeedRandom: 0
 --- !u!1 &6284354625627224792
@@ -1780,7 +1780,7 @@ Transform:
   m_GameObject: {fileID: 6316911616380734909}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -30, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1.5000001, y: 1.5000001, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
