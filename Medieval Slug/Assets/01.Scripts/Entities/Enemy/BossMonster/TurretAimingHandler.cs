@@ -62,6 +62,6 @@ public class TurretAimingHandler : MonoBehaviour
     public bool IsAimingComplete()
     {
         float angleDifference = Quaternion.Angle(rotatingPivot.rotation, targetRotation);
-        return angleDifference < 10f;
+        return angleDifference < 20f;
     }
 }

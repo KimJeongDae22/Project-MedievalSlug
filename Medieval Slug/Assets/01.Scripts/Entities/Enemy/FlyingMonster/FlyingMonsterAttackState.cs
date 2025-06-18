@@ -24,6 +24,8 @@ public class FlyingMonsterAttackState : MonsterBaseState
         originalPosition = StateMachine.Monster.transform.position;
         attackTargetPosition = StateMachine.target.position;
         
+        FlyingStateMachine.MeleeMonster.EnableCollider();
+        
         if (StateMachine.Monster.HasAnimator) 
             StartAnimation(StateMachine.Monster.AnimationHash.AttackParameterHash);
     }
