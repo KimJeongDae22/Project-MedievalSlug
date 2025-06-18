@@ -7,7 +7,7 @@ public class Item : MonoBehaviour
 
     // private field
     private SpriteRenderer spriteRenderer;
-    private Collider2D collider;
+    private Collider2D itemCollider;
     
     private SpriteRenderer effectRenderer;
     private Animator effectAnimator;
@@ -19,13 +19,13 @@ public class Item : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        collider = GetComponent<Collider2D>();
+        itemCollider = GetComponent<Collider2D>();
         
         effectRenderer = transform.FindChild<SpriteRenderer>("Effect");
         effectAnimator = GetComponentInChildren<Animator>();
 
         if (spriteRenderer == null) Debug.LogError("Item SpriteRenderer not found");
-        if (collider == null) Debug.LogError("Item Collider not found");
+        if (itemCollider == null) Debug.LogError("Item Collider not found");
         
         if (effectRenderer == null) Debug.LogError("Item Effect Renderer not found");
         if (effectAnimator == null) Debug.LogError("Item Effect Animator not found");
@@ -39,7 +39,7 @@ public class Item : MonoBehaviour
         itemData = data;
         spriteRenderer.sprite = data.icon;
         effectRenderer.enabled = false;
-        collider.enabled = true;
+        itemCollider.enabled = true;
         isCollected = false;
     }
     
@@ -60,7 +60,7 @@ public class Item : MonoBehaviour
     {
         // player = CharacterManager.Player
         isCollected = true;
-        collider.enabled = false;
+        itemCollider.enabled = false;
         spriteRenderer.enabled = false;
 
         ApplyItemEffect();
@@ -75,13 +75,10 @@ public class Item : MonoBehaviour
     /// </summary>
     private void ApplyItemEffect()
     {
-        //player = CharacterManager.Player;
-        
         switch (itemData.itemType)
         {
             case ItemType.Score:
-                // TODO
-                // GameManager.Instance.AddScore(itemData.value);
+                GameManager.Instance.AddScore(itemData.value);
                 break;
             
             case ItemType.Weapon:
