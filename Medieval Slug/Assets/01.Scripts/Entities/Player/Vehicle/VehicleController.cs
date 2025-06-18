@@ -39,6 +39,7 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     [Header("[Melee Weapon Setting]")]
     [SerializeField] private int meleeDamage = 10;
     [SerializeField] private float meleeRange = 1f;
+    [SerializeField] private float meleeWidth;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float windupTime = 0.5f;
     [SerializeField] private Vector2 meleeOffset = new Vector2(1.0f, 0.0f);
@@ -62,7 +63,6 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
     Vector2 cachedInput;
     int playerLayer;   // 런타임에 미리 계산
     int vehicleLayer;
-    int ignoreLayer;
 
     // 원거리 무기 관련 필드
     private ProjectileData currentArrowData;
@@ -247,33 +247,44 @@ public class VehicleController : MonoBehaviour, IDamagable, IMountalbe
         StartMeleeFx("Attack");
         yield return new WaitForSeconds(windupTime);
 
-
-        float sign = Mathf.Sign(transform.lossyScale.x);   // +1 : 오른쪽,  -1 : 왼쪽
+        float sign = Mathf.Sign(transform.lossyScale.x);     // +1 오른쪽, -1 왼쪽
         Vector2 dir = Vector2.right * sign;
+        Vector2 center = (Vector2)transform.position           // 전차 기준
+                        + dir * meleeOffset.x                   // 앞뒤 오프셋
+                        + Vector2.up * meleeOffset.y;           // 높이
+        Vector2 size = new Vector2(meleeRange, meleeWidth);  // ★ 가로·세로
+        float angle = 0f;
 
-        Vector2 origin = (Vector2)transform.position
-                       + Vector2.right * meleeOffset.x * sign   // 앞뒤 오프셋
-                       + Vector2.up * meleeOffset.y;         // 높이
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(center, size, angle, dir, 0f, enemyLayer);
+        foreach (var h in hits)
+            if (h.collider.TryGetComponent<IDamagable>(out var target))
+                target.TakeDamage(meleeDamage);
 
-        RaycastHit2D hit = Physics2D.Raycast(origin, dir, meleeRange, enemyLayer);
-        if (hit.collider != null && hit.collider.TryGetComponent<IDamagable>(out var target))
-            target.TakeDamage(meleeDamage);
-
+        DebugDrawBoxCast(center, size, angle, Color.red, 0.2f); // 개발용 시각화
         isAttacking = false;
     }
-    void OnDrawGizmosSelected()
+    void DebugDrawBoxCast(Vector2 center, Vector2 size, float angle, Color col, float dur)
     {
-        Gizmos.color = Color.red;
+        Vector2 half = size * 0.5f;
 
-        float sign = Mathf.Sign(transform.lossyScale.x);
-        Vector2 dir = Vector2.right * sign;
-        Vector2 origin = (Vector2)transform.position
-                       + Vector2.right * meleeOffset.x * sign
-                       + Vector2.up * meleeOffset.y;
+        // Vector3 배열로 선언해 타입 충돌 원천 차단
+        Vector3[] p = new Vector3[4] {
+        new Vector3(-half.x, -half.y, 0),
+        new Vector3(-half.x,  half.y, 0),
+        new Vector3( half.x,  half.y, 0),
+        new Vector3( half.x, -half.y, 0)
+    };
 
-        Gizmos.DrawWireSphere(origin, meleeRange);
-        Gizmos.DrawLine(origin, origin + dir * meleeRange);
+        Quaternion rot = Quaternion.Euler(0, 0, angle);
+        Vector3 center3 = new Vector3(center.x, center.y, 0);
 
+        for (int i = 0; i < 4; i++)
+            p[i] = center3 + rot * p[i];
+
+        Debug.DrawLine(p[0], p[1], col, dur);
+        Debug.DrawLine(p[1], p[2], col, dur);
+        Debug.DrawLine(p[2], p[3], col, dur);
+        Debug.DrawLine(p[3], p[0], col, dur);
     }
 
     private void StartMeleeFx(string name)
