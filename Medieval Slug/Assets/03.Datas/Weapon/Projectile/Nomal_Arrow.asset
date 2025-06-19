@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Nomal_Arrow
   m_EditorClassIdentifier: 
   Type: 0
-  Damage: 3
+  Damage: 5
   Range: 2
   AttackSpeed: 2
   ShotSpeed: 10
