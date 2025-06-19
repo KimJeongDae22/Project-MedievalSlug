@@ -315,7 +315,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  windupTime: 0.2
+  windupTime: 0.5
   animator: {fileID: 4643268736599956163}
   prh: {fileID: 8951737876760437755}
   attackAudioClip: {fileID: 8300000, guid: 465081afe4dc4154d9ec4baac249c37d, type: 3}
