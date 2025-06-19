@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fire_Arrow
   m_EditorClassIdentifier: 
   Type: 1
-  Damage: 4
+  Damage: 5
   Range: 2
   AttackSpeed: 2
   ShotSpeed: 10
