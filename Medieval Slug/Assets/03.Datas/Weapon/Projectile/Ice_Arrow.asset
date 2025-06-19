@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ice_Arrow
   m_EditorClassIdentifier: 
   Type: 2
-  Damage: 0
+  Damage: 5
   Range: 2
   AttackSpeed: 2
   ShotSpeed: 10
