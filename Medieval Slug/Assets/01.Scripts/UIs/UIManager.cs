@@ -78,6 +78,12 @@ public class UIManager : Singleton<UIManager>
             case SceneName.CHARACTER_SELECT_SCENE:
                 //canvas.gameObject.SetActive(false);
                 break;
+            case SceneName.INTRO_SCENE:
+                canvas.gameObject.SetActive(false);
+                break;
+            case SceneName.ENDING_CREDIT_SCENE:
+                canvas.gameObject.SetActive(false);
+                break;
             default:
                 canvas.gameObject.SetActive(true);
                 break;
@@ -169,7 +175,7 @@ public class UIManager : Singleton<UIManager>
                 {
                     escUI.Btn_OffEscUI();
                 }
-                Debug.Log(Time.timeScale);
+                // Debug.Log(Time.timeScale);
             }
         }
         // TODO Esc 누르면 나오는 메뉴 오브젝트 활성화. 오브젝트 제작 필요

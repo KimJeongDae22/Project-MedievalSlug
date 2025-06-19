@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
     private bool jumpRequest;
 
     int cachedSignBeforeMount = 1;   // 탑승 직전 부호
-    bool blockSelfFlip = false; // 탑승 중엔 Update → Flip 금지
     public bool IsFacingRight() => isFacingRight;
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
@@ -121,11 +120,9 @@ public class PlayerController : MonoBehaviour
         if (mounted)
         {
             cachedSignBeforeMount = transform.localScale.x >= 0 ? 1 : -1;
-            blockSelfFlip = true;
         }
         else
         {
-            blockSelfFlip = false;
             SetFacing(cachedSignBeforeMount > 0);
             playerRanged.SetWeaponEnabled(true);
         }
@@ -149,12 +146,6 @@ public class PlayerController : MonoBehaviour
             playerRanged.SetWeaponEnabled(false);
             StartCoroutine(MountAfterDelay(vehicle, 0.25f)); // 살짝 뜀 → 착지 시 탑승
         }
-        else 
-        {
-            Debug.Log("탈 것이 없습니다.");
-            return;
-        } 
-            
     }
 
     IEnumerator MountAfterDelay(VehicleController vehicle, float delay)
@@ -208,7 +199,7 @@ public class PlayerController : MonoBehaviour
 
         if (CharacterManager.Instance.StatHandler.IsDied)
         {
-            rb.velocity = Vector2.zero;
+             moveInput = Vector2.zero;
         }
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
